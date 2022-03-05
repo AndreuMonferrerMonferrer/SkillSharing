@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public final class ColanorationRequestRowMapper implements RowMapper<ColaborationRequest> {
+public final class ColaborationRequestRowMapper implements RowMapper<ColaborationRequest> {
     @Override
     public ColaborationRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
         ColaborationRequest colaborationRequest = new ColaborationRequest();

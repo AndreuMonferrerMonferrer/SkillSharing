@@ -1,4 +1,65 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.model.Colaboration;
+import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import es.uji.ei1027.SkillSharing.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
 public class ColaborationProposalDAO {
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
+
+    public void addColaborationProposal(ColaborationProposal colaborationProposal){
+        jdbcTemplate.update("INSERT INTO ColaborationProposal VALUES(?, ?, ?, ?, ?, ?)",
+          colaborationProposal.getProposalId(),colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),
+          colaborationProposal.getDescription(),colaborationProposal.getEmailStudent(),colaborationProposal.getIdSkill());
+    }
+    public void deleteColaborationProposal(int proposalId){
+        jdbcTemplate.update("DELETE from ColaborationProposal WHERE proposalId=?",
+                proposalId);
+    }
+    public void deleteColaborationProposal(ColaborationProposal colaborationProposal){
+        jdbcTemplate.update("DELETE from ColaborationProposal WHERE proposalId=?",
+                colaborationProposal.getProposalId());
+    }
+    public void updateColaborationProposal(ColaborationProposal colaborationProposal){
+        jdbcTemplate.update("UPDATE ColaborationProposal SET dateStart=?, dateEnd=?, description=? WHERE proposalId=?",
+                colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),colaborationProposal.getDescription(),colaborationProposal.getProposalId());
+    }
+
+    public ColaborationProposal getColaborationProposal(int proposalId){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * from ColaborationProposal WHERE proposalId=?",
+                    new ColaborationProposalRowMapper(), proposalId);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    public List<ColaborationProposal> getColaborationProposal(){
+        try{
+            return jdbcTemplate.query("SELECT * from ColaborationProposal",
+                    new ColaborationProposalRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationProposal>();
+        }
+    }
+    /*todas las ColaborationProposal de un alumno*/
+    public List<ColaborationProposal> getColaborationProposal(String emailStudent){
+        try{
+            return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent=?",
+                    new ColaborationProposalRowMapper(), emailStudent);
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationProposal>();
+        }
+    }
 }

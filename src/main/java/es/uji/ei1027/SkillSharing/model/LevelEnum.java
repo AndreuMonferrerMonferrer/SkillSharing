@@ -1,6 +1,6 @@
 package es.uji.ei1027.SkillSharing.model;
 
-enum LevelEnum
+public enum LevelEnum
 {
-    NOVICE, MEDIUM, EXPERT
+    NOVICE, MEDIUM, EXPERT;
 }

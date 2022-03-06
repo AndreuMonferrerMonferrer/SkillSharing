@@ -41,7 +41,7 @@ public class StudentDAO {
             return null;
         }
     }
-    public List<Student> getStudent(){
+    public List<Student> getStudents(){
         try{
             return jdbcTemplate.query("SELECT * from Student",
                     new StudentRowMapper());

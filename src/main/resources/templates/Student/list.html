@@ -11,26 +11,26 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">Email</th>
-        <th scope="col">isSKP</th>
-        <th scope="col">Name</th>
-        <th scope="col">Pwd</th>
-        <th scope="col">RecivedHours</th>
-        <th scope="col">ProvidedHours</th>
-        <th scope="col">TelephoneNumber</th>
-        <th scope="col">Degree</th>
+        <th>Email</th>
+        <th>isSKP</th>
+        <th>Name</th>
+        <th>Pwd</th>
+        <th>RecivedHours</th>
+        <th>ProvidedHours</th>
+        <th>TelephoneNumber</th>
+        <th>Degree</th>
     </tr>
     </thead>
     <tbody>
-    <tr scope="row" th:each="student: ${students}">
-        <td scope="row" th:text="${student.email}"></td>
-        <td scope="row" th:text="${student.isSKP}"></td>
-        <td scope="row" th:text="${student.name}"></td>
-        <td scope="row" th:text="${student.pwd}"></td>
-        <td scope="row" th:text="${student.recivedHours}"></td>
-        <td scope="row" th:text="${student.providedHours}"></td>
-        <td scope="row" th:text="${student.telephoneNumber}"></td>
-        <td scope="row" th:text="${student.degree}"></td>
+    <tr th:each="student: ${students}">
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.isSKP}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.pwd}"></td>
+        <td th:text="${student.recivedHours}"></td>
+        <td th:text="${student.providedHours}"></td>
+        <td th:text="${student.telephoneNumber}"></td>
+        <td th:text="${student.degree}"></td>
         <td><a th:href="@{/student/update/{email}(email=${student.email})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
         </td>
         <td><a th:href="@{/student/delete/{email}(email=${student.email})}"><button type="button" class="btn btn-danger">Delete</button></a>

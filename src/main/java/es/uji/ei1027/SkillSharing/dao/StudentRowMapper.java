@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 public final class StudentRowMapper implements
             RowMapper<Student>{
-
+    @Override
     public Student mapRow(ResultSet rs, int rowNum) throws SQLException{
         Student student = new Student();
         student.setEmail(rs.getString("email"));

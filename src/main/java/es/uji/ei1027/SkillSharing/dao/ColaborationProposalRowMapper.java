@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 public final class ColaborationProposalRowMapper implements
         RowMapper<ColaborationProposal> {
-
+    @Override
     public ColaborationProposal mapRow(ResultSet rs, int rowNum) throws SQLException {
         ColaborationProposal colaborationProposal = new ColaborationProposal();
         colaborationProposal.setProposalId(rs.getInt("proposalId"));

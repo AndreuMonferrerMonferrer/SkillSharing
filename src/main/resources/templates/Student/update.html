@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Student</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Update Student</h2>
+<form action="#" th:action="@{/Student/update}"
+      th:object="${Student}" method="post">
+    <table>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="hiden" th:field="${Student.getEmail()}"></td>
+        </tr>
+        <tr>
+            <td><label>Is SKP? (N or S)</label></td>
+            <td><input type="text" th:field="${isSkp}"></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{Name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td><input type="password" th:field="*{pwd}"></td>
+        </tr>
+        <tr>
+            <td><label>Recived Hours</label></td>
+            <td><input type="number" th:field="*{recivedHours}" /></td>
+        </tr>
+        <tr>
+            <td><label>Provided Hours</label></td>
+            <td><input type="number" th:field="*{providedHours}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tel. Number</label></td>
+            <td><input type="text" th:field="*{telNumber}" /></td>
+        </tr>
+        <tr>
+            <td><label>Degree</label></td>
+            <td><input type="text" th:field="*{degree}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Update student" /></td>
+        </tr>
+
+
+    </table>
+</form>
+</body>
+</html>

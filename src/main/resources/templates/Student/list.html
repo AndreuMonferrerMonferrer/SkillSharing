@@ -6,6 +6,37 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-
+<h1>List of Students</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>isSKP</th>
+        <th>Name</th>
+        <th>Pwd</th>
+        <th>RecivedHours</th>
+        <th>ProvidedHours</th>
+        <th>TelephoneNumber</th>
+        <th>Degree</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student: ${students}">
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.isSKP}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.pwd}"></td>
+        <td th:text="${student.recivedHours}"></td>
+        <td th:text="${student.providedHours}"></td>
+        <td th:text="${student.telephoneNumber}"></td>
+        <td th:text="${student.degree}"></td>
+        <td><a th:href="@{/student/update/{email}(email=${student.email})}">Update</a>
+        </td>
+        <td><a th:href="@{/student/delete/{email}(email=${student.email})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add">Add student</a>
 </body>
 </html>

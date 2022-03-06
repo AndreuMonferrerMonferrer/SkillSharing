@@ -47,16 +47,16 @@ public class StudentController {
 
     @RequestMapping(value = "/update/{email}", method = RequestMethod.GET)
     public String editStudent(Model model, @PathVariable String email){
-        model.addAttribute("student", studentDAO.getStudent(email));
-        return "student/update";
+        model.addAttribute("Student", studentDAO.getStudent(email));
+        return "Student/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("student") Student student,
+            @ModelAttribute("Student") Student student,
             BindingResult bindingResult){
         if (bindingResult.hasErrors())
-            return "student/update";
+            return "Student/update";
         studentDAO.updateStudent(student);
         return "redirect:list";
     }

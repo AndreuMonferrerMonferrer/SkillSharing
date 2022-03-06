@@ -26,21 +26,21 @@ public class StudentController {
 
     @RequestMapping("/list")
     public String listStudents(Model model){
-        model.addAttribute("students", studentDAO.getStudents());
-        return "student/list";
+        model.addAttribute("Students", studentDAO.getStudents());
+        return "Student/list";
     }
 
     @RequestMapping(value = "/add")
     public String addStudent(Model model){
-        model.addAttribute("student", new Student());
-        return "student/add";
+        model.addAttribute("Student", new Student());
+        return "Student/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("student") Student student,
+    public String processAndSubmit(@ModelAttribute("Student") Student student,
                                    BindingResult bindingResult){
         if (bindingResult.hasErrors())
-            return "student/add";
+            return "Student/add";
         studentDAO.addStudent(student);
         return "redirect:list";
     }

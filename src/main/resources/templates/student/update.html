@@ -13,11 +13,11 @@
     <table>
         <tr>
             <td><label>Email</label></td>
-            <td><input type="text" th:field="${email}"></td>
+            <td><input type="text" th:field="*{email}"></td>
         </tr>
         <tr>
             <td><label>Is SKP? (N or S)</label></td>
-            <td><input type="text" th:field="${isSkp}"></td>
+            <td><input type="text" th:field="*{isSkp}"></td>
         </tr>
         <tr>
             <td><label>Name</label></td>

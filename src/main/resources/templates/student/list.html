@@ -24,12 +24,12 @@
     <tbody>
     <tr th:each="student: ${students}">
         <td th:text="${student.email}"></td>
-        <td th:text="${student.isSKP}"></td>
+        <td th:text="${student.isSkp}"></td>
         <td th:text="${student.name}"></td>
         <td th:text="${student.pwd}"></td>
         <td th:text="${student.recivedHours}"></td>
         <td th:text="${student.providedHours}"></td>
-        <td th:text="${student.telephoneNumber}"></td>
+        <td th:text="${student.telNumber}"></td>
         <td th:text="${student.degree}"></td>
         <td><a th:href="@{/student/update/{email}(email=${student.email})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
         </td>

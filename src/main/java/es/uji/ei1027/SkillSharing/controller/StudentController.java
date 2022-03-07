@@ -26,37 +26,37 @@ public class StudentController {
 
     @RequestMapping("/list")
     public String listStudents(Model model){
-        model.addAttribute("Students", studentDAO.getStudents());
-        return "Student/list";
+        model.addAttribute("students", studentDAO.getStudents());
+        return "student/list";
     }
 
     @RequestMapping(value = "/add")
     public String addStudent(Model model){
-        model.addAttribute("Student", new Student());
-        return "Student/add";
+        model.addAttribute("student", new Student());
+        return "student/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("Student") Student student,
+    public String processAndSubmit(@ModelAttribute("student") Student student,
                                    BindingResult bindingResult){
         if (bindingResult.hasErrors())
-            return "Student/add";
+            return "student/add";
         studentDAO.addStudent(student);
         return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{email}", method = RequestMethod.GET)
     public String editStudent(Model model, @PathVariable String email){
-        model.addAttribute("Student", studentDAO.getStudent(email));
-        return "Student/update";
+        model.addAttribute("student", studentDAO.getStudent(email));
+        return "student/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("Student") Student student,
+            @ModelAttribute("student") Student student,
             BindingResult bindingResult){
         if (bindingResult.hasErrors())
-            return "Student/update";
+            return "student/update";
         studentDAO.updateStudent(student);
         return "redirect:list";
     }

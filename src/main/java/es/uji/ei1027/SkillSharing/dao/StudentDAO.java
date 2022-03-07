@@ -29,7 +29,7 @@ public class StudentDAO {
                 student.getEmail());
     }
     public void updateStudent(Student student){
-        jdbcTemplate.update("UPDATE student SET receivedHours=?, providedHours=? WHERE email=?",
+        jdbcTemplate.update("UPDATE student SET recivedHours=?, providedHours=? WHERE email=?",
                 student.getRecivedHours(), student.getProvidedHours(),student.getEmail());
     }
 

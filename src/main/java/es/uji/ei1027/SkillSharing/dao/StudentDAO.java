@@ -29,8 +29,8 @@ public class StudentDAO {
                 student.getEmail());
     }
     public void updateStudent(Student student){
-        jdbcTemplate.update("UPDATE student SET recivedHours=?, providedHours=? WHERE email=?",
-                student.getRecivedHours(), student.getProvidedHours(),student.getEmail());
+        jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=? WHERE email=?",
+                student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getEmail());
     }
 
     public Student getStudent(String email){

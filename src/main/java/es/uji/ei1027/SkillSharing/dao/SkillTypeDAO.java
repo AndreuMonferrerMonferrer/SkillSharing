@@ -5,11 +5,13 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class SkillTypeDAO {
     private JdbcTemplate jdbcTemplate;
 
@@ -21,7 +23,7 @@ public class SkillTypeDAO {
                 skillType.getId(),skillType.getName(),skillType.getLevel(),skillType.getDescription(),skillType.isAbilitationState());
     }
 
-    public void deleteSkillType(String id){//¿pongo name o id?
+    public void deleteSkillType(int id){//¿pongo name o id?
         jdbcTemplate.update("DELETE from SkillType WHERE id=?",
                 id);
     }
@@ -36,7 +38,7 @@ public class SkillTypeDAO {
                 skillType.getName(), skillType.getLevel(),skillType.getDescription(),skillType.isAbilitationState(),skillType.getId());
     }
 
-    public SkillType getSkillType(String id){
+    public SkillType getSkillType(int id){
         try{
             return jdbcTemplate.queryForObject("SELECT * from SkillType WHERE id=?",
                     new SkillTypeRowMapper(), id);
@@ -47,7 +49,7 @@ public class SkillTypeDAO {
 
     public List<SkillType> getSkillTypes(){
         try{
-            return jdbcTemplate.query("SELECT * from SkillTypes",
+            return jdbcTemplate.query("SELECT * from SkillType",
                     new SkillTypeRowMapper());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<SkillType>();

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar SkillTypes</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>List of SkillTypes</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Description</th>
+        <th>Abilitation State</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="skillType: ${skillType}">
+        <td th:text="${skillType.id}"></td>
+        <td th:text="${skillType.name}"></td>
+        <td th:text="${skillType.level}"></td>
+        <td th:text="${skillType.description}"></td>
+        <td th:text="${skillType.abilitationState}"></td>
+        <td><a th:href="@{/skillType/update/{id}(id=${skillType.id})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
+        </td>
+        <td><a th:href="@{/skillType/delete/{id}(id=${skillType.id})}"><button type="button" class="btn btn-danger">Delete</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Add Student</button></a>
+</body>
+</html>

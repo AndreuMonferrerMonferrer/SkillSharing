@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar Students</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>List of colaboration proposals</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ProposalId</th>
+    <th>Date Start</th>
+    <th>Date End</th>
+    <th>Description</th>
+    <th>EmailStudent</th>
+    <th>IdSkill</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="colaborationProposal: ${colaborationProposals}">
+    <td th:text="${colaborationProposal.proposalId}"></td>
+    <td th:text="${colaborationProposal.dateStart}"></td>
+    <td th:text="${colaborationProposal.dateEnd}"></td>
+    <td th:text="${colaborationProposal.description}"></td>
+    <td th:text="${colaborationProposal.emailStudent}"></td>
+    <td th:text="${colaborationProposal.idSkill}"></td>
+    <td><a th:href="@{/colaborationProposal/update/{proposalId}(proposalId=${colaborationProposal.proposalId})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
+    </td>
+    <td><a th:href="@{/colaborationProposal/delete/{proposalId}(proposalId=${colaborationProposal.proposalId})}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Add a Colaboration Proposal</button></a>
+</body>
+</html>

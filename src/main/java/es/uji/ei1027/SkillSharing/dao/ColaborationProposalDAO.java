@@ -45,7 +45,7 @@ public class ColaborationProposalDAO {
             return null;
         }
     }
-    public List<ColaborationProposal> getColaborationProposal(){
+    public List<ColaborationProposal> getColaborationProposals(){
         try{
             return jdbcTemplate.query("SELECT * from ColaborationProposal",
                     new ColaborationProposalRowMapper());
@@ -54,7 +54,7 @@ public class ColaborationProposalDAO {
         }
     }
     /*todas las ColaborationProposal de un alumno*/
-    public List<ColaborationProposal> getColaborationProposal(String emailStudent){
+    public List<ColaborationProposal> getColaborationProposals(String emailStudent){
         try{
             return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent=?",
                     new ColaborationProposalRowMapper(), emailStudent);

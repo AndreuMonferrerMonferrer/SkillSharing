@@ -2,18 +2,18 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add new SkillType</title>
+    <title>Update Student</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>New SkillType</h2>
-<form action="#" th:action="@{/skillType/add}"
+<h2>Update SkillType</h2>
+<form action="#" th:action="@{/skillType/update}"
       th:object="${skillType}" method="post">
     <table>
         <tr>
             <td><label>Id</label></td>
-            <td><input type="number" th:field="*{id}" /></td>
+            <td><input type="hiden" th:field="${skillType.getId()}"></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td><label>Level</label></td>
-            <td><input type="text" th:field="*{level}" /></td>
+            <td><input type="text" th:field="*{level}"></td>
         </tr>
         <tr>
             <td><label>Description</label></td>
@@ -32,10 +32,11 @@
             <td><input type="text" th:field="*{abilitationState}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Add SkillType" /></td>
+            <td colspan="2"><input type="submit" value="Update student" /></td>
         </tr>
+
+
     </table>
 </form>
 </body>
-
 </html>

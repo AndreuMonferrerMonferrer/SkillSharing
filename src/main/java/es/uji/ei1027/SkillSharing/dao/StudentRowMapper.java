@@ -4,7 +4,7 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
+
 
 public final class StudentRowMapper implements
             RowMapper<Student>{

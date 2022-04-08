@@ -13,7 +13,7 @@
     <table>
         <tr>
             <td><label>Id</label></td>
-            <td><input type="number" th:field="*{id}" /></td>
+            <td><input type="number"  th:field="*{id}" /></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
@@ -21,7 +21,11 @@
         </tr>
         <tr>
             <td><label>Level</label></td>
-            <td><input type="text" th:field="*{level}" /></td>
+            <td><select class="form_control" type="text" th:field="*{level}">
+                <option value="novice">Novice</option>
+                <option value="medium">Medium</option>
+                <option value="expert">Expert</option>
+            </select></td>
         </tr>
         <tr>
             <td><label>Description</label></td>
@@ -29,7 +33,11 @@
         </tr>
         <tr>
             <td><label>Abilitation State</label></td>
-            <td><input type="text" th:field="*{abilitationState}" /></td>
+            <td><select class="form_control" type="text" th:field="*{abilitationState}">
+                <option value="N">False</option>
+                <option value="S">True</option>
+            </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Add SkillType" /></td>

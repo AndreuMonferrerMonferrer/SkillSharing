@@ -1,12 +1,10 @@
 package es.uji.ei1027.SkillSharing.dao;
 
 import es.uji.ei1027.SkillSharing.model.SkillType;
-import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +14,12 @@ public class SkillTypeDAO {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
+    public void setDataSource(DataSource dataSource){
+        jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addSkillType(SkillType skillType){//como funciona un serial ¿bool?
         jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?, ?)",
-                skillType.getId(),skillType.getName(),skillType.getLevel(),skillType.getDescription(),skillType.isAbilitationState());
+                skillType.getId(),skillType.getName(),skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState());
     }
 
     public void deleteSkillType(int id){//¿pongo name o id?
@@ -35,7 +34,7 @@ public class SkillTypeDAO {
 
     public void updateSkillType(SkillType skillType){//¿bool?
         jdbcTemplate.update("UPDATE skillType SET name=? , level=? , description=? ,  abilitationState=? WHERE id=?",
-                skillType.getName(), skillType.getLevel(),skillType.getDescription(),skillType.isAbilitationState(),skillType.getId());
+                skillType.getName(), skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState(),skillType.getId());
     }
 
     public SkillType getSkillType(int id){
@@ -56,12 +55,12 @@ public class SkillTypeDAO {
         }
     }
 
-    public List<Student> getSkillTypeId(String id){
+    public List<SkillType> getSkillTypeId(String id){
         try{
             return this.jdbcTemplate.query("SELECT * FROM SkillType WHERE id=?",
-                    new StudentRowMapper(), id);
+                    new SkillTypeRowMapper(), id);
         }catch(EmptyResultDataAccessException e){
-            return new ArrayList<Student>();
+            return new ArrayList<SkillType>();
         }
     }
 

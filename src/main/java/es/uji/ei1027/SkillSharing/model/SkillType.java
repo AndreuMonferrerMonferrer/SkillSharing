@@ -5,8 +5,9 @@ public class SkillType {
     private int id;
     private String name;
     private String description;
-    private boolean abilitationState;
-    private LevelEnum level;
+    private String abilitationState;
+    private String level;
+    //private LevelEnum level;
 
     public int getId() {
         return id;
@@ -32,19 +33,19 @@ public class SkillType {
         this.description = description;
     }
 
-    public boolean isAbilitationState() {
-        return abilitationState;
+    public String getAbilitationState() {
+        return this.abilitationState;
     }
 
-    public void setAbilitationState(boolean abilitationState) {
+    public void setAbilitationState(String abilitationState) {
         this.abilitationState = abilitationState;
     }
 
-    public LevelEnum getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(LevelEnum level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

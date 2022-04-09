@@ -2,7 +2,6 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
-import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

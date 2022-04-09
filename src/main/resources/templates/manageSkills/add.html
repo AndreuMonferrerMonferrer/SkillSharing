@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Add new manage skill</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New Manage Skill</h2>
+<form action="#" th:action="@{/manageSkill/add}"
+      th:object="${manageSkill}" method="post">
+  <table>
+    <tr>
+      <td><label>Skill Type Id</label></td>
+      <td><input type="text" th:field="*{idSkillType}" /></td>
+    </tr>
+    <tr>
+      <td><label>Email</label></td>
+      <td><input type="text" th:field="*{email}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Add Manage Skill" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+
+</html>

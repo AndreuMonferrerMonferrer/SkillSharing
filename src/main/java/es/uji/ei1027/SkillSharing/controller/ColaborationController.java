@@ -1,0 +1,71 @@
+package es.uji.ei1027.SkillSharing.controller;
+
+import es.uji.ei1027.SkillSharing.dao.ColaborationDAO;
+import es.uji.ei1027.SkillSharing.model.Colaboration;
+import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping("/colaboration")
+public class ColaborationController {
+
+    private ColaborationDAO colaborationDAO;
+
+    @Autowired
+    public void setColaborationDAO(ColaborationDAO colaborationDAO){
+        this.colaborationDAO=colaborationDAO;
+    }
+
+    @RequestMapping("/list")
+    public String listColaborations(Model model){
+        model.addAttribute("colaborations",colaborationDAO.getColaborations());
+        return "colaboration/list";
+    }
+
+    @RequestMapping("/add")
+    public String addColaboration(Model model){
+        model.addAttribute("colaboration",new Colaboration());
+        return "colaboration/add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String processAndSubmit(@ModelAttribute("colaboration") Colaboration colaboration,
+                                   BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "colaboration/add";
+        colaborationDAO.addColaboration(colaboration);
+        return "redirect:list";
+    }
+
+    @RequestMapping("/update/{proposalId}/{requestId}")
+    public String editColaboration(Model model,
+                                   @PathVariable int proposalId,
+                                   @PathVariable int requestId){
+        model.addAttribute("colaboration",colaborationDAO.getColaboration(proposalId,requestId));
+        return "colaboration/update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String processUpdateAndSubmit(
+            @ModelAttribute("colaboration") Colaboration colaboration,
+            BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "colaboration/update";
+        colaborationDAO.updateColaboration(colaboration);
+        return "redirect:list";
+    }
+
+    @RequestMapping(value = "/delete/{proposalId}/{requestId}")
+    public String processDeleteColaboration(@PathVariable int proposalId,
+                                       @PathVariable int requestId) {
+        colaborationDAO.deleteColaboration(proposalId, requestId);
+        return "redirect:../../list";
+    }
+}

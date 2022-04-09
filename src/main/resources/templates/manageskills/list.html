@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar Colaborations</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>List of Colaborations</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Skill Type Id</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="manageSkills: ${manageSkills}">
+    <td th:text="${manageSkills.idSkillType}"></td>
+    <td th:text="${manageSkills.email}"></td>
+    <td><a th:href="@{/manageSkills/delete/{idSkillType}/{email}(idSkillType=${manageSkills.idSkillType}, email=${manageSkills.email})}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Add Manage Skill</button></a>
+</body>
+</html>

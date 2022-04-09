@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new colaboration</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New Colaboration</h2>
+<form action="#" th:action="@{/colaboration/add}"
+      th:object="${colaboration}" method="post">
+    <table>
+        <tr>
+            <td><label>Proposal Id</label></td>
+            <td><input type="number" th:field="*{proposalId}" /></td>
+        </tr>
+        <tr>
+            <td><label>Request Id</label></td>
+            <td><input type="number" th:field="*{requestId}" /></td>
+        </tr>
+        <tr>
+            <td><label>Date Start</label></td>
+            <td><input type="date" th:field="*{dateStart}" /></td>
+        </tr>
+        <tr>
+            <td><label>Date End</label></td>
+            <td><input type="date" th:field="*{dateEnd}" /></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add Colaboration" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>

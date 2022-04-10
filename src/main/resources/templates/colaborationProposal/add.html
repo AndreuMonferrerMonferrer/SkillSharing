@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new colaboration proposal</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>New Colaboration Proposal</h2>
+<form action="#" th:action="@{/colaborationProposal/add}"
+      th:object="${colaborationProposal}" method="post">
+    <table>
+        <tr>
+            <td><label>Proposal Id</label></td>
+            <td><input type="number" th:field="*{proposalId}" /></td>
+        </tr>
+        <tr>
+            <td><label>Date Start</label></td>
+            <td><input type="date" th:field="*{dateStart}" /></td>
+        </tr>
+        <tr>
+            <td><label>Date End</label></td>
+            <td><input type="date" th:field="*{dateEnd}" /></td>
+        </tr>
+        <tr>
+            <td><label>Description</label></td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td><label>Student Email</label></td>
+            <td><input type="text" th:field="*{emailStudent}" /></td>
+        </tr>
+        <tr>
+            <td><label>Id Skill</label></td>
+            <td><input type="number" th:field="*{idSkill}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add Colaboration Proposal" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>

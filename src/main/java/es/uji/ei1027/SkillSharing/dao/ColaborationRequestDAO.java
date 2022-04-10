@@ -20,6 +20,7 @@ public class ColaborationRequestDAO {
     }
 
     public void addColaborationRequest(ColaborationRequest colaborationRequest){
+        System.out.println("DAO insert");
         jdbcTemplate.update("INSERT INTO ColaborationRequest VALUES(?, ?, ?, ?, ?, ?)",
                 colaborationRequest.getRequestId(),colaborationRequest.getDateStart(),
                 colaborationRequest.getDateEnd(), colaborationRequest.getDescription(),

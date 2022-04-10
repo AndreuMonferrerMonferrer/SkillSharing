@@ -12,6 +12,7 @@ public final class ColaborationProposalRowMapper implements
         RowMapper<ColaborationProposal> {
     @Override
     public ColaborationProposal mapRow(ResultSet rs, int rowNum) throws SQLException {
+        System.out.println("rowmapper ");
         ColaborationProposal colaborationProposal = new ColaborationProposal();
         colaborationProposal.setProposalId(rs.getInt("proposalId"));
         colaborationProposal.setDateStart(rs.getDate("dateStart"));

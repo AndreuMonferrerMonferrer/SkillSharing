@@ -21,6 +21,7 @@ public class ManageSkillsController {
     @Autowired
     public void setManageSkillsDAO(ManageSkillsDAO manageSkillsDAO){this.manageSkillsDAO=manageSkillsDAO;}
 
+
     @RequestMapping("/list")
     public String listManageSkills(Model model){
         model.addAttribute("manageSkills",manageSkillsDAO.getManageSkillsList());

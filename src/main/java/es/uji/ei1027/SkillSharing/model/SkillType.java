@@ -7,7 +7,7 @@ public class SkillType {
     private String description;
     private String abilitationState;
     private String level;
-    //private LevelEnum level;
+
 
     public int getId() {
         return id;

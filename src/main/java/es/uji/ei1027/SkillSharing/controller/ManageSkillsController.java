@@ -43,7 +43,7 @@ public class ManageSkillsController {
     }
 
     @RequestMapping(value = "/delete/{idSkillType}/{email}")
-    public String processDeleteColaboration(@PathVariable String idSkillType,
+    public String processDeleteColaboration(@PathVariable int idSkillType,
                                             @PathVariable String email) {
         manageSkillsDAO.deleteManageSkills(idSkillType, email);
         return "redirect:../../list";

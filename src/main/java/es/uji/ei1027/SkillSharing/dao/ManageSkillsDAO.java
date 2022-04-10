@@ -24,7 +24,7 @@ public class ManageSkillsDAO {
 
     }
 
-    public void deleteManageSkills(String idSkillType,String email){
+    public void deleteManageSkills(int idSkillType,String email){
         jdbcTemplate.update("DELETE from ManageSkills WHERE idSkillType=? and email=?",
                 idSkillType,email);
     }
@@ -36,7 +36,7 @@ public class ManageSkillsDAO {
 
     //el update no se puede
 
-    public ManageSkills getManageSkills(String idSkillType,String email){
+    public ManageSkills getManageSkills(int idSkillType,String email){
         try{
             return jdbcTemplate.queryForObject("SELECT * from ManageSkills WHERE idSkillType= and email=?",
                     new ManageSkillsRowMapper(), idSkillType,email);
@@ -65,7 +65,7 @@ public class ManageSkillsDAO {
         }
     }
 
-    public List<ManageSkills> getManageSkillsIdSkillType(String idSkillType){
+    public List<ManageSkills> getManageSkillsIdSkillType(int idSkillType){
         try{
             return this.jdbcTemplate.query("SELECT * FROM ManageSkills WHERE idSkillType=?",
                     new ManageSkillsRowMapper(), idSkillType);

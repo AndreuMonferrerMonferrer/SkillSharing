@@ -1,11 +1,15 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ColaborationProposal {
     private int proposalId;
-    private Date dateStart;
-    private Date dateEnd;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
     private String description;
     private String emailStudent;
     private int idSkill;
@@ -18,19 +22,19 @@ public class ColaborationProposal {
         this.proposalId = proposalId;
     }
 
-    public Date getDateStart() {
+    public LocalDate getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(LocalDate dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public LocalDate getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
     }
 

@@ -1,10 +1,13 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class ColaborationRequest {
 
     private int requestId;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private String description;
@@ -27,12 +30,20 @@ public class ColaborationRequest {
         this.dateStart = dateStart;
     }
 
+    public void setDateStart(String  dateStart) {
+        this.dateStart =this.dateStart;
+    }
+
     public LocalDate getDateEnd() {
         return dateEnd;
     }
 
     public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public void setDateEnd(String  dateEnd) {
+        this.dateEnd =this.dateEnd;
     }
 
     public String getDescription() {

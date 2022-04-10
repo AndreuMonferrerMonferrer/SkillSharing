@@ -1,6 +1,5 @@
 package es.uji.ei1027.SkillSharing.dao;
 
-import es.uji.ei1027.SkillSharing.model.LevelEnum;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;

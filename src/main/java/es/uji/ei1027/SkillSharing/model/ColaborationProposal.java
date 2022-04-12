@@ -9,10 +9,14 @@ public class ColaborationProposal {
     private int proposalId;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateStart;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateEnd;
     private String description;
     private String emailStudent;
     private int idSkill;
+
+    public ColaborationProposal(){
+    }
 
     public int getProposalId() {
         return proposalId;
@@ -26,8 +30,10 @@ public class ColaborationProposal {
         return dateStart;
     }
 
-    public void setDateStart(LocalDate dateStart) {
-        this.dateStart = dateStart;
+    public void setDateStart(LocalDate dateStart) { this.dateStart = dateStart;    }
+
+    public void setDateStart(String  dateStart) {
+        this.dateStart =this.dateStart;
     }
 
     public LocalDate getDateEnd() {
@@ -36,6 +42,10 @@ public class ColaborationProposal {
 
     public void setDateEnd(LocalDate dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public void setDateEnd(String  dateEnd) {
+        this.dateEnd =this.dateEnd;
     }
 
     public String getDescription() {

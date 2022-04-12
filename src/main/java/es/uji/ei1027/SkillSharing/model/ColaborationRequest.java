@@ -9,11 +9,14 @@ public class ColaborationRequest {
     private int requestId;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateStart;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateEnd;
     private String description;
     private String emailStudent;
     private int idSkill;
 
+    public ColaborationRequest(){
+    }
     public int getRequestId() {
         return requestId;
     }

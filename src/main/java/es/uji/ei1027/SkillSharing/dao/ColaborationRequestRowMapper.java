@@ -12,10 +12,8 @@ public final class ColaborationRequestRowMapper implements RowMapper<Colaboratio
     public ColaborationRequest mapRow(ResultSet rs, int rowNum) throws SQLException {
         ColaborationRequest colaborationRequest = new ColaborationRequest();
         colaborationRequest.setRequestId(rs.getInt("requestId"));
-        //colaborationRequest.setDateStart(rs.getObject("dateStart", LocalDate.class));
-        colaborationRequest.setDateStart(rs.getString("dateStart"));
-        //colaborationRequest.setDateEnd(rs.getObject("dateEnd", LocalDate.class));
-        colaborationRequest.setDateEnd(rs.getString("dateEnd"));
+        colaborationRequest.setDateStart(rs.getObject("dateStart", LocalDate.class));
+        colaborationRequest.setDateEnd(rs.getObject("dateEnd", LocalDate.class));
         colaborationRequest.setDescription(rs.getString("description"));
         colaborationRequest.setEmailStudent(rs.getString("emailStudent"));
         colaborationRequest.setIdSkill(rs.getInt("idSkill"));

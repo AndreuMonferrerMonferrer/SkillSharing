@@ -15,10 +15,8 @@ public final class ColaborationProposalRowMapper implements
     public ColaborationProposal mapRow(ResultSet rs, int rowNum) throws SQLException {
         ColaborationProposal colaborationProposal = new ColaborationProposal();
         colaborationProposal.setProposalId(rs.getInt("proposalId"));
-        //colaborationProposal.setDateStart(rs.getObject("dateStart", LocalDate.class));
-        colaborationProposal.setDateStart(rs.getString("dateStart"));
-        //colaborationProposal.setDateEnd(rs.getObject("dateEnd", LocalDate.class));
-        colaborationProposal.setDateStart(rs.getString("dateEnd"));
+        colaborationProposal.setDateStart(rs.getObject("dateStart", LocalDate.class));
+        colaborationProposal.setDateEnd(rs.getObject("dateEnd", LocalDate.class));
         colaborationProposal.setDescription(rs.getString("description"));
         colaborationProposal.setEmailStudent(rs.getString("emailStudent"));
         colaborationProposal.setIdSkill(rs.getInt("idSKill"));

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Skill Sharing</title>
@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Skill Sharing index</h1>
+<div th:replace="fragments/logininfo" >...</div>
 <ul>
     <li><a href="student/list">Lista Estudiantes</a></li>
     <li><a href="colaborationProposal/list">Lista Colaboration Proposals</a></li>
@@ -14,6 +15,7 @@
     <li><a href="skillType/list">Lista de Skill Types</a></li>
     <li><a href="manageSkills/list">Lista de ManageSkills</a></li>
     <li><a href="colaboration/list">Lista de colaboration</a></li>
+    <li><a href="user/list">Lista de usuarios</a> </li>
 </ul>
 </body>
 </html>

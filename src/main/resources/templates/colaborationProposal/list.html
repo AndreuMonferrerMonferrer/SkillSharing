@@ -22,8 +22,8 @@
   <tbody>
   <tr th:each="colaborationProposal: ${colaborationProposals}">
     <td th:text="${colaborationProposal.proposalId}"></td>
-    <td th:text="${colaborationProposal.dateStart}"></td>
-    <td th:text="${colaborationProposal.dateEnd}"></td>
+    <td th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')}"></td>
+    <td th:text="${#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></td>
     <td th:text="${colaborationProposal.description}"></td>
     <td th:text="${colaborationProposal.emailStudent}"></td>
     <td th:text="${colaborationProposal.idSkill}"></td>

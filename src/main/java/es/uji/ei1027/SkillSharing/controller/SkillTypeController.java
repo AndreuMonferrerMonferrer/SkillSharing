@@ -29,7 +29,6 @@ public class SkillTypeController {
     @RequestMapping(value = "/add")
     public String addSkillType(Model model){
         model.addAttribute("skillType", new SkillType());
-        System.out.println("add skilltypecontroller");
         return "skillType/add";
     }
 

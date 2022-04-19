@@ -1,12 +1,16 @@
 package es.uji.ei1027.SkillSharing.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Colaboration {
 
     private int proposalId;
     private int requestId;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateStart;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateEnd;
     private String description;
 

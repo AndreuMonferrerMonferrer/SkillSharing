@@ -43,7 +43,7 @@ public class ColaborationController {
         return "redirect:list";
     }
 
-    @RequestMapping("/update/{proposalId}/{requestId}")
+    @RequestMapping(value ="/update/{proposalId}/{requestId}", method = RequestMethod.GET)
     public String editColaboration(Model model,
                                    @PathVariable int proposalId,
                                    @PathVariable int requestId){

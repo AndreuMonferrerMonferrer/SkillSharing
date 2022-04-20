@@ -14,18 +14,26 @@
         <tr>
             <td><label>Email</label></td>
             <td><input type="text" th:field="*{email}" /></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
         </tr>
         <tr>
             <td><label>Is SKP?</label></td>
-            <td><input type="text" th:field="*{isSkp}" /></td>
+            <td><select class="form_control" type="text" th:field="*{isSkp}">
+                <option value="N" >Isn't skp</option>
+                <option value="S">Is skp</option>
+            </select>
+            </td>
+            <td th:if="${#fields.hasErrors('isSkp')}" th:errors="*{isSkp}"></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
-            <td><input type="text" th:field="*{name}" /></td>
+            <td><input type="text" th:field="*{name}" placeholder="Name and surname"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
         </tr>
         <tr>
             <td><label>Password</label></td>
             <td><input type="password" th:field="*{pwd}" /></td>
+            <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></td>
         </tr>
         <tr>
             <td><label>Recived Hours</label></td>
@@ -38,10 +46,12 @@
         <tr>
             <td><label>Tel. Number</label></td>
             <td><input type="text" th:field="*{telNumber}" /></td>
+            <td th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}"></td>
         </tr>
         <tr>
             <td><label>Degree</label></td>
             <td><input type="text" th:field="*{degree}" /></td>
+            <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Add Student" /></td>

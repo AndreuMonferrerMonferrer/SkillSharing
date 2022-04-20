@@ -13,11 +13,13 @@
   <table>
     <tr>
       <td><label>Skill Type Id</label></td>
-      <td><input type="text" th:field="*{idSkillType}" /></td>
+      <td><input type="number" th:field="*{idSkillType}" required/></td>
+
     </tr>
     <tr>
       <td><label>Email</label></td>
       <td><input type="text" th:field="*{email}" /></td>
+      <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Add Manage Skill" /></td>

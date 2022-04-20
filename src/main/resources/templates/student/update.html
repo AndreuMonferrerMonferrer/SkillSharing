@@ -17,7 +17,7 @@
             <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
         </tr>
         <tr>
-            <td><label>Is SKP? (N or S)</label></td>
+            <td><label>Is SKP?</label></td>
             <td><select class="form_control" type="text" th:field="*{isSkp}">
                 <option value="S">Is skp</option>
                 <option value="N" selected>Isn't skp</option>

@@ -37,6 +37,8 @@ public class ManageSkillsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("manageSkill") ManageSkills manageSkill,
                                    BindingResult bindingResult){
+        ManageSkillsValidator manageSkillsValidator=new ManageSkillsValidator();
+        manageSkillsValidator.validate(manageSkill,bindingResult);
         if (bindingResult.hasErrors())
             return "manageSkills/add";
         manageSkillsDAO.addManageSkills(manageSkill);

@@ -37,6 +37,8 @@ public class ColaborationController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("colaboration") Colaboration colaboration,
                                    BindingResult bindingResult){
+        ColaborationValidator colaborationValidator=new ColaborationValidator();
+        colaborationValidator.validate(colaboration,bindingResult);
         if (bindingResult.hasErrors())
             return "colaboration/add";
         colaborationDAO.addColaboration(colaboration);

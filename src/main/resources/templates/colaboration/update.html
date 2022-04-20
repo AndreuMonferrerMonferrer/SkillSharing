@@ -14,22 +14,31 @@
     <tr>
       <td><label>Proposal Id</label></td>
       <td><input type="number" th:field="*{proposalId}" readonly/></td>
+      <td th:if="${#fields.hasErrors('proposalId')}" th:errors="*{proposalId}"></td>
     </tr>
     <tr>
       <td><label>Request Id</label></td>
       <td><input type="number" th:field="*{requestId}" /></td>
+      <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}"></td>
     </tr>
     <tr>
       <td><label>Date Start</label></td>
       <td><input type="date" th:field="*{dateStart}" /></td>
+      <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></td>
+
     </tr>
     <tr>
       <td><label>Date End</label></td>
       <td><input type="date" th:field="*{dateEnd}" /></td>
+      <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></td>
+
     </tr>
     <tr>
       <td><label>Description</label></td>
       <td><input type="text" th:field="*{description}" /></td>
+      <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+
+
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Update Colaboration" /></td>

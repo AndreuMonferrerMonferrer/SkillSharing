@@ -27,12 +27,12 @@
         </tr>
         <tr>
             <td><label>Name</label></td>
-            <td><input type="text" th:field="*{name}" /></td>
+            <td><input type="text" th:field="*{name}" placeholder="Name and surname" maxlength="50" required/></td>
             <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
         </tr>
         <tr>
             <td><label>Password</label></td>
-            <td><input type="password" th:field="*{pwd}"></td>
+            <td><input type="password" th:field="*{pwd}" maxlength="30" required></td>
             <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></td>
         </tr>
         <tr>
@@ -45,12 +45,12 @@
         </tr>
         <tr>
             <td><label>Tel. Number</label></td>
-            <td><input type="text" th:field="*{telNumber}"/></td>
+            <td><input type="text" th:field="*{telNumber}" minlength="9" maxlength="9" required/></td>
             <td th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}"></td>
         </tr>
         <tr>
             <td><label>Degree</label></td>
-            <td><input type="text" th:field="*{degree}" /></td>
+            <td><input type="text" th:field="*{degree}" maxlength="30" required/></td>
             <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></td>
         </tr>
         <tr>

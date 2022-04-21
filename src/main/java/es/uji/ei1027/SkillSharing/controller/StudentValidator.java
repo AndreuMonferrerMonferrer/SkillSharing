@@ -25,8 +25,8 @@ public class StudentValidator implements Validator {
         if(student.getDegree().trim().equals("")) {
             errors.rejectValue("degree", "required", "you have to enter a value");
         }
-        if(String.valueOf(student.getTelNumber()).length()<9) {
-            errors.rejectValue("telNumber", "length incorrect", "The number must have nine digits or more");
+        if(String.valueOf(student.getTelNumber()).length()!=9) {
+            errors.rejectValue("telNumber", "length incorrect", "The number must have nine digits");
         }
         if(!student.getIsSkp().equals("N") && !student.getIsSkp().equals("S")) {
             errors.rejectValue("isSkp", "required", "the value has to be S or N");

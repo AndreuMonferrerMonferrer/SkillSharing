@@ -29,7 +29,7 @@ public class StudentValidator implements Validator {
             errors.rejectValue("telNumber", "length incorrect", "The number must have nine digits");
         }
         if(!student.getIsSkp().equals("N") && !student.getIsSkp().equals("S")) {
-            errors.rejectValue("isSkp", "required", "the value has to be S or N");
+            errors.rejectValue("isSkp", "incorrectValue", "the value has to be S or N");
         }
         if(student.getName().length()>50) {
             errors.rejectValue("name", "length exceeded", "the length has to be <= 50");

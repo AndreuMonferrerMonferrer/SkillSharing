@@ -35,6 +35,8 @@ public class SkillTypeController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("skillType") SkillType skillType,
                                    BindingResult bindingResult){
+        SkillTypeValidator skillTypeValidator=new SkillTypeValidator();
+        skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
             return "skillType/add";
         skillTypeDAO.addSkillType(skillType);
@@ -51,6 +53,8 @@ public class SkillTypeController {
     public String processUpdateSubmit(
             @ModelAttribute("skillType") SkillType skillType,
             BindingResult bindingResult){
+        SkillTypeValidator skillTypeValidator=new SkillTypeValidator();
+        skillTypeValidator.validate(skillType, bindingResult);
         if (bindingResult.hasErrors())
             return "skillType/update";
         skillTypeDAO.updateSkillType(skillType);

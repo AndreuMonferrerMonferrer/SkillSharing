@@ -27,5 +27,6 @@ public class ColaborationValidator implements Validator {
         if(colaboration.getDateEnd().isBefore(colaboration.getDateStart())){
             errors.rejectValue("dateEnd","temporal issue", "the end date has to be after the start date");
         }
+
     }
 }

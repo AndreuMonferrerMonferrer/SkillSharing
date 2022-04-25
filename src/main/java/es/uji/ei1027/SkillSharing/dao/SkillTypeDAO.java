@@ -3,7 +3,9 @@ package es.uji.ei1027.SkillSharing.dao;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -52,6 +54,15 @@ public class SkillTypeDAO {
                     new SkillTypeRowMapper());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<SkillType>();
+        }
+    }
+
+    public List<Integer> getSkillTypesIds(){
+        try{
+            return jdbcTemplate.query("SELECT id FROM SkillType",
+                    new SingleColumnRowMapper(Integer.class));
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Integer>();
         }
     }
 

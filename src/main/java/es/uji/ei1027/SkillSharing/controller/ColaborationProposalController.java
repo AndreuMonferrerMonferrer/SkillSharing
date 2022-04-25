@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/colaborationProposal")
 public class ColaborationProposalController {
 
     private ColaborationProposalDAO colaborationProposalDAO;
+    private SkillTypeDAO skillTypeDAO;
 
     @Autowired
     public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
         this.colaborationProposalDAO=colaborationProposalDAO;
+    }
+
+    @Autowired
+    public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
+        this.skillTypeDAO=skillTypeDAO;
     }
 
     @RequestMapping("/list")
@@ -32,6 +41,8 @@ public class ColaborationProposalController {
     @RequestMapping(value = "/add")
     public String addColaborationProposal(Model model){
         model.addAttribute("colaborationProposal", new ColaborationProposal());
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
         return "colaborationProposal/add";
     }
 
@@ -47,6 +58,8 @@ public class ColaborationProposalController {
     @RequestMapping(value = "/update/{proposalId}", method = RequestMethod.GET)
     public String editColaborationProposal(Model model, @PathVariable int proposalId){
         model.addAttribute("colaborationProposal", colaborationProposalDAO.getColaborationProposal(proposalId));
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
         return "colaborationProposal/update";
     }
 

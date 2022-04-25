@@ -59,6 +59,8 @@ public class ColaborationRequestController {
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)
     public String editColaborationRequest(Model model, @PathVariable int requestId){
         model.addAttribute("colaborationRequest", colaborationRequestDAO.getColaborationRequest(requestId));
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
         return "colaborationRequest/update";
     }
 

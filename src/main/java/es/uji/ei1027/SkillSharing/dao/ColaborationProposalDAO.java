@@ -33,8 +33,11 @@ public class ColaborationProposalDAO {
                 colaborationProposal.getProposalId());
     }
     public void updateColaborationProposal(ColaborationProposal colaborationProposal){
-        jdbcTemplate.update("UPDATE ColaborationProposal SET dateStart=?, dateEnd=?, description=? WHERE proposalId=?",
-                colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),colaborationProposal.getDescription(),colaborationProposal.getProposalId());
+        jdbcTemplate.update("UPDATE ColaborationRequest SET dateStart=?, dateEnd=?,description=?," +
+                        " emailStudent=?, idSkill=? WHERE proposalId=?",
+                colaborationProposal.getDateStart(), colaborationProposal.getDateEnd(),
+                colaborationProposal.getDescription(), colaborationProposal.getEmailStudent(),
+                colaborationProposal.getIdSkill(), colaborationProposal.getProposalId());
     }
 
     public ColaborationProposal getColaborationProposal(int proposalId){

@@ -33,7 +33,13 @@
         </tr>
         <tr>
             <td><label>Id Skill</label></td>
-            <td><input type="number" th:field="*{idSkill}" /></td>
+            <td>
+                <select class="form_control" type="number" th:field="*{idSkill}">
+                    <option th:each="idValue : ${idList}"
+                            th:value="${idValue}"
+                            th:text="${idValue}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Update Colaboration Request" /></td>

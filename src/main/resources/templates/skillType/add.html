@@ -12,12 +12,6 @@
       th:object="${skillType}" method="post">
     <table>
         <tr>
-            <td><label>Id</label></td>
-            <td><input type="number"  th:field="*{id}" required/></td>
-            <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></td>
-
-        </tr>
-        <tr>
             <td><label>Name</label></td>
             <td><input type="text" th:field="*{name}" maxlength="20" required /></td>
             <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
@@ -28,7 +22,6 @@
                 <option value="novice">Novice</option>
                 <option value="medium">Medium</option>
                 <option value="expert">Expert</option>
-                <option value="expeert">Eexpert</option>
             </select></td>
             <td th:if="${#fields.hasErrors('level')}" th:errors="*{level}"></td>
         </tr>

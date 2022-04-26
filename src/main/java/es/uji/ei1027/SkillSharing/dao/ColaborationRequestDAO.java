@@ -20,8 +20,8 @@ public class ColaborationRequestDAO {
     }
 
     public void addColaborationRequest(ColaborationRequest colaborationRequest){
-        jdbcTemplate.update("INSERT INTO ColaborationRequest VALUES(?, ?, ?, ?, ?, ?)",
-                colaborationRequest.getRequestId(),colaborationRequest.getDateStart(),
+        jdbcTemplate.update("INSERT INTO ColaborationRequest (dateStart,dateEnd,description,emailStudent,idSkill) VALUES(?,?,?,?,?)",
+                colaborationRequest.getDateStart(),
                 colaborationRequest.getDateEnd(), colaborationRequest.getDescription(),
                 colaborationRequest.getEmailStudent(), colaborationRequest.getIdSkill());
     }

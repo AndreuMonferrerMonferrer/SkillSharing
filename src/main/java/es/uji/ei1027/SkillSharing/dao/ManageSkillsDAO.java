@@ -65,14 +65,6 @@ public class ManageSkillsDAO {
             return new ArrayList<ManageSkills>();
         }
     }
-    public List<Integer> getSkillTypesIds(){
-        try{
-            return jdbcTemplate.query("SELECT id FROM ManageSkills",
-                    new SingleColumnRowMapper(Integer.class));
-        }catch(EmptyResultDataAccessException e){
-            return new ArrayList<Integer>();
-        }
-    }
 
     public List<ManageSkills> getManageSkillsIdSkillType(int idSkillType){
         try{

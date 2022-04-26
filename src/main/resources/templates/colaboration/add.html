@@ -13,12 +13,20 @@
     <table>
         <tr>
             <td><label>Proposal Id</label></td>
-            <td><input type="number" th:field="*{proposalId}" required/></td>
+            <td><select class="form_control" type="number" th:field="*{proposalId}"/>
+            <option th:each="idValue : ${proposalIdList}"
+                    th:value="${idValue}"
+                    th:text="${idValue}"></option>
+            </select>
             <td th:if="${#fields.hasErrors('proposalId')}" th:errors="*{proposalId}"></td>
         </tr>
         <tr>
             <td><label>Request Id</label></td>
-            <td><input type="number" th:field="*{requestId}" required /></td>
+            <td><select class="form_control" type="number" th:field="*{requestId}"/>
+            <option th:each="idValue : ${requestIdList}"
+                    th:value="${idValue}"
+                    th:text="${idValue}"></option>
+            </select>
             <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}"></td>
         </tr>
         <tr>

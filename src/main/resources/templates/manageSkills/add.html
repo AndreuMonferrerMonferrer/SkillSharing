@@ -13,8 +13,12 @@
   <table>
     <tr>
       <td><label>Skill Type Id</label></td>
-      <td><input type="number" th:field="*{idSkillType}" required/></td>
-
+      <td><select class="form_control" type="number" th:field="*{idSkillType}"/>
+      <option th:each="idValue : ${idList}"
+              th:value="${idValue}"
+              th:text="${idValue}"></option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td><label>Email</label></td>

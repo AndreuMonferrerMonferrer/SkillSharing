@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ManageSkillsDAO;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ManageSkills;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/manageSkills")
 public class ManageSkillsController {
 
     private ManageSkillsDAO manageSkillsDAO;
+    private SkillTypeDAO skillTypeDAO;
 
     @Autowired
     public void setManageSkillsDAO(ManageSkillsDAO manageSkillsDAO){this.manageSkillsDAO=manageSkillsDAO;}
 
+    @Autowired
+    public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
+        this.skillTypeDAO=skillTypeDAO;
+    }
 
     @RequestMapping("/list")
     public String listManageSkills(Model model){
@@ -28,9 +36,11 @@ public class ManageSkillsController {
         return "manageSkills/list";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add")
     public String addManageSkills(Model model){
         model.addAttribute("manageSkill", new ManageSkills());
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
         return "manageSkills/add";
     }
 

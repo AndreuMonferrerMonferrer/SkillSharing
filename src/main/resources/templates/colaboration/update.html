@@ -18,7 +18,7 @@
     </tr>
     <tr>
       <td><label>Request Id</label></td>
-      <td><input type="number" th:field="*{requestId}" /></td>
+      <td><input type="number" th:field="*{requestId}" readonly/></td>
       <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}"></td>
     </tr>
     <tr>

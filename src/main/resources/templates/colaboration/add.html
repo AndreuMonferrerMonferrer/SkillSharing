@@ -18,6 +18,7 @@
                     th:value="${idValue}"
                     th:text="${idValue}"></option>
             </select>
+            </td>
             <td th:if="${#fields.hasErrors('proposalId')}" th:errors="*{proposalId}"></td>
         </tr>
         <tr>
@@ -26,7 +27,8 @@
             <option th:each="idValue : ${requestIdList}"
                     th:value="${idValue}"
                     th:text="${idValue}"></option>
-            </select>
+                </select>
+            </td>
             <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}"></td>
         </tr>
         <tr>

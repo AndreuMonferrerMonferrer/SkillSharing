@@ -1,6 +1,8 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationDAO;
+import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
+import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +13,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/colaboration")
 public class ColaborationController {
 
     private ColaborationDAO colaborationDAO;
+    private ColaborationProposalDAO colaborationProposalDAO;
+    private ColaborationRequestDAO colaborationRequestDAO;
 
     @Autowired
     public void setColaborationDAO(ColaborationDAO colaborationDAO){
         this.colaborationDAO=colaborationDAO;
     }
+
+    @Autowired
+    public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){this.colaborationProposalDAO=colaborationProposalDAO;}
+
+    @Autowired
+    public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){this.colaborationRequestDAO = colaborationRequestDAO;}
 
     @RequestMapping("/list")
     public String listColaborations(Model model){
@@ -31,6 +43,10 @@ public class ColaborationController {
     @RequestMapping("/add")
     public String addColaboration(Model model){
         model.addAttribute("colaboration",new Colaboration());
+        List<Integer> requestIdList = colaborationRequestDAO.getRequestId();
+        model.addAttribute("requestIdList", requestIdList);
+        List<Integer> proposalIdList = colaborationProposalDAO.getProposalId();
+        model.addAttribute("proposalIdList", proposalIdList);
         return "colaboration/add";
     }
 

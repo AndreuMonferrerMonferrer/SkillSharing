@@ -4,9 +4,11 @@ import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -49,6 +51,15 @@ public class ColaborationRequestDAO {
                     new ColaborationRequestRowMapper(), requestId);
         } catch (EmptyResultDataAccessException e){
             return null;
+        }
+    }
+
+    public List<Integer> getRequestId(){
+        try{
+            return jdbcTemplate.query("SELECT requestId FROM ColaborationRequest",
+                    new SingleColumnRowMapper(Integer.class));
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Integer>();
         }
     }
 

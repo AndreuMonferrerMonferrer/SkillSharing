@@ -6,6 +6,7 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -56,6 +57,16 @@ public class ColaborationProposalDAO {
             return new ArrayList<ColaborationProposal>();
         }
     }
+
+    public List<Integer> getProposalId(){
+        try{
+            return jdbcTemplate.query("SELECT proposalId FROM ColaborationProposal",
+                    new SingleColumnRowMapper(Integer.class));
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Integer>();
+        }
+    }
+
     /*todas las ColaborationProposal de un alumno*/
     public List<ColaborationProposal> getColaborationProposals(String emailStudent){
         try{

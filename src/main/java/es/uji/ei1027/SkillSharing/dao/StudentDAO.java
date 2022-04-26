@@ -49,6 +49,7 @@ public class StudentDAO {
             return new ArrayList<Student>();
         }
     }
+
     public List<Student> getStudentEmail(String email){
         try{
             return this.jdbcTemplate.query("SELECT * FROM Student WHERE email=?",

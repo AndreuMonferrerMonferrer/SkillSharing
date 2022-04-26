@@ -21,8 +21,8 @@ public class ColaborationProposalDAO {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addColaborationProposal(ColaborationProposal colaborationProposal){
-        jdbcTemplate.update("INSERT INTO ColaborationProposal VALUES(?, ?, ?, ?, ?, ?)",
-          colaborationProposal.getProposalId(),colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),
+        jdbcTemplate.update("INSERT INTO ColaborationProposal (dateStart,dateEnd,description,emailStudent,idSkill) VALUES(?,?,?,?,?)",
+          colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),
           colaborationProposal.getDescription(),colaborationProposal.getEmailStudent(),colaborationProposal.getIdSkill());
     }
     public void deleteColaborationProposal(int proposalId){

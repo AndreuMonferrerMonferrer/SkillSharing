@@ -20,8 +20,8 @@ public class SkillTypeDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addSkillType(SkillType skillType){//como funciona un serial ¿bool?
-        jdbcTemplate.update("INSERT INTO SkillType VALUES(?, ?, ?, ?, ?)",
-                skillType.getId(),skillType.getName(),skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState());
+        jdbcTemplate.update("INSERT INTO SkillType ( name, level, description,abilitationState) VALUES(?, ?, ?, ?)",
+                skillType.getName(),skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState());
     }
 
     public void deleteSkillType(int id){//¿pongo name o id?

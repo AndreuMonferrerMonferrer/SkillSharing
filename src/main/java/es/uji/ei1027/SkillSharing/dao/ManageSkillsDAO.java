@@ -5,6 +5,7 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -62,6 +63,14 @@ public class ManageSkillsDAO {
                     new ManageSkillsRowMapper(), email);
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ManageSkills>();
+        }
+    }
+    public List<Integer> getSkillTypesIds(){
+        try{
+            return jdbcTemplate.query("SELECT id FROM ManageSkills",
+                    new SingleColumnRowMapper(Integer.class));
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<Integer>();
         }
     }
 

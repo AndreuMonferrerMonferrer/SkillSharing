@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar Col. Proposal</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>List of colaboration proposals</h1>
+<div th:replace="fragments/nav" >...</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ProposalId</th>
+        <th>Date Start</th>
+        <th>Date End</th>
+        <th>Description</th>
+        <th>EmailStudent</th>
+        <th>IdSkill</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="colaborationProposal: ${colaborationProposals}">
+        <td th:text="${colaborationProposal.proposalId}"></td>
+        <td th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')}"></td>
+        <td th:text="${#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></td>
+        <td th:text="${colaborationProposal.description}"></td>
+        <td th:text="${colaborationProposal.emailStudent}"></td>
+        <td th:text="${colaborationProposal.idSkill}"></td>
+        <td><a th:href="@{/colaborationProposal/update/{proposalId}(proposalId=${colaborationProposal.proposalId})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Add a Colaboration Proposal</button></a>
+</body>
+</html>

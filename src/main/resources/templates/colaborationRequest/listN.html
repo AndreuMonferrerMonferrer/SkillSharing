@@ -30,8 +30,6 @@
         <td th:text="${colaborationRequest.idSkill}"></td>
         <td><a th:href="@{/colaborationRequest/update/{requestId}(requestId=${colaborationRequest.requestId})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
         </td>
-        <td><a th:href="@{/colaborationRequest/delete/{requestId}(requestId=${colaborationRequest.requestId})}"><button type="button" class="btn btn-danger">Delete</button></a>
-        </td>
     </tr>
     </tbody>
 </table>

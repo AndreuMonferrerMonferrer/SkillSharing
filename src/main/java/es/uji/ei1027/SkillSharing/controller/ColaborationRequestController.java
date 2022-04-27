@@ -50,6 +50,8 @@ public class ColaborationRequestController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
                                    BindingResult bindingResult){
+        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator();
+        colaborationRequestValidator.validate(colaborationRequest,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationRequest/add";
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
@@ -68,6 +70,8 @@ public class ColaborationRequestController {
     public String processUpdateSubmit(
             @ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
             BindingResult bindingResult){
+        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator();
+        colaborationRequestValidator.validate(colaborationRequest,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationRequest/update";
         colaborationRequestDAO.updateColaborationRequest(colaborationRequest);

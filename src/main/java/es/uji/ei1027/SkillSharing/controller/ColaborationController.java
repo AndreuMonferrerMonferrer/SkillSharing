@@ -73,6 +73,8 @@ public class ColaborationController {
     public String processUpdateAndSubmit(
             @ModelAttribute("colaboration") Colaboration colaboration,
             BindingResult bindingResult){
+        ColaborationValidator colaborationValidator=new ColaborationValidator();
+        colaborationValidator.validate(colaboration,bindingResult);
         if (bindingResult.hasErrors())
             return "colaboration/update";
         colaborationDAO.updateColaboration(colaboration);

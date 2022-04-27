@@ -49,6 +49,8 @@ public class ColaborationProposalController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
                                    BindingResult bindingResult){
+        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator();
+        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationProposal/add";
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
@@ -67,6 +69,8 @@ public class ColaborationProposalController {
     public String processUpdateSubmit(
             @ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
             BindingResult bindingResult){
+        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator();
+        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationProposal/update";
         colaborationProposalDAO.updateColaborationProposal(colaborationProposal);

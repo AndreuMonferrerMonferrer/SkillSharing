@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Nav</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
-          th:href="@{/css/bootstrap.css}"/>
+     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link  rel="stylesheet" type="text/css" href="/css/sidebars.css" th:href="@{/css/sidebars.css}"/>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/}">Pàgina principal</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/student/list}">Students</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/colaborationProposal/list}">Col. Proposal</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/colaborationRequest/list}">Col. Request</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/colaboration/list}">Colaborations</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/skillType/list}">Skill Types</a></li>
-            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/manageSkills/list}">Manage Skills</a></li>
-        </ul>
+
+<main>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <a class="nav-link text-white" href="/" th:href="@{/}"><img src="skillsharing.png" alt="Skill Sharing" /></a><!-- no pilla la imagen :cccc-->
+        <a class="nav-link text-white" href="/" th:href="@{/student/list}">Students</a>
+        <a class="nav-link text-white" href="/" th:href="@{/colaborationProposal/list}"><span class="fs-4">Col. Proposal</span></a>
+        <a class="nav-link text-white" href="/" th:href="@{/colaborationRequest/list}">Col. Request</a>
+        <a class="nav-link text-white" href="/" th:href="@{/colaboration/list}">Colaborations</a>
+        <a class="nav-link text-white" href="/" th:href="@{/skillType/list}">Skill Types</a>
+        <a class="nav-link text-white" href="/" th:href="@{/manageSkills/list}">Manage Skills</a>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"><!--la foto ya pondremos otra-->
+                <strong>perfil</strong>
+            </a>
+        </div>
     </div>
-</nav>
-</body>
+
+</main>
+
+
 </html>

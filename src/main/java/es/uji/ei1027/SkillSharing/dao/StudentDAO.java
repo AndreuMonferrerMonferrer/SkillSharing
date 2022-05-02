@@ -4,6 +4,7 @@ import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -49,7 +50,14 @@ public class StudentDAO {
             return new ArrayList<Student>();
         }
     }
-
+    public List<String> getEmails(){
+        try {
+            return jdbcTemplate.query("SELECT email from Student",
+                    new SingleColumnRowMapper(String.class));
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
     public List<Student> getStudentEmail(String email){
         try{
             return this.jdbcTemplate.query("SELECT * FROM Student WHERE email=?",

@@ -1,6 +1,8 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

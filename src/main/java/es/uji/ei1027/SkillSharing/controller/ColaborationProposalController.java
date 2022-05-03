@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
+import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class ColaborationProposalController {
 
     private ColaborationProposalDAO colaborationProposalDAO;
     private SkillTypeDAO skillTypeDAO;
+    private StudentDAO studentDAO;
 
     @Autowired
     public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
@@ -31,6 +33,9 @@ public class ColaborationProposalController {
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
         this.skillTypeDAO=skillTypeDAO;
     }
+
+    @Autowired
+    public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
 
     @RequestMapping("/list")
     public String listColaborationProposals(Model model){
@@ -43,12 +48,16 @@ public class ColaborationProposalController {
         model.addAttribute("colaborationProposal", new ColaborationProposal());
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
+        List<String> emails = studentDAO.getEmails();
+        model.addAttribute("emails",emails);
         return "colaborationProposal/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
                                    BindingResult bindingResult){
+        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator();
+        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationProposal/add";
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
@@ -67,6 +76,8 @@ public class ColaborationProposalController {
     public String processUpdateSubmit(
             @ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
             BindingResult bindingResult){
+        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator();
+        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationProposal/update";
         colaborationProposalDAO.updateColaborationProposal(colaborationProposal);

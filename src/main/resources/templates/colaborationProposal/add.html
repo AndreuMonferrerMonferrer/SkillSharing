@@ -14,18 +14,22 @@
         <tr>
             <td><label>Date Start</label></td>
             <td><input type="date" th:field="*{dateStart}" /></td>
+            <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></td>
         </tr>
         <tr>
             <td><label>Date End</label></td>
             <td><input type="date" th:field="*{dateEnd}" /></td>
+            <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></td>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td><input type="text" th:field="*{description}" /></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
         </tr>
         <tr>
             <td><label>Student Email</label></td>
-            <td><input type="text" th:field="*{emailStudent}" /></td>
+            <td><input type="text" th:field="*{emailStudent}" required/></td>
+
         </tr>
         <tr>
             <td><label>Id Skill</label></td>
@@ -34,6 +38,7 @@
                             th:value="${idValue}"
                             th:text="${idValue}"></option>
                 </select>
+
             </td>
         </tr>
         <tr>

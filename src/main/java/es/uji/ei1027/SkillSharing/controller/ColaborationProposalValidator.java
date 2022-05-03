@@ -7,14 +7,27 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 public class ColaborationProposalValidator implements Validator {
+
+    private StudentDAO studentDAO;
+
+    public ColaborationProposalValidator(StudentDAO studentDAO){
+        super();
+        this.studentDAO=studentDAO;
+    }
+
     @Override
     public boolean supports(Class<?> cls) {
         return ColaborationProposal.class.equals(cls);
     }
 
+
+
     @Override
     public void validate(Object obj, Errors errors) {
         ColaborationProposal proposal = (ColaborationProposal) obj;
+        if (!studentDAO.getEmails().contains(proposal.getEmailStudent())){
+            errors.rejectValue("emailStudent", "email nonexistent", "there is no student with that email");
+        }
         if (proposal.getDescription().length() > 100){
             errors.rejectValue("description", "length exceeded", "the length has to be <= 100");
         }

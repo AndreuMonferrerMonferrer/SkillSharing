@@ -6,6 +6,7 @@
      <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link  rel="stylesheet" type="text/css" href="/css/sidebars.css" th:href="@{/css/sidebars.css}"/>
+
 </head>
 
 <main>
@@ -17,12 +18,12 @@
             <li><a class="nav-link text-white" href="/" th:href="@{/colaborationRequest/list}">Col. Request</a></li>
             <li><a class="nav-link text-white" href="/" th:href="@{/colaboration/list}">Colaborations</a></li>
             <li><a class="nav-link text-white" href="/" th:href="@{/skillType/list}">Skill Types</a></li>
-            <li><a class="nav-link text-white" href="/" th:href="@{/manageSkills/list}">Manage Skills</a></li>
+            <li><p><a class="nav-link text-white" href="/" th:href="@{/manageSkills/list}">Manage Skills</a></p></li>
         </ul>
         <hr>
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <strong>perfil</strong>
+            <a href="#" class="d-flex align-items-center text-white">
+                <div th:replace="/fragments/loginInfo" >...</div>
             </a>
         </div>
     </div>

@@ -1,15 +1,27 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 public class ColaborationRequestValidator implements Validator {
+
+    private StudentDAO studentDAO;
+
+    public ColaborationRequestValidator(StudentDAO studentDAO){
+        super();
+        this.studentDAO=studentDAO;
+    }
+
     public boolean supports(Class<?> cls) {return ColaborationRequest.class.equals(cls);    }
 
     @Override
     public void validate(Object obj, Errors errors) {
         ColaborationRequest request = (ColaborationRequest) obj;
+        if (!studentDAO.getEmails().contains(request.getEmailStudent())){
+            errors.rejectValue("emailStudent", "email nonexistent", "there is no student with that email");
+        }
         if (request.getDescription().length() > 100){
             errors.rejectValue("description", "length exceeded", "the length has to be <= 100");
         }

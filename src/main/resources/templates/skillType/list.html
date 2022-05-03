@@ -7,8 +7,10 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1>List of SkillTypes</h1>
+<div class="d-flex">
 <div th:replace="fragments/nav" >...</div>
+    <div class="container-fluid">
+        <h1>List of SkillTypes</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -34,5 +36,7 @@
     </tbody>
 </table>
 <a href="add"><button type="button" class="btn btn-success">Add SkillType</button></a>
+    </div>
+</div>
 </body>
 </html>

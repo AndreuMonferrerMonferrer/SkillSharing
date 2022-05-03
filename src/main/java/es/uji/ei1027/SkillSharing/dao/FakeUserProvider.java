@@ -1,4 +1,4 @@
-package es.uji.ei1027.SkillSharing.dao;
+/*package es.uji.ei1027.SkillSharing.dao;
 
 
 import java.util.Collection;
@@ -15,11 +15,6 @@ import es.uji.ei1027.SkillSharing.model.UserDetails;
 @Repository
 public class FakeUserProvider implements UserDao {
     final Map<String, UserDetails> knownUsers = new HashMap<String, UserDetails>();
-    private StudentDAO studentDAO;
-
-    @Autowired
-    public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
-
 
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
@@ -61,4 +56,4 @@ public class FakeUserProvider implements UserDao {
         return knownUsers.values();
     }
 }
-
+*/

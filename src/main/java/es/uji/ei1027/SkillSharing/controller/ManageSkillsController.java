@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ManageSkillsDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
+import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ManageSkills;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ManageSkillsController {
 
     private ManageSkillsDAO manageSkillsDAO;
     private SkillTypeDAO skillTypeDAO;
+    private StudentDAO studentDAO;
 
     @Autowired
     public void setManageSkillsDAO(ManageSkillsDAO manageSkillsDAO){this.manageSkillsDAO=manageSkillsDAO;}
@@ -29,6 +31,9 @@ public class ManageSkillsController {
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
         this.skillTypeDAO=skillTypeDAO;
     }
+
+    @Autowired
+    public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
 
     @RequestMapping("/list")
     public String listManageSkills(Model model){
@@ -47,7 +52,7 @@ public class ManageSkillsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("manageSkill") ManageSkills manageSkill,
                                    BindingResult bindingResult){
-        ManageSkillsValidator manageSkillsValidator=new ManageSkillsValidator();
+        ManageSkillsValidator manageSkillsValidator=new ManageSkillsValidator(studentDAO);
         manageSkillsValidator.validate(manageSkill,bindingResult);
         if (bindingResult.hasErrors())
             return "manageSkills/add";

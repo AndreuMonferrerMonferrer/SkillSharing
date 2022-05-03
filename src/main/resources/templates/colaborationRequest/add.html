@@ -13,13 +13,13 @@
     <table>
         <tr>
             <td><label>Date Start</label></td>
-            <td><input type="date" th:field="*{dateStart}" /></td>
+            <td><input type="date" th:field="*{dateStart}" required/></td>
             <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></td>
 
         </tr>
         <tr>
             <td><label>Date End</label></td>
-            <td><input type="date" th:field="*{dateEnd}" /></td>
+            <td><input type="date" th:field="*{dateEnd}" required/></td>
             <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></td>
 
         </tr>
@@ -32,6 +32,7 @@
         <tr>
             <td><label>Student Email</label></td>
             <td><input type="text" th:field="*{emailStudent}" required/></td>
+            <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"></td>
         </tr>
         <tr>
             <td><label>Id Skill</label></td>

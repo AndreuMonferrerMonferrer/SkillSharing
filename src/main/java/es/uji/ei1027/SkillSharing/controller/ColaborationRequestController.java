@@ -2,6 +2,7 @@ package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
+import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class ColaborationRequestController {
 
     private ColaborationRequestDAO colaborationRequestDAO;
     private SkillTypeDAO skillTypeDAO;
+    private StudentDAO studentDAO;
     @Autowired
     public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){
         this.colaborationRequestDAO=colaborationRequestDAO;
@@ -32,6 +34,8 @@ public class ColaborationRequestController {
         this.skillTypeDAO=skillTypeDAO;
     }
 
+    @Autowired
+    public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
 
     @RequestMapping("/list")
     public String listColaboratioRequests(Model model){
@@ -50,7 +54,7 @@ public class ColaborationRequestController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
                                    BindingResult bindingResult){
-        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator();
+        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);
         colaborationRequestValidator.validate(colaborationRequest,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationRequest/add";
@@ -70,7 +74,7 @@ public class ColaborationRequestController {
     public String processUpdateSubmit(
             @ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
             BindingResult bindingResult){
-        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator();
+        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);
         colaborationRequestValidator.validate(colaborationRequest,bindingResult);
         if (bindingResult.hasErrors())
             return "colaborationRequest/update";

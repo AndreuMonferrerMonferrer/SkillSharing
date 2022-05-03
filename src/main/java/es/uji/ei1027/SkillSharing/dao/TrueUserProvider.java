@@ -26,6 +26,7 @@ public class TrueUserProvider implements UserDao{
             newUser = new UserDetails();
             newUser.setUsername(listStudents.get(i).getEmail());
             newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd()));
+            newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
             knownUsers.put(listStudents.get(i).getEmail(),newUser);
         }
     }

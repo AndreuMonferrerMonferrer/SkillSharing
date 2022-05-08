@@ -55,7 +55,10 @@
         </tr>
         <tr>
             <td><label>Abilitation State</label></td>
-            <td><input type="text" th:field="*{abilitationState}"  maxlength="1" required/></td>
+            <td><select class="form_control" type="text" th:field="*{abilitationState}">
+                <option value="N" >Banned</option>
+                <option value="S">Unbanned</option>
+            </select>
             <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}"></td>
         </tr>
         <tr>

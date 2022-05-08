@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RootController {
     @RequestMapping(value="")
     public String homePage() {
-        return "index";
+        return "index3";
     }
 
 }

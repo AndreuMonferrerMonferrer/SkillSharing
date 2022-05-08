@@ -18,8 +18,8 @@ public class StudentDAO {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addStudent(Student student){
-            jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                    student.getEmail(),student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(),student.getProvidedHours(),student.getTelNumber(),student.getDegree());
+            jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    student.getEmail(),student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(),student.getProvidedHours(),student.getTelNumber(),student.getDegree(), student.getAbilitationState());
     }
     public void deleteStudent(String email){
         jdbcTemplate.update("DELETE from Student WHERE email=?",
@@ -30,8 +30,8 @@ public class StudentDAO {
                 student.getEmail());
     }
     public void updateStudent(Student student){
-        jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=? WHERE email=?",
-                student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getEmail());
+        jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=?, abilitationState=? WHERE email=?",
+                student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getAbilitationState(),student.getEmail());
     }
 
     public Student getStudent(String email){

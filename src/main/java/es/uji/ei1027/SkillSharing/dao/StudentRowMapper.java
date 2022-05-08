@@ -19,6 +19,7 @@ public final class StudentRowMapper implements
         student.setProvidedHours(rs.getInt("providedHours"));
         student.setTelNumber(rs.getInt("telNumber"));
         student.setDegree(rs.getString("degree"));
+        student.setAbilitationState(rs.getString("abilitationState"));
         return student;
     }
 }

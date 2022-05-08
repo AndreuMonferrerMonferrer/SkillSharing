@@ -54,6 +54,14 @@
             <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></td>
         </tr>
         <tr>
+            <td><label>Abilitation State</label></td>
+            <td><select class="form_control" type="text" th:field="*{abilitationState}">
+                <option value="N" >Banned</option>
+                <option value="S">Unbanned</option>
+            </select>
+            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}"></td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" value="Add Student" /></td>
         </tr>
     </table>

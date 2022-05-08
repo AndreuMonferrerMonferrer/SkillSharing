@@ -43,6 +43,9 @@ public class StudentValidator implements Validator {
         if(student.getDegree().length()>50) {
             errors.rejectValue("degree", "length exceeded", "the length has to be <= 50");
         }
+        /*if(!student.getAbilitationState().equals("N")||!student.getAbilitationState().equals("S")){
+            errors.rejectValue("abilitationState","incorrectValue","has to be an S or an N");
+        }*/
 
     }
 }

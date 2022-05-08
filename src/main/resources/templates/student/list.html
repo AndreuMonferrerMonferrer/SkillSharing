@@ -22,6 +22,7 @@
                 <th>ProvidedHours</th>
                 <th>TelephoneNumber</th>
                 <th>Degree</th>
+                <th>AbilitationState</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                 <td th:text="${student.providedHours}"></td>
                 <td th:text="${student.telNumber}"></td>
                 <td th:text="${student.degree}"></td>
+                <td th:text="${student.abilitationState}"></td>
                 <td><a th:href="@{/student/update/{email}(email=${student.email})}">
                     <button type="button" class="btn btn-warning" onclick="">Update</button>
                 </a>

@@ -54,6 +54,11 @@
             <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></td>
         </tr>
         <tr>
+            <td><label>Abilitation State</label></td>
+            <td><input type="text" th:field="*{abilitationState}"  maxlength="1" required/></td>
+            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}"></td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" value="Update student" /></td>
         </tr>
 

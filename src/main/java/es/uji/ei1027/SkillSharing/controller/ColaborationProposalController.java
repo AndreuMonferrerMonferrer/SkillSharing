@@ -43,6 +43,7 @@ public class ColaborationProposalController {
         return "colaborationProposal/list";
     }
 
+
     @RequestMapping(value = "/add")
     public String addColaborationProposal(Model model){
         model.addAttribute("colaborationProposal", new ColaborationProposal());

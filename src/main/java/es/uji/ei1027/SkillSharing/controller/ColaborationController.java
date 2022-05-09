@@ -87,4 +87,9 @@ public class ColaborationController {
         colaborationDAO.deleteColaboration(proposalId, requestId);
         return "redirect:../../list";
     }
+
+
+
+
+
 }

@@ -21,6 +21,12 @@ public class StudentDAO {
             jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     student.getEmail(),student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(),student.getProvidedHours(),student.getTelNumber(),student.getDegree(), student.getAbilitationState());
     }
+
+    public void addStudentNormal(Student student){
+        jdbcTemplate.update("INSERT INTO Student VALUES(?, 'N', ?, ?, '0', '0', ?, ?, 'S')",
+                student.getEmail(),student.getName(),student.getPwd(),student.getTelNumber(),student.getDegree());
+    }
+
     public void deleteStudent(String email){
         jdbcTemplate.update("DELETE from Student WHERE email=?",
                 email);

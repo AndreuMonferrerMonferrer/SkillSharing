@@ -24,7 +24,9 @@
                 <label for="floatingPassword">Contrasenya:</label>
                 <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
-            <input class="w-100 btn btn-lg btn-primary" type="submit" value="Accedir" />
+            <a href="index.html">
+            <input class="w-100 btn btn-lg btn-primary" type="submit" value="Accedir"/>
+            </a>
         </form>
 </main>
 </div>

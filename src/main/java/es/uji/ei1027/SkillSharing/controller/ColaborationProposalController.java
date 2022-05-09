@@ -43,7 +43,11 @@ public class ColaborationProposalController {
         return "colaborationProposal/list";
     }
 
-
+    @RequestMapping(value="/listSinRegistrar")
+    public String listColaborationProposalsSinRegistrar(Model model){
+        model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposals());
+        return "colaborationProposal/listSinRegistrar";
+    }
     @RequestMapping(value = "/add")
     public String addColaborationProposal(Model model){
         model.addAttribute("colaborationProposal", new ColaborationProposal());

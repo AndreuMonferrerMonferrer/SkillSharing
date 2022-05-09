@@ -38,8 +38,8 @@
                         <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="email">Skill Requested</label>
-                        <input class="form_control" type="text" th:field="*{emailStudent}" id="email" readonly="readonly"/>
+                        <label for="email">Email</label>
+                        <input class="form_control" type="text" th:field="*{email}" id="email" readonly/>
                         <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"  class="invalid-feedback"></td>
                     </div>
                 </div>

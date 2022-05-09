@@ -94,6 +94,7 @@ public class ColaborationRequestController {
         return "redirect:list";//TODO listN bien hecho
     }
 
+
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)
     public String editColaborationRequest(Model model, @PathVariable int requestId){
         model.addAttribute("colaborationRequest", colaborationRequestDAO.getColaborationRequest(requestId));

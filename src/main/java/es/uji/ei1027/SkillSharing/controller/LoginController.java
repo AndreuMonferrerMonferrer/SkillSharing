@@ -62,12 +62,12 @@ public class LoginController {
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         session.setAttribute("user", user);
-        if(session.getAttribute("nextUrl") != null){
-            return "redirect:" + (String) session.getAttribute("nextUrl");
-        }
 
+        if (user.isSkp())
+            return "redirect:/user/list";
+        else
+            return "redirect:/colaboration/list"; //TODO Esto debe de cambiarse luego
         // Torna a la pàgina principal
-        return "redirect:/";
     }
 
     @RequestMapping("/logout")

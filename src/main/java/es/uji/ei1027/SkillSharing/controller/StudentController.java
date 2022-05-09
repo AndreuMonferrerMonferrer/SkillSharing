@@ -85,4 +85,10 @@ public class StudentController {
         studentDAO.deleteStudent(email);
         return "redirect:../list";
     }
+
+    @RequestMapping(value = "/disable/{email}")
+    public String processDisable(@PathVariable String email){
+        studentDAO.deleteStudent(email);
+        return "redirect:../listTrue";
+    }
 }

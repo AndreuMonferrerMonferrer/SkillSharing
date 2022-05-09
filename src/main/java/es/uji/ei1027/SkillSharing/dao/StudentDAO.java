@@ -35,6 +35,9 @@ public class StudentDAO {
         jdbcTemplate.update("DELETE from Student WHERE email=?",
                 student.getEmail());
     }
+    public void disableStudent(String email){
+        jdbcTemplate.update("UPDATE student SET ")
+    }
     public void updateStudent(Student student){
         jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=?, abilitationState=? WHERE email=?",
                 student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getAbilitationState(),student.getEmail());

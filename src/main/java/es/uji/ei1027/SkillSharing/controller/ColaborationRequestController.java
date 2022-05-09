@@ -3,8 +3,11 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
+import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
+import es.uji.ei1027.SkillSharing.model.UserDetails;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,6 +64,34 @@ public class ColaborationRequestController {
             return "colaborationRequest/add";
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
         return "redirect:list";
+    }
+
+    @RequestMapping(value = "/addN")
+    public String addColaborationRequestUser(HttpSession session, Model model){
+        session.setAttribute("nextUrl", "/user/list");
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        ColaborationRequest colaboration = new ColaborationRequest();
+        colaboration.setEmailStudent(user.getUsername());
+        model.addAttribute("colaborationRequest", colaboration);
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
+        return "colaborationRequest/addN";
+    }
+
+    @RequestMapping(value = "/addN", method = RequestMethod.POST)
+    public String processAddNSubmit(@ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
+                                   BindingResult bindingResult){
+        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);
+        colaborationRequestValidator.validate(colaborationRequest,bindingResult);
+        if (bindingResult.hasErrors())
+            return "colaborationRequest/addN";
+        colaborationRequestDAO.addColaborationRequest(colaborationRequest);
+        return "redirect:list";//TODO listN bien hecho
     }
 
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)

@@ -28,12 +28,25 @@
         <div th:replace="fragments/nav">...</div>
         <div class="container-fluid">
             <h2>New Colaboration Request</h2>
-            <form action="#" th:action="@{/colaborationRequest/add}"
+            <form action="#" th:action="@{/colaborationRequest/addN}"
                   th:object="${colaborationRequest}" method="post">
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="dateStart">Date Start</label>
                         <input type="date" class="form-control" id="dateStart" th:field="*{dateStart}" required>
+                        <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Skill Requested</label>
+                        <input class="form_control" type="text" th:field="*{emailStudent}" id="email" readonly="readonly"/>
+                        <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"  class="invalid-feedback"></td>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="dateEnd">Date End</label>
+                        <input type="date" class="form-control" id="dateEnd" th:field="*{dateEnd}" required>
                         <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group col-md-6">
@@ -43,13 +56,7 @@
                                     th:value="${idValue}"
                                     th:text="${idValue}"></option>
                         </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="dateEnd">Date End</label>
-                        <input type="date" class="form-control" id="dateEnd" th:field="*{dateEnd}" required>
-                        <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
+                        <div th:if="${#fields.hasErrors('idSkill')}" th:errors="*{idSkill}" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="form-group">

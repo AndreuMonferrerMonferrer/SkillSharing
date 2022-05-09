@@ -3,7 +3,6 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
-import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.UserDetails;
@@ -75,9 +74,8 @@ public class ColaborationRequestController {
             return "login";
         }
         UserDetails user = (UserDetails) session.getAttribute("user");
-        ColaborationRequest colaboration = new ColaborationRequest();
-        colaboration.setEmailStudent(user.getUsername());
-        model.addAttribute("colaborationRequest", colaboration);
+        model.addAttribute("email", user.getUsername());
+        model.addAttribute("colaborationRequest", new ColaborationRequest());
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
         return "colaborationRequest/addN";
@@ -93,7 +91,6 @@ public class ColaborationRequestController {
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
         return "redirect:list";//TODO listN bien hecho
     }
-
 
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)
     public String editColaborationRequest(Model model, @PathVariable int requestId){

@@ -36,7 +36,12 @@ public class StudentDAO {
                 student.getEmail());
     }
     public void disableStudent(String email){
-        jdbcTemplate.update("UPDATE student SET ")
+        jdbcTemplate.update("UPDATE student SET abilitationState='N' WHERE email=?",
+                email);
+    }
+    public void disableStudent(Student student){
+        jdbcTemplate.update("UPDATE student SET abilitationState='N' WHERE email=?",
+                student.getEmail());
     }
     public void updateStudent(Student student){
         jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=?, abilitationState=? WHERE email=?",

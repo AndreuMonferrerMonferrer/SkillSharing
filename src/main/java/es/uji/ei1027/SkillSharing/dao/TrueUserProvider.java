@@ -23,11 +23,13 @@ public class TrueUserProvider implements UserDao{
         List<Student> listStudents = studentDAO.getStudents();
         UserDetails newUser;
         for (int i = 0; i< listStudents.size(); i++){
-            newUser = new UserDetails();
-            newUser.setUsername(listStudents.get(i).getEmail());
-            newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd()));
-            newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
-            knownUsers.put(listStudents.get(i).getEmail(),newUser);
+            if (listStudents.get(i).getAbilitationState().equals("S")){
+                newUser = new UserDetails();
+                newUser.setUsername(listStudents.get(i).getEmail());
+                newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd()));
+                newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
+                knownUsers.put(listStudents.get(i).getEmail(),newUser);
+            }
         }
     }
 
@@ -50,5 +52,11 @@ public class TrueUserProvider implements UserDao{
     @Override
     public Collection<UserDetails> listAllUsers() {
         return knownUsers.values();
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        UserDetails deleted = knownUsers.remove(username);
+        return deleted!=null;
     }
 }

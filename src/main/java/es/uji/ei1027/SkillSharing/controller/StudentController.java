@@ -1,6 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
+import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,23 @@ public class StudentController {
         this.studentDAO=studentDAO;
     }
 
+    private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao){
+        this.userDao=userDao;
+    }
+
     @RequestMapping("/list")
     public String listStudents(Model model){
         model.addAttribute("students", studentDAO.getStudents());
         return "student/list";
+    }
+
+    @RequestMapping("/listTrue")
+    public String listUsers(Model model){
+        model.addAttribute("students", studentDAO.getStudents());
+        return "student/listTrue";
     }
 
     @RequestMapping(value = "/add")
@@ -83,12 +97,16 @@ public class StudentController {
     @RequestMapping(value = "/delete/{email}")
     public String processDelete(@PathVariable String email){
         studentDAO.deleteStudent(email);
+
         return "redirect:../list";
     }
 
     @RequestMapping(value = "/disable/{email}")
     public String processDisable(@PathVariable String email){
-        studentDAO.deleteStudent(email);
+        boolean disabled = userDao.deleteUser(email);
+        if (disabled){
+            studentDAO.disableStudent(email);
+        }
         return "redirect:../listTrue";
     }
 }

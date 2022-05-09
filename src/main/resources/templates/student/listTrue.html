@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Gestionar Students</title>
+    <title>List of Users</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
@@ -10,7 +10,7 @@
 <div class="d-flex">
     <div th:replace="fragments/nav">...</div>
     <div class="container-fluid">
-        <h1>List of Students</h1>
+        <h1>List of Users</h1>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -27,19 +27,21 @@
             </thead>
             <tbody>
             <tr th:each="student: ${students}">
-                <td th:text="${student.email}"></td>
-                <td th:text="${student.isSkp}"></td>
-                <td th:text="${student.name}"></td>
-                <td th:text="${student.pwd}"></td>
-                <td th:text="${student.recivedHours}"></td>
-                <td th:text="${student.providedHours}"></td>
-                <td th:text="${student.telNumber}"></td>
-                <td th:text="${student.degree}"></td>
-                <td th:text="${student.abilitationState}"></td>
-                <td><a th:href="@{/student/disable/{email}(email=${student.email})}">
-                    <button type="button" class="btn btn-danger">Disable</button>
-                </a>
-                </td>
+                <div th:if="${#strings.equals('S',student.abilitationState)}">
+                    <td th:text="${student.email}"></td>
+                    <td th:text="${student.isSkp}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.pwd}"></td>
+                    <td th:text="${student.recivedHours}"></td>
+                    <td th:text="${student.providedHours}"></td>
+                    <td th:text="${student.telNumber}"></td>
+                    <td th:text="${student.degree}"></td>
+                    <td th:text="${student.abilitationState}"></td>
+                    <td><a th:href="@{/student/disable/{email}(email=${student.email})}">
+                        <button type="button" class="btn btn-danger">Disable</button>
+                    </a>
+                    </td>
+                </div>
             </tr>
             </tbody>
         </table>

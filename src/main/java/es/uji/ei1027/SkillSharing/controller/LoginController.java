@@ -64,7 +64,7 @@ public class LoginController {
         session.setAttribute("user", user);
 
         if (user.isSkp())
-            return "redirect:/user/list";
+            return "redirect:/student/listTrue";
         else
             return "redirect:/colaboration/list"; //TODO Esto debe de cambiarse luego
         // Torna a la pàgina principal

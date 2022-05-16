@@ -4,6 +4,8 @@ import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import es.uji.ei1027.SkillSharing.model.SkillType;
+import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -46,6 +49,7 @@ public class ColaborationProposalController {
     @RequestMapping(value="/listSinRegistrar")
     public String listColaborationProposalsSinRegistrar(Model model){
         model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposals());
+        model.addAttribute("skillList",skillTypeDAO.getSkillTypes());
         return "colaborationProposal/listSinRegistrar";
     }
     @RequestMapping(value = "/add")
@@ -67,6 +71,21 @@ public class ColaborationProposalController {
             return "colaborationProposal/add";
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
         return "redirect:list";
+    }
+
+    @RequestMapping(value = "/addN")
+    public String addColaborationProposalUser(HttpSession session, Model model){
+        session.setAttribute("nextUrl","/user/list");
+        if(session.getAttribute("user") == null){
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("email", user.getUsername());
+        model.addAttribute("colaborationProposal", new ColaborationProposal());
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
+        return "colaborationProposal/addN";
     }
 
     @RequestMapping(value = "/update/{proposalId}", method = RequestMethod.GET)

@@ -14,7 +14,6 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>ProposalId</th>
     <th>Date Start</th>
     <th>Date End</th>
     <th>Description</th>
@@ -24,7 +23,6 @@
   </thead>
   <tbody>
   <tr th:each="colaborationProposal: ${colaborationProposals}">
-    <td th:text="${colaborationProposal.proposalId}"></td>
     <td th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')}"></td>
     <td th:text="${#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></td>
     <td th:text="${colaborationProposal.description}"></td>

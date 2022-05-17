@@ -4,6 +4,7 @@ import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,17 @@ public class ColaborationProposalController {
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
         model.addAttribute("skillTypes", skillTypes);
         return "colaborationProposal/addN";
+    }
+
+    @RequestMapping(value = "/addN", method = RequestMethod.POST)
+    public String processAddNSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
+                                    BindingResult bindingResult){
+        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator(studentDAO);
+        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
+        if (bindingResult.hasErrors())
+            return "colaborationProposal/addN";
+        colaborationProposalDAO.addColaborationProposal(colaborationProposal);
+        return "redirect:list";//TODO listN bien hecho
     }
 
     @RequestMapping(value = "/update/{proposalId}", method = RequestMethod.GET)

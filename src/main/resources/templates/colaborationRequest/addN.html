@@ -52,9 +52,9 @@
                     <div class="form-group col-md-6">
                         <label for="skillRequested">Skill Requested</label>
                         <select class="form_control" type="number" id="skillRequested" th:field="*{idSkill}">
-                            <option th:each="idValue : ${idList}"
-                                    th:value="${idValue}"
-                                    th:text="${idValue}"></option>
+                            <option th:each="skillType : ${skillTypes}"
+                                    th:value="${skillType.id}"
+                                    th:text="${skillType.name}"></option>
                         </select>
                         <div th:if="${#fields.hasErrors('idSkill')}" th:errors="*{idSkill}" class="invalid-feedback"></div>
                     </div>

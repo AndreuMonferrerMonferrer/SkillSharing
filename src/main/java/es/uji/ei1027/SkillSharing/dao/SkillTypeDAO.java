@@ -57,6 +57,15 @@ public class SkillTypeDAO {
         }
     }
 
+    public List<SkillType> getSkillTypesAbilitados(){
+        try{
+            return jdbcTemplate.query("SELECT * from SkillType WHERE abilitationState='S'",
+                    new SkillTypeRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<SkillType>();
+        }
+    }
+
     public List<Integer> getSkillTypesIds(){
         try{
             return jdbcTemplate.query("SELECT id FROM SkillType",
@@ -74,5 +83,7 @@ public class SkillTypeDAO {
             return new ArrayList<SkillType>();
         }
     }
+
+
 
 }

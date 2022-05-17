@@ -78,7 +78,7 @@ public class ColaborationRequestController {
         model.addAttribute("colaborationRequest", new ColaborationRequest());
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
-        List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
         model.addAttribute("skillTypes", skillTypes);
         return "colaborationRequest/addN";
     }

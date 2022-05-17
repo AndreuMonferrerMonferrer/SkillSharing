@@ -47,14 +47,14 @@
                     <div class="form-group col-md-6">
                         <label for="dateEnd">Date End</label>
                         <input type="date" class="form-control" id="dateEnd" th:field="*{dateEnd}" required>
-                        <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
+                        <div th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="skillRequested">Skill Requested</label>
                         <select class="form_control" type="number" id="skillRequested" th:field="*{idSkill}">
                             <option th:each="skillType : ${skillTypes}"
                                     th:value="${skillType.id}"
-                                    th:text="${skillType.name}"></option>
+                                    th:text="${skillType.name + ' - ' + skillType.level}"></option>
                         </select>
                         <div th:if="${#fields.hasErrors('idSkill')}" th:errors="*{idSkill}" class="invalid-feedback"></div>
                     </div>

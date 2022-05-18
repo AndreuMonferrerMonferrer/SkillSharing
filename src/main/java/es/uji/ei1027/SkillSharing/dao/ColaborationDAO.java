@@ -1,5 +1,6 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.controller.EmailService;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -13,6 +14,8 @@ import java.util.List;
 public class ColaborationDAO {
 
     private JdbcTemplate jdbcTemplate;
+
+    private EmailService emailSenderService;
 
     @Autowired
     public void setDataSource(DataSource dataSource){

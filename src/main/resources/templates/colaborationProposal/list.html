@@ -29,7 +29,7 @@
     <td th:text="${#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></td>
     <td th:text="${colaborationProposal.description}"></td>
     <td th:text="${colaborationProposal.emailStudent}"></td>
-    <td th:text="${colaborationProposal.idSkill}"></td>
+    <td th:each="skillType: ${skillTypes}" th:if="${colaborationProposal.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></td>
     <td><a th:href="@{/colaborationProposal/update/{proposalId}(proposalId=${colaborationProposal.proposalId})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
     </td>
     <td><a th:href="@{/colaborationProposal/delete/{proposalId}(proposalId=${colaborationProposal.proposalId})}"><button type="button" class="btn btn-danger">Delete</button></a>

@@ -43,6 +43,8 @@ public class ColaborationRequestController {
     @RequestMapping("/list")
     public String listColaboratioRequests(Model model){
         model.addAttribute("colaborationRequests", colaborationRequestDAO.getColaborationRequests());
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
+        model.addAttribute("skillTypes", skillTypes);
         return "colaborationRequest/list";
     }
 

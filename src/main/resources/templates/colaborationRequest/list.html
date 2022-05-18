@@ -29,7 +29,7 @@
         <td th:text="${colaborationRequest.dateEnd}"></td>
         <td th:text="${colaborationRequest.description}"></td>
         <td th:text="${colaborationRequest.emailStudent}"></td>
-        <td th:text="${colaborationRequest.idSkill}"></td>
+        <td th:each="skillType: ${skillTypes}" th:if="${colaborationRequest.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></td>
         <td><a th:href="@{/colaborationRequest/update/{requestId}(requestId=${colaborationRequest.requestId})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
         </td>
         <td><a th:href="@{/colaborationRequest/delete/{requestId}(requestId=${colaborationRequest.requestId})}"><button type="button" class="btn btn-danger">Delete</button></a>

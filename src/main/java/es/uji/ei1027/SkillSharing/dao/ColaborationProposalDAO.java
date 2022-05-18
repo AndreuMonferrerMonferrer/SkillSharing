@@ -76,4 +76,13 @@ public class ColaborationProposalDAO {
             return new ArrayList<ColaborationProposal>();
         }
     }
+
+    public List<ColaborationProposal> getProposalAbilitated(){
+        try{
+            return jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S')",
+                    new ColaborationProposalRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationProposal>();
+        }
+    }
 }

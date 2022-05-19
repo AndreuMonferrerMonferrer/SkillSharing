@@ -8,7 +8,12 @@
 </head>
 <body>
 <div class="d-flex">
-  <div th:replace="fragments/navSinRegistrar" >...</div>
+  <div th:if="${logged}">
+    <div th:replace="fragments/nav">...</div>
+  </div>
+  <div th:unless="${logged}">
+    <div th:replace="fragments/navSinRegistrar"th:unless="${logged}">...</div>
+  </div>
   <div class="container-fluid">
     <h1>List of colaboration proposals</h1>
     <div class="d-flex flex-row justify-content-center flex-wrap">
@@ -18,7 +23,7 @@
           <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationProposal.emailStudent}"></h6>
           <h6 class="small" th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></h6>
           <p class="card-text" th:text="${colaborationProposal.description}"></p>
-          <a href="add" class="button btn btn-success" th:if="${logged}">Add a Colaboration request</button></a>
+          <a href="../colaborationRequest/add" class="button btn btn-success" th:if="${logged}">Add a Colaboration request</button></a>
         </div>
       </div>
     </div>

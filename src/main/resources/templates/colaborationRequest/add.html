@@ -36,13 +36,14 @@
         </tr>
         <tr>
             <td><label>Id Skill</label></td>
-            <td> <select class="form_control" type="number" th:field="*{idSkill}">
-                <option th:each="idValue : ${idList}"
+            <td th:if="${requestId== null }">
+                <select class="form_control" type="number" th:field="*{idSkill}">
+                    <option th:each="idValue : ${idList}"
                         th:value="${idValue}"
                         th:text="${idValue}"></option>
-            </select>
+                </select>
             </td>
-
+            <td><input type="text" th:field="*{idSkill}"th:text="${requestId}" th:if="${requestId!=null }" readonly required/></input></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Add Colaboration Request" /></td>

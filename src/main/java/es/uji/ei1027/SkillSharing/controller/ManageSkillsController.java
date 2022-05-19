@@ -5,6 +5,7 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ManageSkills;
+import es.uji.ei1027.SkillSharing.model.SkillType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,8 @@ public class ManageSkillsController {
     @RequestMapping("/list")
     public String listManageSkills(Model model){
         model.addAttribute("manageSkills",manageSkillsDAO.getManageSkillsList());
+        List<SkillType> idSkillTypes = skillTypeDAO.getSkillTypes();
+        model.addAttribute("skillTypes", idSkillTypes);
         return "manageSkills/list";
     }
 
@@ -46,6 +49,8 @@ public class ManageSkillsController {
         model.addAttribute("manageSkill", new ManageSkills());
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
+        List<SkillType> idSkillTypes = skillTypeDAO.getSkillTypes();
+        model.addAttribute("skillTypes", idSkillTypes);
         return "manageSkills/add";
     }
 

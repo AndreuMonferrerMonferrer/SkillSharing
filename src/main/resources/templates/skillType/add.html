@@ -14,7 +14,7 @@
         <tr>
             <td><label>Name</label></td>
             <td><input type="text" th:field="*{name}" maxlength="20" required /></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Level</label></td>
@@ -23,12 +23,12 @@
                 <option value="medium">Medium</option>
                 <option value="expert">Expert</option>
             </select></td>
-            <td th:if="${#fields.hasErrors('level')}" th:errors="*{level}"></td>
+            <td th:if="${#fields.hasErrors('level')}" th:errors="*{level}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td><input type="text" th:field="*{description}" maxlength="100" required/></td>
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Abilitation State</label></td>
@@ -37,7 +37,7 @@
                 <option value="S">True</option>
             </select>
             </td>
-            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}"></td>
+            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}" class="text-danger"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Add SkillType" /></td>

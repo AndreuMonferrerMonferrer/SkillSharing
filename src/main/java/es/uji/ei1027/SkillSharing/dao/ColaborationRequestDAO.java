@@ -81,4 +81,14 @@ public class ColaborationRequestDAO {
             return new ArrayList<ColaborationRequest>();
         }
     }
+
+    /*todas las ColaborationRequest de un alumno*/
+    public List<ColaborationRequest> getColaborationRequests(String emailStudent){
+        try{
+            return this.jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent=?",
+                    new ColaborationRequestRowMapper(), emailStudent);
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationRequest>();
+        }
+    }
 }

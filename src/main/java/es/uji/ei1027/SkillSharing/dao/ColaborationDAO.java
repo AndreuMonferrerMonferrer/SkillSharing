@@ -61,4 +61,13 @@ public class ColaborationDAO {
         }
     }
 
+    public List<Colaboration> getColaborationsStudent(String emailStudent) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM Colaboration WHERE proposalId IN (SELECT proposalId from ColaborationProposal where emailStudent=?) OR requestId IN (SELECT requestId from ColaborationRequest where emailStudent=?)",
+                    new ColaborationRowMapper(), emailStudent, emailStudent);
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 }

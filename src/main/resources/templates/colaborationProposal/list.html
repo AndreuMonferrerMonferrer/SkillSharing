@@ -8,7 +8,12 @@
 </head>
 <body>
 <div class="d-flex">
-  <div th:replace="fragments/navSinRegistrar" >...</div>
+  <div th:if="${logged}">
+    <div th:replace="fragments/nav">...</div>
+  </div>
+  <div th:unless="${logged}">
+    <div th:replace="fragments/navSinRegistrar"th:unless="${logged}">...</div>
+  </div>
   <div class="container-fluid">
     <h1>List of colaboration proposals</h1>
     <div class="d-flex flex-row justify-content-center flex-wrap">

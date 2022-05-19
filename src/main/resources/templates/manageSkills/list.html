@@ -15,12 +15,14 @@
   <thead>
   <tr>
     <th>Skill Type Id</th>
+    <th>Skill Type Name</th>
     <th>Email</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="manageSkills: ${manageSkills}">
     <td th:text="${manageSkills.idSkillType}"></td>
+    <td th:each="skillType: ${skillTypes}" th:if="${manageSkills.idSkillType} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></td>
     <td th:text="${manageSkills.email}"></td>
     <td><a th:href="@{/manageSkills/delete/{idSkillType}/{email}(idSkillType=${manageSkills.idSkillType}, email=${manageSkills.email})}"><button type="button" class="btn btn-danger">Delete</button></a>
     </td>

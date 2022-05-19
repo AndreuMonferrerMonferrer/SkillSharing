@@ -14,7 +14,7 @@
         <tr>
             <td><label>Email</label></td>
             <td><input type="text" th:field="*{email}" maxlength="50" required/></td>
-            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Is SKP?</label></td>
@@ -23,17 +23,17 @@
                 <option value="S">Is skp</option>
             </select>
             </td>
-            <td th:if="${#fields.hasErrors('isSkp')}" th:errors="*{isSkp}"></td>
+            <td th:if="${#fields.hasErrors('isSkp')}" th:errors="*{isSkp}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
             <td><input type="text" th:field="*{name}" placeholder="Name and surname"  maxlength="50" required/></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Password</label></td>
             <td><input type="password" th:field="*{pwd}"  maxlength="30" required/></td>
-            <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></td>
+            <td th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Recived Hours</label></td>
@@ -46,12 +46,12 @@
         <tr>
             <td><label>Tel. Number</label></td>
             <td><input type="text" th:field="*{telNumber}" minlength="9" required/></td>
-            <td th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}"></td>
+            <td th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Degree</label></td>
             <td><input type="text" th:field="*{degree}"  maxlength="30" required/></td>
-            <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"></td>
+            <td th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Abilitation State</label></td>
@@ -59,7 +59,7 @@
                 <option value="N" >Banned</option>
                 <option value="S">Unbanned</option>
             </select>
-            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}"></td>
+            <td th:if="${#fields.hasErrors('abilitationState')}" th:errors="*{abilitationState}" class="text-danger"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Add Student" /></td>

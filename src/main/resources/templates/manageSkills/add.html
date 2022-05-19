@@ -14,16 +14,16 @@
     <tr>
       <td><label>Skill Type Id</label></td>
       <td><select class="form_control" type="number" th:field="*{idSkillType}"/>
-      <option th:each="idValue : ${idList}"
-              th:value="${idValue}"
-              th:text="${idValue}"></option>
+      <option th:each="skillType : ${skillTypes}"
+              th:value="${skillType.id}"
+              th:text="${skillType.id + ': ' + skillType.name + ' - ' + skillType.level}"></option>
         </select>
       </td>
     </tr>
     <tr>
       <td><label>Email</label></td>
       <td><input type="text" th:field="*{email}" /></td>
-      <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+      <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Add Manage Skill" /></td>

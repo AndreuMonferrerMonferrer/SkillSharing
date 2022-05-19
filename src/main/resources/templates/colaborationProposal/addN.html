@@ -35,19 +35,19 @@
                 <div class="form-group col-md-6">
                     <label for="dateStart">Date Start</label>
                     <input type="date" class="form-control" id="dateStart" th:field="*{dateStart}" required>
-                    <div th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="invalid-feedback"></div>
+                    <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="text-danger"></td>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="emailStudent">Email</label>
                     <input class="form_control" type="text" th:value="${email}" id="emailStudent" name="emailStudent" readonly="readonly"/>
-                    <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"  class="invalid-feedback"></td>
+                    <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"  class="text-danger"></td>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="dateEnd">Date End</label>
                     <input type="date" class="form-control" id="dateEnd" th:field="*{dateEnd}" required>
-                    <div th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" class="invalid-feedback"></div>
+                    <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" class="text-danger"></td>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="skillProposed">Skill Proposed</label>
@@ -56,13 +56,13 @@
                                 th:value="${skillType.id}"
                                 th:text="${skillType.name + ' - ' + skillType.level}"></option>
                     </select>
-                    <div th:if="${#fields.hasErrors('idSkill')}" th:errors="*{idSkill}" class="invalid-feedback"></div>
+                    <td th:if="${#fields.hasErrors('idSkill')}" th:errors="*{idSkill}" class="text-danger"></td>
                 </div>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea th:field="*{description}" class="form-control" id="description" rows="2"></textarea>
-                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></td>
             </div>
             <button type="submit" class="btn btn-primary">Add Colaboration Proposal</button>
         </form>

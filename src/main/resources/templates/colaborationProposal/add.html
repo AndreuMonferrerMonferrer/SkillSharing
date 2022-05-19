@@ -14,27 +14,27 @@
         <tr>
             <td><label>Date Start</label></td>
             <td><input type="date" th:field="*{dateStart}" required/></td>
-            <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></td>
+            <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Date End</label></td>
             <td><input type="date" th:field="*{dateEnd}" required/></td>
-            <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></td>
+            <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td><input type="text" th:field="*{description}" /></td>
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Student Email</label></td>
             <td><input type="text" th:field="*{emailStudent}" required/></td>
-            <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}"></td>
+            <td th:if="${#fields.hasErrors('emailStudent')}" th:errors="*{emailStudent}" class="text-danger"></td>
 
         </tr>
         <tr>
             <td><label>Id Skill</label></td>
-            <td><select class="form_control" type="number" th:field="*{idSkill}">
+            <td><select class="form_control" type="number" th:field="*{idSkill}" >
                     <option th:each="idValue : ${idList}"
                             th:value="${idValue}"
                             th:text="${idValue}"></option>

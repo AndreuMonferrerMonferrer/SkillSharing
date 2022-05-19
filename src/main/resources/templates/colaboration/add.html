@@ -20,7 +20,7 @@
                     th:text="${idValue}"></option>
             </select>
             </td>
-            <td th:if="${#fields.hasErrors('proposalId')}" th:errors="*{proposalId}"></td>
+            <td th:if="${#fields.hasErrors('proposalId')}" th:errors="*{proposalId}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Request Id</label></td>
@@ -30,24 +30,24 @@
                     th:text="${idValue}"></option>
                 </select>
             </td>
-            <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}"></td>
+            <td th:if="${#fields.hasErrors('requestId')}" th:errors="*{requestId}" class="text-danger"></td>
         </tr>
         <tr>
             <td><label>Date Start</label></td>
             <td><input type="date" th:field="*{dateStart}" required/></td>
-            <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></td>
+            <td th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" class="text-danger"></td>
 
         </tr>
         <tr>
             <td><label>Date End</label></td>
             <td><input type="date" th:field="*{dateEnd}" required/></td>
-            <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></td>
+            <td th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" class="text-danger"></td>
 
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td><input type="text" th:field="*{description}" /></td>
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></td>
 
         </tr>
         <tr>

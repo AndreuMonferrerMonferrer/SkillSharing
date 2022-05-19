@@ -3,6 +3,7 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
+import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
@@ -42,19 +43,13 @@ public class ColaborationProposalController {
     public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
 
     @RequestMapping("/list")
-    public String listColaborationProposals(Model model){
-        model.addAttribute("colaborationProposals", colaborationProposalDAO.getProposalAbilitated());
-        List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
-        model.addAttribute("skillTypes", skillTypes);
+    public String listColaborationProposals(HttpSession session,Model model){
+        model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposals());
+        model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
+        model.addAttribute("logged",session.getAttribute("user")!=null);
         return "colaborationProposal/list";
     }
 
-    @RequestMapping(value="/listSinRegistrar")
-    public String listColaborationProposalsSinRegistrar(Model model){
-        model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposals());
-        model.addAttribute("skillList",skillTypeDAO.getSkillTypes());
-        return "colaborationProposal/listSinRegistrar";
-    }
     @RequestMapping(value = "/add")
     public String addColaborationProposal(Model model){
         model.addAttribute("colaborationProposal", new ColaborationProposal());

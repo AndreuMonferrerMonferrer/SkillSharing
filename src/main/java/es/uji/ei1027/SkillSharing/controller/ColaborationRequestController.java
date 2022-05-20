@@ -41,10 +41,11 @@ public class ColaborationRequestController {
     public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
 
     @RequestMapping("/list")
-    public String listColaboratioRequests(Model model){
+    public String listColaboratioRequests(HttpSession session, Model model){
         model.addAttribute("colaborationRequests", colaborationRequestDAO.getRequestAbilitated());
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
         model.addAttribute("skillTypes", skillTypes);
+        model.addAttribute("logged",session.getAttribute("user")!=null);
         return "colaborationRequest/list";
     }
 

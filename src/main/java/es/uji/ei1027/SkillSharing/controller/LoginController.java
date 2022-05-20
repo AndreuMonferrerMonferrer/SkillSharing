@@ -66,7 +66,7 @@ public class LoginController {
         if (user.isSkp())
             return "redirect:/student/listTrue";
         else
-            return "redirect:/colaboration/list"; //TODO Esto debe de cambiarse luego
+            return "redirect:/colaboration/list"; //TODO Esto debe de cambiarse luego + next URL arreglarse
         // Torna a la pàgina principal
     }
 

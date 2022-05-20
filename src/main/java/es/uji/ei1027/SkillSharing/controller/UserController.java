@@ -3,6 +3,7 @@ package es.uji.ei1027.SkillSharing.controller;
 import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SkillSharing.dao.*;
+import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.uji.ei1027.SkillSharing.model.UserDetails;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -50,6 +53,13 @@ public class UserController {
         this.colaborationDAO=colaborationDAO;
     }
 
+    private SkillTypeDAO skillTypeDAO;
+
+    @Autowired
+    public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
+        this.skillTypeDAO=skillTypeDAO;
+    }
+
     @RequestMapping("/list")
     public String listUsers(HttpSession session, Model model) {
         session.setAttribute("nextUrl", "/user/list");
@@ -77,9 +87,11 @@ public class UserController {
 
         model.addAttribute("colaborationRequests", colaborationRequestDAO.getColaborationRequests(email));
 
-        model.addAttribute("colaborationProposal",colaborationProposalDAO.getColaborationProposals(email));
+        model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposals(email));
 
-        model.addAttribute("colaboration", colaborationDAO.getColaborationsStudent(email));
+        model.addAttribute("colaborations", colaborationDAO.getColaborationsStudent(email));
+
+        model.addAttribute("skillTypes",  skillTypeDAO.getSkillTypes());
 
         return (String) session.getAttribute("nextUrl");
     }

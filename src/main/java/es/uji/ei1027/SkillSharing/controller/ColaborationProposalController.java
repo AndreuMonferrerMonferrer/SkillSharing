@@ -90,11 +90,21 @@ public class ColaborationProposalController {
 
     @RequestMapping(value = "/addN", method = RequestMethod.POST)
     public String processAddNSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
-                                    BindingResult bindingResult){
+                                    BindingResult bindingResult,HttpSession session, Model model){
         ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator(studentDAO);
         colaborationProposalValidator.validate(colaborationProposal,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            session.setAttribute("nextUrl","/user/list");
+            if(session.getAttribute("user") == null){
+                model.addAttribute("user", new UserDetails());
+                return "login";
+            }
+            UserDetails user = (UserDetails) session.getAttribute("user");
+            model.addAttribute("email", user.getUsername());
+            List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+            model.addAttribute("skillTypes", skillTypes);
             return "colaborationProposal/addN";
+        }
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
         return "redirect:list";//TODO listN bien hecho
     }

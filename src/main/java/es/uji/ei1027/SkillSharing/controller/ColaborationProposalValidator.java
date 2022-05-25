@@ -1,5 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,6 @@ public class ColaborationProposalValidator implements Validator {
         if(proposal.getDateEnd().isBefore(proposal.getDateStart())){
             errors.rejectValue("dateEnd","temporal issue", "the end date has to be after the start date");
         }
+
     }
 }

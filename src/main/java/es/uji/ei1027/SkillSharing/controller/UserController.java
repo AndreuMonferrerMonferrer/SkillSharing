@@ -3,15 +3,13 @@ package es.uji.ei1027.SkillSharing.controller;
 import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SkillSharing.dao.*;
-import es.uji.ei1027.SkillSharing.model.SkillType;
-import es.uji.ei1027.SkillSharing.model.Student;
+import es.uji.ei1027.SkillSharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import es.uji.ei1027.SkillSharing.model.UserDetails;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -89,7 +87,37 @@ public class UserController {
 
         model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposals(email));
 
-        model.addAttribute("colaborations", colaborationDAO.getColaborationsStudent(email));
+        class tupleColabRequest {
+            private final Colaboration colabo;
+            private final ColaborationRequest request;
+            private final ColaborationProposal proposal;
+
+            tupleColabRequest (Colaboration colabo, ColaborationRequest request, ColaborationProposal proposal){
+                this.colabo=colabo;
+                this.request=request;
+                this.proposal=proposal;
+            }
+
+            public Colaboration getColabo() {
+                return colabo;
+            }
+
+            public ColaborationRequest getRequest() {
+                return request;
+            }
+
+            public ColaborationProposal getProposal() {
+                return proposal;
+            }
+        }
+
+        List<Colaboration> colabos =  colaborationDAO.getColaborationsStudent(email);
+        List<tupleColabRequest> colabs = new ArrayList<>();
+        for (Colaboration colabo:colabos) {
+            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+        }
+
+        model.addAttribute("colaborations",colabs);
 
         model.addAttribute("skillTypes",  skillTypeDAO.getSkillTypes());
 

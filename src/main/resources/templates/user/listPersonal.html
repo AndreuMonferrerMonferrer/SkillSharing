@@ -20,7 +20,7 @@
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationProposal.emailStudent}"></h6>
             <h6 class="small" th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationProposal.description}"></p>
-            <a href="#" class="button btn btn-success">Edit Colaboration Proposal</button></a>
+            <a href="#" class="button btn btn-success" th:href="@{'../colaborationProposal/update/'+${colaborationProposal.proposalId}}">Edit Colaboration Proposal</button></a>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationRequest.emailStudent}"></h6>
             <h6 class="small" th:text="${#temporals.format(colaborationRequest.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationRequest.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationRequest.description}"></p>
-            <a href="#" class="button btn btn-success">Edit Colaboration Request</button></a>
+            <a href="#" class="button btn btn-success" th:href="@{'../colaborationRequest/update/'+${colaborationRequest.requestId}}">Edit Colaboration Request</button></a>
           </div>
         </div>
       </div>

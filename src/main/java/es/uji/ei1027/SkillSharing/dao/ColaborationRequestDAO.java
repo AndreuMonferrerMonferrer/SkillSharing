@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,15 @@ public class ColaborationRequestDAO {
                     new ColaborationRequestRowMapper(), requestId);
         } catch (EmptyResultDataAccessException e){
             return null;
+        }
+    }
+
+    public List<String> getColaborationRequestEmailsByTimeAndTime(int idSkill, LocalDate startDate,LocalDate endDate){
+        try{
+            return jdbcTemplate.query("SELECT emailStudent FROM ColaborationRequest WHERE idSkill=? AND dateStart>=? AND dateEnd<=?",
+                    new SingleColumnRowMapper(String.class), idSkill,startDate,endDate);
+        } catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
         }
     }
 

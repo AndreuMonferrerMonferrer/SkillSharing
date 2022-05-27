@@ -1,11 +1,10 @@
 package es.uji.ei1027.SkillSharing.controller;
 
 import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
+import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
-import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
-import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,14 +26,19 @@ import java.util.List;
 public class ColaborationProposalController {
 
     private ColaborationProposalDAO colaborationProposalDAO;
+    private ColaborationRequestDAO colaborationRequestDAO;
+
     private SkillTypeDAO skillTypeDAO;
     private StudentDAO studentDAO;
-
+    private EmailService emailService;
     @Autowired
     public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
         this.colaborationProposalDAO=colaborationProposalDAO;
     }
-
+    @Autowired
+    public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){
+        this.colaborationRequestDAO=colaborationRequestDAO;
+    }
     @Autowired
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
         this.skillTypeDAO=skillTypeDAO;
@@ -41,6 +46,9 @@ public class ColaborationProposalController {
 
     @Autowired
     public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
+
+    @Autowired
+    public void setEmailService(EmailService emailService){this.emailService=emailService;}
 
     @RequestMapping("/list")
     public String listColaborationProposals(HttpSession session,Model model){
@@ -105,9 +113,26 @@ public class ColaborationProposalController {
             model.addAttribute("skillTypes", skillTypes);
             return "colaborationProposal/addN";
         }
+        List<String> emailList =colaborationRequestDAO.getColaborationRequestEmailsByTimeAndTime(
+                colaborationProposal.getIdSkill(),
+                colaborationProposal.getDateStart(),
+                colaborationProposal.getDateEnd());
+        SkillType skill=skillTypeDAO.getSkillType(colaborationProposal.getIdSkill());
+
+        for(String email:emailList) {
+            emailService.sendEmail(
+                    email,
+                    "Nueva propuesta de colaboración",
+                    "Se ha creado una propuesta de colaboración de la habilidad "
+                            + skill.getName()+"-"+skill.getLevel()
+                            + " entre " + colaborationProposal.getDateStart()
+                            + " y " + colaborationProposal.getDateEnd()
+            );
+        }
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
         return "redirect:list";//TODO listN bien hecho
     }
+
 
     @RequestMapping(value = "/update/{proposalId}", method = RequestMethod.GET)
     public String editColaborationProposal(Model model, @PathVariable int proposalId){

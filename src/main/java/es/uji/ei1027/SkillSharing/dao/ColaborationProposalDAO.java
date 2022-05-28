@@ -68,7 +68,7 @@ public class ColaborationProposalDAO {
     }
 
     /*todas las ColaborationProposal de un alumno*/
-    public List<ColaborationProposal> getColaborationProposals(String emailStudent){
+    public List<ColaborationProposal> getColaborationProposalsByUser(String emailStudent){
         try{
             return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent=?",
                     new ColaborationProposalRowMapper(), emailStudent);
@@ -77,10 +77,21 @@ public class ColaborationProposalDAO {
         }
     }
 
+
     public List<ColaborationProposal> getProposalAbilitated(){
         try{
             return jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S')",
                     new ColaborationProposalRowMapper());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationProposal>();
+        }
+    }
+
+    /*todas las ColaborationProposal otros alumnos*/
+    public List<ColaborationProposal> getColaborationProposalsByOtherUsers(String emailStudent){
+        try{
+            return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND emailStudent!=?",
+                    new ColaborationProposalRowMapper(), emailStudent);
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationProposal>();
         }

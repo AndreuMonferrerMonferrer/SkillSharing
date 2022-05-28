@@ -52,7 +52,12 @@ public class ColaborationProposalController {
 
     @RequestMapping("/list")
     public String listColaborationProposals(HttpSession session,Model model){
-        model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposals());
+        if(session.getAttribute("user") == null){
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposalsByOtherUsers(user.getUsername()));
         model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
         model.addAttribute("logged",session.getAttribute("user")!=null);
         return "colaborationProposal/list";

@@ -28,7 +28,7 @@
     <div>
         <div th:replace="fragments/nav">...</div>
     </div>
-    <div class="vh-100 overflow-auto">
+    <div class="overflow-auto">
         <h2>New Colaboration Request</h2>
         <form action="#" class="mt-5" th:action="@{/colaborationRequest/add}"
               th:object="${colaborationRequest}" method="post">

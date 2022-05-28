@@ -85,7 +85,7 @@ public class UserController {
 
         model.addAttribute("colaborationRequests", colaborationRequestDAO.getColaborationRequests(email));
 
-        model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposals(email));
+        model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposalsByUser(email));
 
         class tupleColabRequest {
             private final Colaboration colabo;
@@ -114,7 +114,7 @@ public class UserController {
         List<Colaboration> colabos =  colaborationDAO.getColaborationsStudent(email);
         List<tupleColabRequest> colabs = new ArrayList<>();
         for (Colaboration colabo:colabos) {
-            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequestByUser(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
         }
 
         model.addAttribute("colaborations",colabs);

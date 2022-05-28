@@ -47,7 +47,7 @@ public class ColaborationRequestDAO {
                 colaborationRequest.getIdSkill(), colaborationRequest.getRequestId());
     }
 
-    public ColaborationRequest getColaborationRequest(int requestId){
+    public ColaborationRequest getColaborationRequestByUser(int requestId){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM ColaborationRequest WHERE requestId=?",
                     new ColaborationRequestRowMapper(), requestId);
@@ -99,6 +99,16 @@ public class ColaborationRequestDAO {
                     new ColaborationRequestRowMapper(), emailStudent);
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationRequest>();
+        }
+    }
+
+    /*todas las ColaborationRequest otros alumnos*/
+    public List<ColaborationRequest> getColaborationRequestByOtherUsers(String emailStudent){
+        try{
+            return jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND emailStudent!=?",
+                    new ColaborationRequestRowMapper(), emailStudent);
+        } catch (EmptyResultDataAccessException e){
+            return null;
         }
     }
 }

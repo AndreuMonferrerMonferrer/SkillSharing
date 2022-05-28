@@ -141,7 +141,7 @@ public class UserController {
 
     @RequestMapping("/profileSKP")
     public String listProfileSKP(HttpSession session, Model model){
-        session.setAttribute("nextUrl","/user/profile");
+        session.setAttribute("nextUrl","/user/profileSKP");
         if(session.getAttribute("user")==null){
             model.addAttribute("user", new UserDetails());
             return "login";

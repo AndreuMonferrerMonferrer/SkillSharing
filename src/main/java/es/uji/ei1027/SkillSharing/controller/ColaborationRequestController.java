@@ -49,14 +49,6 @@ public class ColaborationRequestController {
         return "colaborationRequest/list";
     }
 
-    @RequestMapping(value = "/add")
-    public String addColaborationRequest(Model model){
-        model.addAttribute("colaborationRequest", new ColaborationRequest());
-        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
-        model.addAttribute("idList", idList);
-        return "colaborationRequest/add";
-    }
-
     @RequestMapping(value = "/add/{requestId}")
     public String addColaborationRequest(Model model, @PathVariable int requestId){
         model.addAttribute("colaborationRequest", new ColaborationRequest());
@@ -66,18 +58,8 @@ public class ColaborationRequestController {
         return "colaborationRequest/add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
-                                   BindingResult bindingResult){
-        ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);
-        colaborationRequestValidator.validate(colaborationRequest,bindingResult);
-        if (bindingResult.hasErrors())
-            return "colaborationRequest/add";
-        colaborationRequestDAO.addColaborationRequest(colaborationRequest);
-        return "redirect:list";
-    }
 
-    @RequestMapping(value = "/addN")
+    @RequestMapping(value = "/add")
     public String addColaborationRequestUser(HttpSession session, Model model){
         session.setAttribute("nextUrl", "/user/list");
         if (session.getAttribute("user") == null)
@@ -92,10 +74,10 @@ public class ColaborationRequestController {
         model.addAttribute("idList", idList);
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
         model.addAttribute("skillTypes", skillTypes);
-        return "colaborationRequest/addN";
+        return "colaborationRequest/add";
     }
 
-    @RequestMapping(value = "/addN", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddNSubmit(@ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
                                    BindingResult bindingResult, HttpSession session, Model model){
         ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);

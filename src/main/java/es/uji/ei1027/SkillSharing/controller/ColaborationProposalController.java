@@ -58,28 +58,8 @@ public class ColaborationProposalController {
         return "colaborationProposal/list";
     }
 
+
     @RequestMapping(value = "/add")
-    public String addColaborationProposal(Model model){
-        model.addAttribute("colaborationProposal", new ColaborationProposal());
-        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
-        model.addAttribute("idList", idList);
-        List<String> emails = studentDAO.getEmails();
-        model.addAttribute("emails",emails);
-        return "colaborationProposal/add";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
-                                   BindingResult bindingResult){
-        ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator(studentDAO);
-        colaborationProposalValidator.validate(colaborationProposal,bindingResult);
-        if (bindingResult.hasErrors())
-            return "colaborationProposal/add";
-        colaborationProposalDAO.addColaborationProposal(colaborationProposal);
-        return "redirect:list";
-    }
-
-    @RequestMapping(value = "/addN")
     public String addColaborationProposalUser(HttpSession session, Model model){
         session.setAttribute("nextUrl","/user/list");
         if(session.getAttribute("user") == null){
@@ -93,11 +73,11 @@ public class ColaborationProposalController {
         model.addAttribute("idList", idList);
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
         model.addAttribute("skillTypes", skillTypes);
-        return "colaborationProposal/addN";
+        return "colaborationProposal/add";
     }
 
-    @RequestMapping(value = "/addN", method = RequestMethod.POST)
-    public String processAddNSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("colaborationProposal") ColaborationProposal colaborationProposal,
                                     BindingResult bindingResult,HttpSession session, Model model){
         ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator(studentDAO);
         colaborationProposalValidator.validate(colaborationProposal,bindingResult);
@@ -111,7 +91,7 @@ public class ColaborationProposalController {
             model.addAttribute("email", user.getUsername());
             List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
             model.addAttribute("skillTypes", skillTypes);
-            return "colaborationProposal/addN";
+            return "colaborationProposal/add";
         }
         List<String> emailList =colaborationRequestDAO.getColaborationRequestEmailsByTimeAndTime(
                 colaborationProposal.getIdSkill(),

@@ -106,7 +106,7 @@ public class ColaborationRequestController {
             return "colaborationRequest/add";
         }
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
-        return "redirect:list";//TODO listN bien hecho
+        return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)
@@ -133,5 +133,11 @@ public class ColaborationRequestController {
     public String processDelete(@PathVariable int requestId){
         colaborationRequestDAO.deleteColaborationRequest(requestId);
         return "redirect:../list";
+    }
+
+    @RequestMapping("/end/{requestId}")
+    public String processEndRequest(@PathVariable int requestId){
+        colaborationRequestDAO.endRequest(requestId);
+        return "redirect:../listSKP";
     }
 }

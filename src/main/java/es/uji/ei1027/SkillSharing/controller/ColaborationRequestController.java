@@ -92,7 +92,7 @@ public class ColaborationRequestController {
             model.addAttribute("email", user.getUsername());
             List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
             model.addAttribute("skillTypes", skillTypes);
-            return "colaborationRequest/addN";
+            return "colaborationRequest/add";
         }
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
         return "redirect:list";//TODO listN bien hecho

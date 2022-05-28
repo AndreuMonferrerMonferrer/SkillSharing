@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Nav</title>
+     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link  rel="stylesheet" type="text/css" href="/css/sidebars.css" th:href="@{/css/sidebars.css}"/>
+
+</head>
+
+<main>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li><img src="https://raw.githubusercontent.com/AndreuMonferrerMonferrer/SkillSharing/master/src/main/resources/templates/fragments/skillsharing.png" alt="Skill Sharing" width="132" height="40" /></a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/student/list}">Students</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/colaborationProposal/list}">Col. Proposal</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/colaborationRequest/list}">Col. Request</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/colaborationRequest/addN}">Add Col. Request Final</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/colaborationProposal/addN}">Add Col. Proposal Final</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/colaboration/list}">Colaborations</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/skillType/list}">Skill Types</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/student/listTrue}">Lista Ususarios Final</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/manageSkills/list}">Manage Skills</a></li>
+            <li><a class="nav-link text-white" href="/" th:href="@{/user/listPersonal}">My Col. requests and proposals</a></li>
+
+            <li><p><a class="nav-link text-white" href="/" th:href="@{/user/profile}">Profile</a></p></li>
+
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white">
+                <div th:replace="/fragments/loginInfo" >...</div>
+            </a>
+        </div>
+    </div>
+
+</main>
+
+
+</html>

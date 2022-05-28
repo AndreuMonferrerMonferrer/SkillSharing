@@ -8,18 +8,22 @@
 </head>
 <body>
 <div class="d-flex">
+  <div>
   <div th:replace="fragments/nav">...</div>
-  <div class="container-fluid">
+  </div>
+    <div class="vh-100 overflow-auto">
     <div>
       <!--Proporals-->
       <h1>List of colaboration proposals</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark " th:each="colaborationProposal: ${colaborationProposals}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationProposal: ${colaborationProposals}">
           <div class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaborationProposal.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationProposal.emailStudent}"></h6>
             <h6 class="small" th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationProposal.description}"></p>
+          </div>
+          <div class="card-footer text-center">
             <a href="#" class="button btn btn-success" th:href="@{'../colaborationProposal/update/'+${colaborationProposal.proposalId}}">Edit Colaboration Proposal</button></a>
           </div>
         </div>
@@ -30,12 +34,14 @@
       <!--Requests-->
       <h1>List of colaboration requests</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark " th:each="colaborationRequest: ${colaborationRequests}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationRequest: ${colaborationRequests}">
           <div class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaborationRequest.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationRequest.emailStudent}"></h6>
             <h6 class="small" th:text="${#temporals.format(colaborationRequest.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationRequest.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationRequest.description}"></p>
+          </div>
+          <div class="card-footer text-center">
             <a href="#" class="button btn btn-success" th:href="@{'../colaborationRequest/update/'+${colaborationRequest.requestId}}">Edit Colaboration Request</button></a>
           </div>
         </div>
@@ -45,7 +51,7 @@
       <!--Colabos-->
       <h1>List of Colaborations</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark " th:each="colaboration: ${colaborations}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaboration: ${colaborations}">
           <div class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaboration.request.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted"><i>Requester:</i></h6>
@@ -54,6 +60,8 @@
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaboration.proposal.emailStudent}"> </h6>
             <h6 class="small" th:text="${#temporals.format(colaboration.colabo.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaboration.colabo.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaboration.colabo.description}"></p>
+          </div>
+          <div class="card-footer text-center">
             <a href="#" class="button btn btn-success">Edit Colaboration</button></a>
           </div>
         </div>

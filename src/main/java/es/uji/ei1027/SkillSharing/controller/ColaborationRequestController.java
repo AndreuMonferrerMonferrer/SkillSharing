@@ -60,14 +60,6 @@ public class ColaborationRequestController {
         return "colaborationRequest/listSKP";
     }
 
-    @RequestMapping(value = "/add")
-    public String addColaborationRequest(Model model){
-        model.addAttribute("colaborationRequest", new ColaborationRequest());
-        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
-        model.addAttribute("idList", idList);
-        return "colaborationRequest/add";
-    }
-
     @RequestMapping(value = "/add/{requestId}")
     public String addColaborationRequest(Model model, @PathVariable int requestId){
         model.addAttribute("colaborationRequest", new ColaborationRequest());

@@ -3,13 +3,17 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.ColaborationDAO;
 import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
+import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
+import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,6 +23,7 @@ public class ColaborationController {
     private ColaborationDAO colaborationDAO;
     private ColaborationProposalDAO colaborationProposalDAO;
     private ColaborationRequestDAO colaborationRequestDAO;
+    private SkillTypeDAO skillTypeDAO;
 
     @Autowired
     public void setColaborationDAO(ColaborationDAO colaborationDAO){
@@ -31,11 +36,48 @@ public class ColaborationController {
     @Autowired
     public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){this.colaborationRequestDAO = colaborationRequestDAO;}
 
-    @RequestMapping("/list")
+    @Autowired
+    public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){this.skillTypeDAO=skillTypeDAO;}
+
+    @RequestMapping("/listSKP")
     public String listColaborations(Model model){
-        model.addAttribute("colaborations",colaborationDAO.getColaborations());
-        return "colaboration/list";
+        class tupleColab {
+            private final Colaboration colabo;
+            private final ColaborationRequest request;
+            private final ColaborationProposal proposal;
+
+            tupleColab (Colaboration colabo, ColaborationRequest request, ColaborationProposal proposal){
+                this.colabo=colabo;
+                this.request=request;
+                this.proposal=proposal;
+            }
+
+            public Colaboration getColabo() {
+                return colabo;
+            }
+
+            public ColaborationRequest getRequest() {
+                return request;
+            }
+
+            public ColaborationProposal getProposal() {
+                return proposal;
+            }
+        }
+
+        List<Colaboration> colabos =  colaborationDAO.getColaborations();
+        List<tupleColab> colabs = new ArrayList<>();
+        for (Colaboration colabo:colabos) {
+            colabs.add(new tupleColab(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+        }
+
+        model.addAttribute("colaborations",colabs);
+
+        model.addAttribute("skillTypes",  skillTypeDAO.getSkillTypes());
+
+        return "colaboration/listSKP";
     }
+
 
     @RequestMapping("/add")
     public String addColaboration(Model model){

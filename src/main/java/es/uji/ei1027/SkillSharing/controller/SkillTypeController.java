@@ -22,7 +22,7 @@ public class SkillTypeController {
 
     @RequestMapping("/list")
     public String listSkillType(Model model){
-        model.addAttribute("skillType", skillTypeDAO.getSkillTypes());
+        model.addAttribute("skillType", skillTypeDAO.getSkillTypesAbilitados());
         return "skillType/list";
     }
 
@@ -63,6 +63,12 @@ public class SkillTypeController {
     @RequestMapping(value = "/delete/{id}")
     public String processDelete(@PathVariable int id){
         skillTypeDAO.deleteSkillType(id);
+        return "redirect:../list";
+    }
+
+    @RequestMapping(value = "/disable/{id}")
+    public String processDisable(@PathVariable int id){
+        skillTypeDAO.disableSkillType(id);
         return "redirect:../list";
     }
 }

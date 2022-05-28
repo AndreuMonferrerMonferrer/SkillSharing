@@ -34,6 +34,11 @@ public class SkillTypeDAO {
                 skillType.getId());
     }
 
+    public void disableSkillType(int id){
+        jdbcTemplate.update("UPDATE skillType SET abilitationState=? WHERE id=?",
+                "N",id);
+    }
+
     public void updateSkillType(SkillType skillType){//¿bool?
         jdbcTemplate.update("UPDATE skillType SET name=? , level=? , description=? ,  abilitationState=? WHERE id=?",
                 skillType.getName(), skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState(),skillType.getId());

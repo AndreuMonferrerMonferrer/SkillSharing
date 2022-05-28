@@ -52,6 +52,22 @@ public class ColaborationRequestController {
         return "colaborationRequest/list";
     }
 
+    @RequestMapping("/listSKP")
+    public String listSKPColaboratioRequests(HttpSession session, Model model){
+        model.addAttribute("colaborationRequests", colaborationRequestDAO.getRequestAbilitated());
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypes();
+        model.addAttribute("skillTypes", skillTypes);
+        return "colaborationRequest/listSKP";
+    }
+
+    @RequestMapping(value = "/add")
+    public String addColaborationRequest(Model model){
+        model.addAttribute("colaborationRequest", new ColaborationRequest());
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
+        return "colaborationRequest/add";
+    }
+
     @RequestMapping(value = "/add/{requestId}")
     public String addColaborationRequest(Model model, @PathVariable int requestId){
         model.addAttribute("colaborationRequest", new ColaborationRequest());

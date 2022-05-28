@@ -25,10 +25,10 @@ class UserValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         obj = (UserDetails) obj;
         if(((UserDetails) obj).getPassword().equals("")){
-            errors.rejectValue("password","obligatori","No se aceptan contraseñas en blanco");
+            errors.rejectValue("password","must","Blank passwords are not accepted");
         }
         if(((UserDetails) obj).getUsername().equals("")){
-            errors.rejectValue("username","obligatori","No se aceptan usernames en blanco");
+            errors.rejectValue("username","must","Blank usernames are not accepted");
         }
     }
 }
@@ -56,7 +56,7 @@ public class LoginController {
         // intentant carregar les dades de l'usuari
         user = userDao.loadUserByUsername(user.getUsername(), user.getPassword());
         if (user == null) {
-            bindingResult.rejectValue("password", "badpw", "Contrasenya incorrecta");
+            bindingResult.rejectValue("password", "badpw", "Wrong password");
             return "login";
         }
         // Autenticats correctament.

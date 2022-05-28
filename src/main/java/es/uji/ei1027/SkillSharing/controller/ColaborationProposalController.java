@@ -63,6 +63,12 @@ public class ColaborationProposalController {
         return "colaborationProposal/list";
     }
 
+    @RequestMapping("/listSKP")
+    public String listSKPColaborationProposals(HttpSession session,Model model){
+        model.addAttribute("colaborationProposals", colaborationProposalDAO.getProposalAbilitated());
+        model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
+        return "colaborationProposal/listSKP";
+    }
 
     @RequestMapping(value = "/add")
     public String addColaborationProposalUser(HttpSession session, Model model){

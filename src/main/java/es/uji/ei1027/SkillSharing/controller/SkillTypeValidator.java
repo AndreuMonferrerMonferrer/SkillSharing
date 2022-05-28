@@ -18,7 +18,7 @@ public class SkillTypeValidator implements Validator {
             errors.rejectValue("name", "required", "you have to enter a value");
         }
         if(skillType.getName().length()>20) {
-            errors.rejectValue("name", "lengthExceeded", "Length has to be <=20");
+            errors.rejectValue("name", "lengthExceeded", "Length has to be less than 20");
         }
         if(skillType.getAbilitationState().trim().equals("")) {
             errors.rejectValue("ailitationState", "required", "you have to enter a value");

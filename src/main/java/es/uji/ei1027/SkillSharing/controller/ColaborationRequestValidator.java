@@ -23,7 +23,7 @@ public class ColaborationRequestValidator implements Validator {
             errors.rejectValue("emailStudent", "email nonexistent", "there is no student with that email");
         }
         if (request.getDescription().length() > 100){
-            errors.rejectValue("description", "length exceeded", "the length has to be <= 100");
+            errors.rejectValue("description", "length exceeded", "the length has to be less than 100");
         }
         if (request.getRequestId()< 0){
             errors.rejectValue("requestId","negative number","the number has to be positive");

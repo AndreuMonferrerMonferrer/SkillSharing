@@ -121,7 +121,7 @@ public class ColaborationProposalController {
             );
         }
         colaborationProposalDAO.addColaborationProposal(colaborationProposal);
-        return "redirect:list";//TODO listN bien hecho
+        return "redirect:list";
     }
 
 
@@ -149,5 +149,11 @@ public class ColaborationProposalController {
     public String processDelete(@PathVariable int proposalId){
         colaborationProposalDAO.deleteColaborationProposal(proposalId);
         return "redirect:../list";
+    }
+
+    @RequestMapping("/end/{proposalId}")
+    public String processEndProposal(@PathVariable int proposalId){
+        colaborationProposalDAO.endProposal(proposalId);
+        return "redirect:../listSKP";
     }
 }

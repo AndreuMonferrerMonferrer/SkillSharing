@@ -20,7 +20,7 @@
           <p class="card-text" th:text="${colaborationProposal.description}"></p>
         </div>
         <div class="card-footer text-center">
-          <a href="#" class="button btn btn-success">Forcefully End Proposal</button></a>
+          <a th:href="@{/colaborationProposal/end/{idProp}(idProp=${colaborationProposal.proposalId})}" class="button btn btn-warning">Forcefully End Colaboration</button></a>
         </div>
       </div>
     </div>

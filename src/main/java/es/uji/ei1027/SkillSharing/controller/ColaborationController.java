@@ -65,7 +65,7 @@ public class ColaborationController {
             }
         }
 
-        List<Colaboration> colabos =  colaborationDAO.getColaborations();
+        List<Colaboration> colabos =  colaborationDAO.getColaborationsNotEnded();
         List<tupleColab> colabs = new ArrayList<>();
         for (Colaboration colabo:colabos) {
             colabs.add(new tupleColab(colabo,colaborationRequestDAO.getColaborationRequestByUser(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
@@ -97,7 +97,7 @@ public class ColaborationController {
         if (bindingResult.hasErrors())
             return "colaboration/add";
         colaborationDAO.addColaboration(colaboration);
-        return "redirect:list";
+        return "redirect:listSKP";
     }
 
 
@@ -119,14 +119,20 @@ public class ColaborationController {
         if (bindingResult.hasErrors())
             return "colaboration/update";
         colaborationDAO.updateColaboration(colaboration);
-        return "redirect:list";
+        return "redirect:listSKP";
     }
 
     @RequestMapping(value = "/delete/{proposalId}/{requestId}")
     public String processDeleteColaboration(@PathVariable int proposalId,
                                        @PathVariable int requestId) {
         colaborationDAO.deleteColaboration(proposalId, requestId);
-        return "redirect:../../list";
+        return "redirect:../../listSKP";
+    }
+
+    @RequestMapping(value = "/end/{proposalId}")
+    public String processEndColaboration(@PathVariable int proposalId, @PathVariable int requestId){
+        colaborationDAO.endColaboration(proposalId, requestId);
+        return "redirect:../listSKP";
     }
 
 

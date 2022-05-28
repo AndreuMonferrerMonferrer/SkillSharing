@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="d-flex">
-  <div th:replace="fragments/nav">...</div>
+  <div th:replace="fragments/navSkp">...</div>
   <div class="vh-100 overflow-auto">
     <h1>List of colaboration proposals</h1>
     <div class="d-flex flex-row justify-content-center flex-wrap">
@@ -20,7 +20,7 @@
           <p class="card-text" th:text="${colaborationProposal.description}"></p>
         </div>
         <div class="card-footer text-center">
-          <a th:href="@{'../colaborationRequest/add/'+${colaborationProposal.proposalId}}" class="button btn btn-success" th:if="${logged}">Add a Colaboration request</button></a>
+          <a href="#" class="button btn btn-success">Forcefully End Proposal</button></a>
         </div>
       </div>
     </div>

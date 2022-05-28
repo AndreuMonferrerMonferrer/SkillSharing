@@ -30,6 +30,5 @@ public class ManageSkillsValidator implements Validator {
         if(manageSkills.getIdSkillType()<0){
             errors.rejectValue("idSkillType","negative number","the number has to be positive");
         }
-        //FALTA COMPROBAR SI EL EMAIL YA ESTABA
     }
 }

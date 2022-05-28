@@ -30,7 +30,7 @@ public class ColaborationProposalValidator implements Validator {
             errors.rejectValue("emailStudent", "email nonexistent", "there is no student with that email");
         }
         if (proposal.getDescription().length() > 100){
-            errors.rejectValue("description", "length exceeded", "the length has to be <= 100");
+            errors.rejectValue("description", "length exceeded", "the length has to be less than 100 characters");
         }
         if (proposal.getProposalId()< 0){
             errors.rejectValue("proposalId","negative number","the number has to be positive");

@@ -138,5 +138,20 @@ public class UserController {
 
         return (String) session.getAttribute("nextUrl");
     }
+
+    @RequestMapping("/profileSKP")
+    public String listProfileSKP(HttpSession session, Model model){
+        session.setAttribute("nextUrl","/user/profile");
+        if(session.getAttribute("user")==null){
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("email", user.getUsername());
+        Student student = studentDAO.getStudent(user.getUsername());
+        model.addAttribute("student",student);
+
+        return (String) session.getAttribute("nextUrl");
+    }
 }
 

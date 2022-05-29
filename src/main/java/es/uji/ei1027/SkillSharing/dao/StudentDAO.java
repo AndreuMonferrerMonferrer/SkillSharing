@@ -15,15 +15,10 @@ import java.util.List;
 public class StudentDAO {
     private JdbcTemplate jdbcTemplate;
 
-
+    private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
     @Autowired
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
-
-    public void addStudent(Student student){
-            jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    student.getEmail(),student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(),student.getProvidedHours(),student.getTelNumber(),student.getDegree(), student.getAbilitationState());
-    }
 
     public void addStudentNormal(Student student){
         jdbcTemplate.update("INSERT INTO Student VALUES(?, 'N', ?, ?, '0', '0', ?, ?, 'S')",

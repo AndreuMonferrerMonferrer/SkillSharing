@@ -69,8 +69,7 @@ public class LoginController {
         if (user.isSkp())
             return "redirect:/student/listTrue";
         else
-            return "redirect:/user/profile"; //TODO Esto debe de cambiarse luego + next URL arreglarse
-        // Torna a la pàgina principal
+            return "redirect:/user/profile";
     }
 
     @RequestMapping("/logout")

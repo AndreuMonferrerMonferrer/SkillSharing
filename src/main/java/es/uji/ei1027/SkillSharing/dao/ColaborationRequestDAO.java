@@ -105,8 +105,12 @@ public class ColaborationRequestDAO {
     /*todas las ColaborationRequest otros alumnos*/
     public List<ColaborationRequest> getColaborationRequestByOtherUsers(String emailStudent){
         try{
-            return jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND emailStudent!=?",
-                    new ColaborationRequestRowMapper(), emailStudent);
+            return jdbcTemplate.query("SELECT * FROM ColaborationRequest " +
+                            "WHERE emailStudent IN (SELECT email from Student where abilitationState='S') " +
+                            "AND emailStudent!=? " +
+                            "AND idSkill IN (SELECT id FROM SkillType WHERE abilitationState='S') " +
+                            "AND dateEnd>?",
+                    new ColaborationRequestRowMapper(), emailStudent,LocalDate.now());
         } catch (EmptyResultDataAccessException e){
             return null;
         }

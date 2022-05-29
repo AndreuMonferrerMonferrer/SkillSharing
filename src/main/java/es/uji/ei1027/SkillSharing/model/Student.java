@@ -4,7 +4,6 @@ import org.jasypt.util.password.BasicPasswordEncryptor;
 
 public class Student {
 
-    private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
     private String email;
     private String isSkp;
@@ -37,7 +36,7 @@ public class Student {
     }
 
     public void setPwd(String pwd) {
-        this.pwd =passwordEncryptor.encryptPassword(pwd);
+        this.pwd = pwd;
     }
 
     public int getRecivedHours() {

@@ -23,6 +23,9 @@
             <h6 class="small" th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationProposal.description}"></p>
           </div>
+          <div th:style="${colaborationProposal.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" th:if="${colaborationProposal.dateEnd.isBefore(tomorrow)}">
+            <p class="card-txt" >Proposal ended or expired</p>
+          </div>
           <div th:unless="${colaborationProposal.dateEnd.isBefore(tomorrow)}" class="card-footer text-center">
             <a href="#" class="button btn btn-success" th:href="@{'../colaborationProposal/update/'+${colaborationProposal.proposalId}}">Edit Colaboration Proposal</button></a>
           </div>
@@ -40,6 +43,9 @@
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationRequest.emailStudent}"></h6>
             <h6 class="small" th:text="${#temporals.format(colaborationRequest.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationRequest.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaborationRequest.description}"></p>
+          </div>
+          <div th:style="${colaborationRequest.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" th:if="${colaborationRequest.dateEnd.isBefore(tomorrow)}">
+            <p class="card-txt" >Request ended or expired</p>
           </div>
           <div th:unless="${colaborationRequest.dateEnd.isBefore(tomorrow)}" class="card-footer text-center">
             <a href="#" class="button btn btn-success" th:href="@{'../colaborationRequest/update/'+${colaborationRequest.requestId}}">Edit Colaboration Request</button></a>
@@ -60,6 +66,9 @@
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaboration.proposal.emailStudent}"> </h6>
             <h6 class="small" th:text="${#temporals.format(colaboration.colabo.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaboration.colabo.dateEnd,'dd/MM/yyyy')}"></h6>
             <p class="card-text" th:text="${colaboration.colabo.description}"></p>
+          </div>
+          <div th:style="${colaboration.colabo.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" th:if="${colaboration.colabo.dateEnd.isBefore(tomorrow)}">
+            <p class="card-txt" >Colaboration ended or expired</p>
           </div>
           <div th:unless="${colaboration.colabo.dateEnd.isBefore(tomorrow)}" class="card-footer text-center">
             <a th:href="@{/colaboration/end/{idProp}/{idReq}(idProp=${colaboration.colabo.proposalId}, idReq=${colaboration.colabo.requestId})}" class="button btn btn-success">Finish Colaboration</button></a>

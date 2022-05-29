@@ -28,6 +28,7 @@ public class ColaborationProposalController {
     private ColaborationProposalDAO colaborationProposalDAO;
     private ColaborationRequestDAO colaborationRequestDAO;
 
+
     private SkillTypeDAO skillTypeDAO;
     private StudentDAO studentDAO;
     private EmailService emailService;
@@ -162,7 +163,6 @@ public class ColaborationProposalController {
         model.addAttribute("idList", idList);
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
         model.addAttribute("skillTypes", skillTypes);
-
         return "colaborationProposal/update";
     }
 

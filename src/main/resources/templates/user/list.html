@@ -6,33 +6,39 @@
     <!-- Afegim una fulla d'estil (Bootstrap) -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"
-          th:href="@{/css/bootstrap.css}"/>
 </head>
 
 <body>
-<h1>Llista d'usuaris del sistema</h1>
-<div th:replace="fragments/nav" >...</div>
-<div th:replace="fragments/loginInfo" >...</div>
-<div th:if="${#lists.isEmpty(users)}">
-    No hi ha usuaris
+<div class="d-flex">
+    <div>
+        <div th:replace="fragments/nav">...</div>
+    </div>
+    <div class="vh-100 overflow-auto">
+        <h1>Llista d'usuaris del sistema</h1>
+        <div>
+            <div th:replace="fragments/navSkp">...</div>
+        </div>
+        <div th:if="${#lists.isEmpty(users)}">
+            No hi ha usuaris
+        </div>
+        <table th:unless="${#lists.isEmpty(users)}" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom d'usuari</th>
+                <th>isSKP</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="user: ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.isSkp}"></td>
+            </tr>
+
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary" role="button">Tornar</a>
+    </div>
 </div>
-<table th:unless="${#lists.isEmpty(users)}"  class="table table-striped">
-    <thead>
-    <tr>
-        <th>Nom d'usuari</th>
-        <th>isSKP</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:each="user: ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.isSkp}"></td>
-    </tr>
-
-    </tbody>
-</table>
-<a href="/" class="btn btn-primary" role="button">Tornar</a>
 </body>
 </html>

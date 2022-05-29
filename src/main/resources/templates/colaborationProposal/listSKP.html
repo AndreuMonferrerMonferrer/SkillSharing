@@ -8,8 +8,10 @@
 </head>
 <body>
 <div class="d-flex">
+  <div>
   <div th:replace="fragments/navSkp">...</div>
-  <div class="vh-100 overflow-auto">
+  </div>
+    <div class="vh-100 overflow-auto">
     <h1>List of colaboration proposals</h1>
     <div class="d-flex flex-row justify-content-center flex-wrap">
       <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationProposal: ${colaborationProposals}">

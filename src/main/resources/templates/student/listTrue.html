@@ -8,8 +8,10 @@
 </head>
 <body>
 <div class="d-flex">
-    <div th:replace="fragments/navSkp">...</div>
-    <div class="container-fluid">
+    <div>
+        <div th:replace="fragments/navSkp">...</div>
+    </div>
+    <div class="vh-100 container-fluid overflow-auto">
         <h1>List of Users</h1>
         <table class="table table-striped">
             <thead>

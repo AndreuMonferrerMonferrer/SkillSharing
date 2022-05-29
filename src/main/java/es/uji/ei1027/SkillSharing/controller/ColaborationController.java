@@ -145,13 +145,25 @@ public class ColaborationController {
     }
 
     @RequestMapping(value = "/end/{proposalId}/{requestId}")
-    public String processEndColaboration(HttpSession session, @PathVariable int proposalId, @PathVariable int requestId){
-        colaborationDAO.endColaboration(proposalId, requestId);
-        UserDetails user = (UserDetails) session.getAttribute("user");
-        if(user.isSkp()){
-            return "redirect:../../listSKP";
-        }
-        return "redirect:../.././user/listPersonal";
+    public String processEndColaboration(
+            Model model,
+            @PathVariable int proposalId,
+            @PathVariable int requestId){
+        model.addAttribute("proposalId",proposalId);
+        model.addAttribute("requestId",requestId);
+        return "colaboration/end";
+
+    }
+
+    @RequestMapping(value = "/end", method = RequestMethod.POST)
+    public String processUpdateAndSubmit(
+            Model model,
+            @ModelAttribute("proposalId") Integer proposalId,
+            @ModelAttribute("requestId") Integer requestId
+            ){
+        int hours=(Integer) model.getAttribute("hours");
+        colaborationDAO.endColaboration(proposalId, requestId,hours);
+        return "redirect:listSKP";
     }
 
 

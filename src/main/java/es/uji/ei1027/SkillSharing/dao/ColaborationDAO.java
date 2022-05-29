@@ -79,10 +79,18 @@ public class ColaborationDAO {
         }
     }
 
-    public void endColaboration(int proposalId, int requestId){
+    public void endColaboration(int proposalId, int requestId,int hours){
         LocalDate now = LocalDate.now();
         jdbcTemplate.update("UPDATE Colaboration SET dateEnd=? WHERE proposalId=? AND requestId=?",
                 now, proposalId, requestId);
+        String emailProposal=jdbcTemplate.queryForObject("SELECT emailStudent FROM ColaborationProposal WHERE proposalId=?",
+                String.class, proposalId);
+        String emailRequest=jdbcTemplate.queryForObject("SELECT emailStudent FROM ColaborationRequest WHERE requestId=?)",
+                String.class, requestId);
+        jdbcTemplate.update("UPDATE Student SET recivedHours=recivedHours+? WHERE email=?"
+                ,hours, emailRequest);
+        jdbcTemplate.update("UPDATE Student SET recivedHours=recivedHours+? WHERE email=?"
+                ,hours, emailProposal);
     }
 
 }

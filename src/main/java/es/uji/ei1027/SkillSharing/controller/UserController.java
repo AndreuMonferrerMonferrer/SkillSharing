@@ -122,7 +122,9 @@ public class UserController {
 
         model.addAttribute("skillTypes",  skillTypeDAO.getSkillTypes());
 
-        model.addAttribute("today",LocalDate.now());
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        model.addAttribute("tomorrow",tomorrow);
         return (String) session.getAttribute("nextUrl");
     }
 

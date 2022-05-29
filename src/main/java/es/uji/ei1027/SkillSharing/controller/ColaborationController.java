@@ -7,12 +7,14 @@ import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
+import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,10 +131,14 @@ public class ColaborationController {
         return "redirect:../../listSKP";
     }
 
-    @RequestMapping(value = "/end/{proposalId}")
-    public String processEndColaboration(@PathVariable int proposalId, @PathVariable int requestId){
+    @RequestMapping(value = "/end/{proposalId}/{requestId}")
+    public String processEndColaboration(HttpSession session, @PathVariable int proposalId, @PathVariable int requestId){
         colaborationDAO.endColaboration(proposalId, requestId);
-        return "redirect:../listSKP";
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if(user.isSkp()){
+            return "redirect:../../listSKP";
+        }
+        return "redirect:../.././user/listPersonal";
     }
 
 

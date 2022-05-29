@@ -2,40 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Gestionar SkillTypes</title>
+    <title>List of Skills</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="d-flex">
-<div th:replace="fragments/nav" >...</div>
-    <div class="container-fluid">
-        <h1>List of SkillTypes</h1>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Level</th>
-        <th>Description</th>
-        <th>Abilitation State</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="skillType: ${skillType}">
-        <td th:text="${skillType.id}"></td>
-        <td th:text="${skillType.name}"></td>
-        <td th:text="${skillType.level}"></td>
-        <td th:text="${skillType.description}"></td>
-        <td th:text="${skillType.abilitationState}"></td>
-        <td><a th:href="@{/skillType/update/{id}(id=${skillType.id})}"><button type="button" class="btn btn-warning" onclick="">Update</button></a>
-        </td>
-        <td><a th:href="@{/skillType/delete/{id}(id=${skillType.id})}"><button type="button" class="btn btn-danger">Delete</button></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="add"><button type="button" class="btn btn-success">Add SkillType</button></a>
+    <div th:replace="fragments/navSkp" >...</div>
+    <div class="vh-100 overflow-auto">
+        <h1>List of Skills</h1>
+        <div class="d-flex flex-row justify-content-center flex-wrap">
+            <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="skillType: ${skillType}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${skillType.name}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${skillType.level}"></h6>
+                    <p class="card-text" th:text="${skillType.description}"></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a th:href="@{/skillType/update/{id}(id=${skillType.id})}" class="btn btn-warning" onclick="">Edit Skill</button></a><!-- TODO th:if es creador de la skill  -->
+                </div>
+                <div class="card-footer text-center">
+                    <a th:href="@{/skillType/disable/{id}(id=${skillType.id})}"class="btn btn-danger">Disable</button></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

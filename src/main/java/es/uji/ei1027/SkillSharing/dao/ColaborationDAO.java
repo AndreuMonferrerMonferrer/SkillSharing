@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -60,6 +61,14 @@ public class ColaborationDAO {
             return null;
         }
     }
+    public List<Colaboration> getColaborationsNotEnded() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM Colaboration WHERE dateEnd>?",
+                    new ColaborationRowMapper(), LocalDate.now());
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
     public List<Colaboration> getColaborationsStudent(String emailStudent) {
         try{
@@ -68,6 +77,12 @@ public class ColaborationDAO {
         } catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    public void endColaboration(int proposalId, int requestId){
+        LocalDate now = LocalDate.now();
+        jdbcTemplate.update("UPDATE Colaboration SET dateEnd=? WHERE proposalId=? AND requestId=?",
+                now, proposalId, requestId);
     }
 
 }

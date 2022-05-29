@@ -14,6 +14,9 @@ public class SkillTypeValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         SkillType skillType=(SkillType) obj;
+        if(skillType.getName()==null) {
+            errors.rejectValue("name", "required", "you have to enter a value");
+        }
         if(skillType.getName().trim().equals("")) {
             errors.rejectValue("name", "required", "you have to enter a value");
         }

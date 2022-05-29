@@ -159,4 +159,10 @@ public class ColaborationRequestController {
         colaborationRequestDAO.deleteColaborationRequest(requestId);
         return "redirect:../list";
     }
+
+    @RequestMapping("/end/{requestId}")
+    public String processEndRequest(@PathVariable int requestId){
+        colaborationRequestDAO.endRequest(requestId);
+        return "redirect:../listSKP";
+    }
 }

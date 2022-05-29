@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
+import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,15 @@ public class ColaborationProposalDAO {
         }
     }
 
+    public List<ColaborationProposal> getColaborationProposalsNotEnded(){
+        try{
+            return jdbcTemplate.query("SELECT * from ColaborationProposal WHERE dateEnd>?",
+                    new ColaborationProposalRowMapper(), LocalDate.now());
+        }catch(EmptyResultDataAccessException e){
+            return new ArrayList<ColaborationProposal>();
+        }
+    }
+
     public List<Integer> getProposalId(){
         try{
             return jdbcTemplate.query("SELECT proposalId FROM ColaborationProposal",
@@ -80,8 +91,8 @@ public class ColaborationProposalDAO {
 
     public List<ColaborationProposal> getProposalAbilitated(){
         try{
-            return jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S')",
-                    new ColaborationProposalRowMapper());
+            return jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND dateEnd>?",
+                    new ColaborationProposalRowMapper(), LocalDate.now());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationProposal>();
         }
@@ -95,5 +106,10 @@ public class ColaborationProposalDAO {
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationProposal>();
         }
+    }
+
+    public void endProposal(int proposalId){
+        jdbcTemplate.update("UPDATE ColaborationProposal SET dateEnd=? WHERE proposalId=?",
+                LocalDate.now(),proposalId);
     }
 }

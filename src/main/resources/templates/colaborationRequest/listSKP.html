@@ -22,7 +22,7 @@
                     <p class="card-text" th:text="${colaborationRequest.description}"></p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" class="button btn btn-success">Forcefully End Request</button></a>
+                    <a th:href="@{/colaborationRequest/end/{idReq}(idReq=${colaborationRequest.requestId})}" class="button btn btn-warning">Forcefully End Request</button></a>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@
           <p class="card-text" th:text="${colaboration.colabo.description}"></p>
         </div>
         <div class="card-footer text-center">
-          <a href="#" class="button btn btn-success">Forcefully End Colaboration</button></a>
+          <a th:href="@{/colaboration/end/{idProp}/{idReq}(idProp=${colaboration.colabo.proposalId}, idReq=${colaboration.colabo.requestId})}" class="button btn btn-warning">Forcefully End Colaboration</button></a>
         </div>
       </div>
     </div>

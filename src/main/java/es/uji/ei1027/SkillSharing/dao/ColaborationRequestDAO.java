@@ -85,8 +85,8 @@ public class ColaborationRequestDAO {
 
     public List<ColaborationRequest> getRequestAbilitated(){
         try{
-            return jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent IN (SELECT email from Student where abilitationState='S')",
-                    new ColaborationRequestRowMapper());
+            return jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND dateEnd>?",
+                    new ColaborationRequestRowMapper(), LocalDate.now());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationRequest>();
         }
@@ -110,5 +110,10 @@ public class ColaborationRequestDAO {
         } catch (EmptyResultDataAccessException e){
             return null;
         }
+    }
+
+    public void endRequest(int requestId){
+        jdbcTemplate.update("UPDATE ColaborationRequest SET dateEnd=? WHERE requestId=?",
+                LocalDate.now(),requestId);
     }
 }

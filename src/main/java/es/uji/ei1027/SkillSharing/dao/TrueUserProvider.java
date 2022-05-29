@@ -33,6 +33,15 @@ public class TrueUserProvider implements UserDao{
         }
     }
 
+    public void addUser(Student student){
+
+        UserDetails newUser = new UserDetails();
+        newUser.setUsername(student.getEmail());
+        newUser.setPassword(student.getPwd());
+        newUser.setSkp(student.getIsSkp().equals("S"));
+        knownUsers.put(student.getEmail(),newUser);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username, String password) {
         UserDetails user = knownUsers.get(username.trim());

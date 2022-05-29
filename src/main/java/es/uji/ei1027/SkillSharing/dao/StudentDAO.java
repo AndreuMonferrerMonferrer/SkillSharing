@@ -20,14 +20,9 @@ public class StudentDAO {
     @Autowired
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
-    public void addStudent(Student student){
-            jdbcTemplate.update("INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    student.getEmail(),student.getIsSkp(),student.getName(),passwordEncryptor.encryptPassword(student.getPwd()),student.getRecivedHours(),student.getProvidedHours(),student.getTelNumber(),student.getDegree(), student.getAbilitationState());
-    }
-
     public void addStudentNormal(Student student){
         jdbcTemplate.update("INSERT INTO Student VALUES(?, 'N', ?, ?, '0', '0', ?, ?, 'S')",
-                student.getEmail(),student.getName(),passwordEncryptor.encryptPassword(student.getPwd()),student.getTelNumber(),student.getDegree());
+                student.getEmail(),student.getName(),student.getPwd(),student.getTelNumber(),student.getDegree());
     }
 
     public void deleteStudent(String email){
@@ -48,7 +43,7 @@ public class StudentDAO {
     }
     public void updateStudent(Student student){
         jdbcTemplate.update("UPDATE student SET isSKP=?, name=?, pwd=?,recivedHours=?, providedHours=?, telNumber=?, degree=?, abilitationState=? WHERE email=?",
-                student.getIsSkp(),student.getName(),passwordEncryptor.encryptPassword(student.getPwd()),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getAbilitationState(),student.getEmail());
+                student.getIsSkp(),student.getName(),student.getPwd(),student.getRecivedHours(), student.getProvidedHours(),student.getTelNumber(),student.getDegree(),student.getAbilitationState(),student.getEmail());
     }
 
     public Student getStudent(String email){

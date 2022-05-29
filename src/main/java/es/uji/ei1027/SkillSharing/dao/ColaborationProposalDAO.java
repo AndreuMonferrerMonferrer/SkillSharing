@@ -1,13 +1,10 @@
 package es.uji.ei1027.SkillSharing.dao;
 
-import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
-import es.uji.ei1027.SkillSharing.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
-import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -27,6 +24,7 @@ public class ColaborationProposalDAO {
           colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),
           colaborationProposal.getDescription(),colaborationProposal.getEmailStudent(),colaborationProposal.getIdSkill());
     }
+
     public void deleteColaborationProposal(int proposalId){
         jdbcTemplate.update("DELETE from ColaborationProposal WHERE proposalId=?",
                 proposalId);
@@ -117,4 +115,6 @@ public class ColaborationProposalDAO {
         jdbcTemplate.update("UPDATE ColaborationProposal SET dateEnd=? WHERE proposalId=?",
                 LocalDate.now(),proposalId);
     }
+
+
 }

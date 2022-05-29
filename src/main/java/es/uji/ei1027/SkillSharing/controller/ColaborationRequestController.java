@@ -143,13 +143,19 @@ public class ColaborationRequestController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
+    public String processUpdateSubmit(Model model,
             @ModelAttribute("colaborationRequest") ColaborationRequest colaborationRequest,
             BindingResult bindingResult){
         ColaborationRequestValidator colaborationRequestValidator =new ColaborationRequestValidator(studentDAO);
         colaborationRequestValidator.validate(colaborationRequest,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()){
+            List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+            model.addAttribute("idList", idList);
+            List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+            model.addAttribute("skillTypes", skillTypes);
             return "colaborationRequest/update";
+        }
+
         colaborationRequestDAO.updateColaborationRequest(colaborationRequest);
         return "redirect:../user/listPersonal";
     }

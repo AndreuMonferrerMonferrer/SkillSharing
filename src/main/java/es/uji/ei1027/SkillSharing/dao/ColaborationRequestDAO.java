@@ -30,6 +30,15 @@ public class ColaborationRequestDAO {
                 colaborationRequest.getEmailStudent(), colaborationRequest.getIdSkill());
     }
 
+    public ColaborationRequest getRequestWithDescription(String description){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * from ColaborationRequest WHERE description=?",
+                    new ColaborationRequestRowMapper(), description);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     public void deleteColaborationRequest(int requestId){
         jdbcTemplate.update("DELETE from ColaborationRequest where requestId=?",
                 requestId);

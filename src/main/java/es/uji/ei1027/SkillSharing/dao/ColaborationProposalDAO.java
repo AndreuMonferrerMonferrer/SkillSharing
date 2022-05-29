@@ -1,5 +1,6 @@
 package es.uji.ei1027.SkillSharing.dao;
 
+import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,6 +24,15 @@ public class ColaborationProposalDAO {
         jdbcTemplate.update("INSERT INTO ColaborationProposal (dateStart,dateEnd,description,emailStudent,idSkill) VALUES(?,?,?,?,?)",
           colaborationProposal.getDateStart(),colaborationProposal.getDateEnd(),
           colaborationProposal.getDescription(),colaborationProposal.getEmailStudent(),colaborationProposal.getIdSkill());
+    }
+
+    public ColaborationProposal getProposalWithDescription(String description){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * from ColaborationProposal WHERE description=?",
+                    new ColaborationProposalRowMapper(), description);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     public void deleteColaborationProposal(int proposalId){

@@ -105,19 +105,20 @@ public class ColaborationProposalController {
         proposal.setIdSkill(request.getIdSkill());
         proposal.setDateEnd(request.getDateEnd());
         proposal.setDateStart(request.getDateStart());
-        proposal.setDescription("");
+        proposal.setDescription(String.valueOf(requestId));
         proposal.setEmailStudent(user.getUsername());
-        Integer proposalId=colaborationProposalDAO.addColaborationProposal(proposal);
+        colaborationProposalDAO.addColaborationProposal(proposal);
+        int proposalId = colaborationProposalDAO.getProposalWithDescription(String.valueOf(requestId)).getProposalId();
         Colaboration colaboration=new Colaboration();
         colaboration.setDateEnd(request.getDateEnd());
         colaboration.setDateStart(request.getDateStart());
         colaboration.setRequestId(requestId);
         colaboration.setProposalId(proposalId);
-        colaboration.setDescription("");
+        colaboration.setDescription(request.getDescription());
         colaborationDAO.addColaboration(colaboration);
         colaborationProposalDAO.endProposal(proposalId);
         colaborationRequestDAO.endRequest(requestId);
-        return "../user/listPersonal";
+        return "/user/listPersonal";
     }
 
     @RequestMapping(value = "/add")

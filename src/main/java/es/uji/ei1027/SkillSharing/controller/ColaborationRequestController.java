@@ -1,13 +1,7 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
-import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
-import es.uji.ei1027.SkillSharing.dao.StudentDAO;
-import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
-import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
-import es.uji.ei1027.SkillSharing.model.SkillType;
-import es.uji.ei1027.SkillSharing.model.UserDetails;
+import es.uji.ei1027.SkillSharing.dao.*;
+import es.uji.ei1027.SkillSharing.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +23,15 @@ public class ColaborationRequestController {
     private ColaborationProposalDAO colaborationProposalDAO;
     private SkillTypeDAO skillTypeDAO;
     private StudentDAO studentDAO;
+    private ColaborationDAO colaborationDAO;
     @Autowired
     public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){
         this.colaborationRequestDAO=colaborationRequestDAO;
     }
-
+    @Autowired
+    public void setColaborationDAO(ColaborationDAO colaborationDAO){
+        this.colaborationDAO=colaborationDAO;
+    }
     @Autowired
     public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
         this.colaborationProposalDAO=colaborationProposalDAO;
@@ -90,17 +88,25 @@ public class ColaborationRequestController {
             return "login";
         }
         UserDetails user = (UserDetails) session.getAttribute("user");
-        model.addAttribute("email", user.getUsername());
+
         ColaborationProposal proposal=colaborationProposalDAO.getColaborationProposal(proposalId);
         ColaborationRequest request=new ColaborationRequest();
         request.setIdSkill(proposal.getIdSkill());
         request.setDateEnd(proposal.getDateEnd());
         request.setDateStart(proposal.getDateStart());
-        model.addAttribute("colaborationRequest",request);
-        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
-        model.addAttribute("idList", idList);
-        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
-        model.addAttribute("skillTypes", skillTypes);
+        request.setDescription(String.valueOf(proposalId));
+        request.setEmailStudent(user.getUsername());
+        colaborationRequestDAO.addColaborationRequest(request);
+        int requestId = colaborationRequestDAO.getRequestWithDescription(String.valueOf(proposalId)).getRequestId();
+        Colaboration colaboration = new Colaboration();
+        colaboration.setDateEnd(proposal.getDateEnd());
+        colaboration.setDateStart(proposal.getDateStart());
+        colaboration.setRequestId(requestId);
+        colaboration.setProposalId(proposalId);
+        colaboration.setDescription(proposal.getDescription());
+        colaborationDAO.addColaboration(colaboration);
+        colaborationRequestDAO.endRequest(requestId);
+        colaborationProposalDAO.endProposal(proposalId);
         return "colaborationRequest/add";
     }
 

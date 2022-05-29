@@ -19,14 +19,14 @@ public class TrueUserProvider implements UserDao{
     @Autowired
     public TrueUserProvider(StudentDAO studentDAO){
         this.studentDAO=studentDAO;
-        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+
         List<Student> listStudents = studentDAO.getStudents();
         UserDetails newUser;
         for (int i = 0; i< listStudents.size(); i++){
             if (listStudents.get(i).getAbilitationState().equals("S")){
                 newUser = new UserDetails();
                 newUser.setUsername(listStudents.get(i).getEmail());
-                newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd()));
+                newUser.setPassword(listStudents.get(i).getPwd());
                 newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
                 knownUsers.put(listStudents.get(i).getEmail(),newUser);
             }
@@ -41,7 +41,7 @@ public class TrueUserProvider implements UserDao{
         // Contrasenya
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         if (passwordEncryptor.checkPassword(password, user.getPassword())) {
-            // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+            password = null;
             return user;
         }
         else {

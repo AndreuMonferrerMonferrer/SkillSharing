@@ -3,6 +3,8 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.Student;
+import es.uji.ei1027.SkillSharing.model.UserDetails;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -39,15 +43,20 @@ public class StudentController {
     }
 
     @RequestMapping("/listTrue")
-    public String listUsers(Model model){
+    public String listUsers(HttpSession session, Model model){
+        session.setAttribute("nextUrl", "/student/listTrue");
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if (user == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+
+        if (studentDAO.getStudent(user.getUsername()).getIsSkp().equals("N")){
+            return "/user/profile";
+        }
         model.addAttribute("students", studentDAO.getStudents());
         return "student/listTrue";
-    }
-
-    @RequestMapping(value = "/add")
-    public String addStudent(Model model){
-        model.addAttribute("student", new Student());
-        return "student/add";
     }
 
     @RequestMapping(value = "/addNormal")
@@ -58,23 +67,16 @@ public class StudentController {
 
     @RequestMapping(value = "/addNormal", method = RequestMethod.POST)
     public String processAndSubmitNormal(@ModelAttribute("student") Student student,
-                                   BindingResult bindingResult){
-        StudentNormalValidator studentNormalValidator=new StudentNormalValidator();
-        studentNormalValidator.validate(student,bindingResult);
+                                   BindingResult bindingResult) {
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        StudentNormalValidator studentNormalValidator = new StudentNormalValidator();
+        studentNormalValidator.validate(student, bindingResult);
         if (bindingResult.hasErrors())
             return "student/addNormal";
+        student.setPwd(passwordEncryptor.encryptPassword(student.getPwd()));
+        userDao.addUser(student);
         studentDAO.addStudentNormal(student);
         return "redirect:../user/profile";
-    }
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("student") Student student,
-                                   BindingResult bindingResult){
-        StudentValidator studentValidator=new StudentValidator();
-        studentValidator.validate(student,bindingResult);
-        if (bindingResult.hasErrors())
-            return "student/add";
-        studentDAO.addStudent(student);
-        return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{email}", method = RequestMethod.GET)

@@ -19,18 +19,27 @@ public class TrueUserProvider implements UserDao{
     @Autowired
     public TrueUserProvider(StudentDAO studentDAO){
         this.studentDAO=studentDAO;
-
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         List<Student> listStudents = studentDAO.getStudents();
         UserDetails newUser;
         for (int i = 0; i< listStudents.size(); i++){
             if (listStudents.get(i).getAbilitationState().equals("S")){
                 newUser = new UserDetails();
                 newUser.setUsername(listStudents.get(i).getEmail());
-                newUser.setPassword(listStudents.get(i).getPwd());
+                newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd())); //TODO quitar de aquí la encriptación una vez esté arreglada la bbdd
                 newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
                 knownUsers.put(listStudents.get(i).getEmail(),newUser);
             }
         }
+    }
+
+    public void addUser(Student student){
+
+        UserDetails newUser = new UserDetails();
+        newUser.setUsername(student.getEmail());
+        newUser.setPassword(student.getPwd());
+        newUser.setSkp(student.getIsSkp().equals("S"));
+        knownUsers.put(student.getEmail(),newUser);
     }
 
     @Override
@@ -41,7 +50,7 @@ public class TrueUserProvider implements UserDao{
         // Contrasenya
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         if (passwordEncryptor.checkPassword(password, user.getPassword())) {
-            password = null;
+            password=null;
             return user;
         }
         else {

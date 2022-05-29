@@ -3,6 +3,7 @@ package es.uji.ei1027.SkillSharing.controller;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.dao.UserDao;
 import es.uji.ei1027.SkillSharing.model.Student;
+import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -39,7 +42,18 @@ public class StudentController {
     }
 
     @RequestMapping("/listTrue")
-    public String listUsers(Model model){
+    public String listUsers(HttpSession session, Model model){
+        session.setAttribute("nextUrl", "/student/listTrue");
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if (user == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+
+        if (studentDAO.getStudent(user.getUsername()).getIsSkp().equals("N")){
+            return "/user/profile";
+        }
         model.addAttribute("students", studentDAO.getStudents());
         return "student/listTrue";
     }

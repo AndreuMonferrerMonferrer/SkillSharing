@@ -1,9 +1,6 @@
 package es.uji.ei1027.SkillSharing.controller;
 
-import es.uji.ei1027.SkillSharing.dao.ColaborationDAO;
-import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
-import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
-import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
+import es.uji.ei1027.SkillSharing.dao.*;
 import es.uji.ei1027.SkillSharing.model.Colaboration;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
@@ -15,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +24,7 @@ public class ColaborationController {
     private ColaborationProposalDAO colaborationProposalDAO;
     private ColaborationRequestDAO colaborationRequestDAO;
     private SkillTypeDAO skillTypeDAO;
+    private StudentDAO studentDAO;
 
     @Autowired
     public void setColaborationDAO(ColaborationDAO colaborationDAO){
@@ -41,8 +40,22 @@ public class ColaborationController {
     @Autowired
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){this.skillTypeDAO=skillTypeDAO;}
 
+    @Autowired
+    public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
+
     @RequestMapping("/listSKP")
-    public String listColaborations(Model model){
+    public String listColaborations(HttpSession session, Model model){
+        session.setAttribute("nextUrl", "/colaboration/listSKP");
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if (user == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+
+        if (studentDAO.getStudent(user.getUsername()).getIsSkp().equals("N")){
+            return "/user/profile";
+        }
         class tupleColab {
             private final Colaboration colabo;
             private final ColaborationRequest request;

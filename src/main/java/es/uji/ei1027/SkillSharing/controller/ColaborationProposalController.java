@@ -53,6 +53,7 @@ public class ColaborationProposalController {
 
     @RequestMapping("/list")
     public String listColaborationProposals(HttpSession session,Model model){
+        session.setAttribute("nextUrl", "/colaborationProposal/list");
         if(session.getAttribute("user") == null){
             model.addAttribute("user", new UserDetails());
             return "login";
@@ -73,6 +74,17 @@ public class ColaborationProposalController {
 
     @RequestMapping("/listSKP")
     public String listSKPColaborationProposals(HttpSession session,Model model){
+        session.setAttribute("nextUrl", "/colaborationProposal/listSKP");
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if (user == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+
+        if (studentDAO.getStudent(user.getUsername()).getIsSkp().equals("N")){
+            return "/user/profile";
+        }
         model.addAttribute("colaborationProposals", colaborationProposalDAO.getProposalAbilitated());
         model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
         return "colaborationProposal/listSKP";
@@ -80,7 +92,7 @@ public class ColaborationProposalController {
 
     @RequestMapping(value = "/add/{requestId}")
     public String addColaborationProposal(HttpSession session,Model model, @PathVariable int requestId){
-        session.setAttribute("nextUrl", "/user/list");
+        session.setAttribute("nextUrl", "/colaborationProposal/add");
         if (session.getAttribute("user") == null)
         {
             model.addAttribute("user", new UserDetails());
@@ -103,7 +115,7 @@ public class ColaborationProposalController {
 
     @RequestMapping(value = "/add")
     public String addColaborationProposalUser(HttpSession session, Model model){
-        session.setAttribute("nextUrl","/user/list");
+        session.setAttribute("nextUrl","colaborationProposal/add");
         if(session.getAttribute("user") == null){
             model.addAttribute("user", new UserDetails());
             return "login";
@@ -124,7 +136,7 @@ public class ColaborationProposalController {
         ColaborationProposalValidator colaborationProposalValidator =new ColaborationProposalValidator(studentDAO);
         colaborationProposalValidator.validate(colaborationProposal,bindingResult);
         if (bindingResult.hasErrors()) {
-            session.setAttribute("nextUrl","/user/list");
+            session.setAttribute("nextUrl","colaborationProposal/add");
             if(session.getAttribute("user") == null){
                 model.addAttribute("user", new UserDetails());
                 return "login";

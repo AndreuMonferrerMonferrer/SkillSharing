@@ -59,20 +59,20 @@ public class StudentController {
         return "student/listTrue";
     }
 
-    @RequestMapping(value = "/addNormal")
+    @RequestMapping(value = "/add")
     public String addStudentNormal(Model model){
         model.addAttribute("student", new Student());
-        return "student/addNormal";
+        return "student/add";
     }
 
-    @RequestMapping(value = "/addNormal", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmitNormal(@ModelAttribute("student") Student student,
                                    BindingResult bindingResult) {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         StudentNormalValidator studentNormalValidator = new StudentNormalValidator();
         studentNormalValidator.validate(student, bindingResult);
         if (bindingResult.hasErrors())
-            return "student/addNormal";
+            return "student/add";
         student.setPwd(passwordEncryptor.encryptPassword(student.getPwd()));
         userDao.addUser(student);
         studentDAO.addStudentNormal(student);
@@ -95,13 +95,6 @@ public class StudentController {
             return "student/update";
         studentDAO.updateStudent(student);
         return "redirect:list";
-    }
-
-    @RequestMapping(value = "/delete/{email}")
-    public String processDelete(@PathVariable String email){
-        studentDAO.deleteStudent(email);
-
-        return "redirect:../list";
     }
 
     @RequestMapping(value = "/disable/{email}")

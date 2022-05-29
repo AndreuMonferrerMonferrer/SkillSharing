@@ -59,19 +59,6 @@ public class UserController {
         this.skillTypeDAO=skillTypeDAO;
     }
 
-    @RequestMapping("/list")
-    public String listUsers(HttpSession session, Model model) {
-        session.setAttribute("nextUrl", "/user/list");
-        if (session.getAttribute("user") == null)
-        {
-            model.addAttribute("user", new UserDetails());
-            return "login";
-        }
-        model.addAttribute("users", userDao.listAllUsers());
-
-        return (String) session.getAttribute("nextUrl");
-
-    }
 
     @RequestMapping("/listPersonal")
     public String listPersonal(HttpSession session, Model model){

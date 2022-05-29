@@ -219,12 +219,6 @@ public class ColaborationProposalController {
         return "redirect:../user/listPersonal";
     }
 
-    @RequestMapping(value = "/delete/{proposalId}")
-    public String processDelete(@PathVariable int proposalId){
-        colaborationProposalDAO.deleteColaborationProposal(proposalId);
-        return "redirect:../list";
-    }
-
     @RequestMapping("/end/{proposalId}")
     public String processEndProposal(@PathVariable int proposalId){
         colaborationProposalDAO.endProposal(proposalId);

@@ -13,7 +13,7 @@
              src="https://raw.githubusercontent.com/AndreuMonferrerMonferrer/SkillSharing/master/src/main/resources/templates/fragments/skillsharing.png"
              alt="" width="264" height="80">
         <h2>Register</h2>
-        <form action="#" th:action="@{/student/addNormal}"
+        <form action="#" th:action="@{/student/add}"
               th:object="${student}" method="post">
             <div class="my-1 form-floating">
                 <input type="email" th:field="*{email}" maxlength="50" class="form-control text-white bg-dark"

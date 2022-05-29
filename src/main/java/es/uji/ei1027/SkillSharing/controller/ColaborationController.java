@@ -93,50 +93,6 @@ public class ColaborationController {
         return "colaboration/listSKP";
     }
 
-
-    @RequestMapping("/add")
-    public String addColaboration(Model model){
-        model.addAttribute("colaboration",new Colaboration());
-        List<Integer> requestIdList = colaborationRequestDAO.getRequestId();
-        model.addAttribute("requestIdList", requestIdList);
-        List<Integer> proposalIdList = colaborationProposalDAO.getProposalId();
-        model.addAttribute("proposalIdList", proposalIdList);
-        return "colaboration/add";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAndSubmit(@ModelAttribute("colaboration") Colaboration colaboration,
-                                   BindingResult bindingResult){
-        ColaborationValidator colaborationValidator=new ColaborationValidator();
-        colaborationValidator.validate(colaboration,bindingResult);
-        if (bindingResult.hasErrors())
-            return "colaboration/add";
-        colaborationDAO.addColaboration(colaboration);
-        return "redirect:listSKP";
-    }
-
-
-
-    @RequestMapping(value ="/update/{proposalId}/{requestId}", method = RequestMethod.GET)
-    public String editColaboration(Model model,
-                                   @PathVariable int proposalId,
-                                   @PathVariable int requestId){
-        model.addAttribute("colaboration",colaborationDAO.getColaboration(proposalId,requestId));
-        return "colaboration/update";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateAndSubmit(
-            @ModelAttribute("colaboration") Colaboration colaboration,
-            BindingResult bindingResult){
-        ColaborationValidator colaborationValidator=new ColaborationValidator();
-        colaborationValidator.validate(colaboration,bindingResult);
-        if (bindingResult.hasErrors())
-            return "colaboration/update";
-        colaborationDAO.updateColaboration(colaboration);
-        return "redirect:listSKP";
-    }
-
     @RequestMapping(value = "/delete/{proposalId}/{requestId}")
     public String processDeleteColaboration(@PathVariable int proposalId,
                                        @PathVariable int requestId) {

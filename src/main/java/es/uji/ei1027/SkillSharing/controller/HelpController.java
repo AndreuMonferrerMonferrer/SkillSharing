@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/help")
-public class helpController {
+public class HelpController {
     @RequestMapping("/help")
     public String help(HttpSession session, Model model){
         session.setAttribute("nextUrl", "/help/help");

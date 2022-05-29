@@ -91,11 +91,6 @@ public class SkillTypeController {
         skillTypeDAO.updateSkillType(skillType);
         return "redirect:list";
     }
-    @RequestMapping(value = "/delete/{id}")
-    public String processDelete(@PathVariable int id){
-        skillTypeDAO.deleteSkillType(id);
-        return "redirect:../list";
-    }
 
     @RequestMapping(value = "/disable/{id}")
     public String processDisable(@PathVariable int id){

@@ -78,6 +78,15 @@ public class ColaborationProposalDAO {
         }
     }
 
+    public List<String> getColaborationProposalEmailsByTimeAndTime(int idSkill, LocalDate startDate,LocalDate endDate){
+        try{
+            return jdbcTemplate.query("SELECT emailStudent FROM ColaborationProposal WHERE idSkill=? AND dateStart>=? AND dateEnd<=?",
+                    new SingleColumnRowMapper(String.class), idSkill,startDate,endDate);
+        } catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
     public List<Integer> getProposalId(){
         try{
             return jdbcTemplate.query("SELECT proposalId FROM ColaborationProposal",

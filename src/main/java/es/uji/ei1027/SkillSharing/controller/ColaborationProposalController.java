@@ -118,6 +118,21 @@ public class ColaborationProposalController {
         colaborationDAO.addColaboration(colaboration);
         colaborationProposalDAO.endProposal(proposalId);
         colaborationRequestDAO.endRequest(requestId);
+
+        emailService.sendEmail(request.getEmailStudent(),
+                "Nueva Colaboración",
+                "Nueva colaboración creada entre usted y "+
+                        proposal.getEmailStudent()
+                        + " /n Las fechas de inicio y fin son: "+
+                        colaboration.getDateStart() + " y " + colaboration.getDateEnd());
+
+        emailService.sendEmail(proposal.getEmailStudent(),
+                "Nueva Colaboración",
+                "Nueva colaboración creada entre usted y "+
+                        request.getEmailStudent()
+                        + " /n Las fechas de inicio y fin son: "+
+                        colaboration.getDateStart() + " y " + colaboration.getDateEnd());
+
         return "/user/listPersonal";
     }
 

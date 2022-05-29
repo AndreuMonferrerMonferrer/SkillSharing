@@ -24,6 +24,7 @@ public class ColaborationRequestController {
     private SkillTypeDAO skillTypeDAO;
     private StudentDAO studentDAO;
     private ColaborationDAO colaborationDAO;
+    private EmailService emailService;
     @Autowired
     public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){
         this.colaborationRequestDAO=colaborationRequestDAO;
@@ -36,7 +37,6 @@ public class ColaborationRequestController {
     public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
         this.colaborationProposalDAO=colaborationProposalDAO;
     }
-
     @Autowired
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
         this.skillTypeDAO=skillTypeDAO;
@@ -44,6 +44,8 @@ public class ColaborationRequestController {
 
     @Autowired
     public void setStudentDAO(StudentDAO studentDAO){this.studentDAO=studentDAO;}
+    @Autowired
+    public void setEmailService(EmailService emailService){this.emailService=emailService;}
 
     @RequestMapping("/list")
     public String listColaboratioRequests(HttpSession session, Model model){
@@ -107,7 +109,22 @@ public class ColaborationRequestController {
         colaborationDAO.addColaboration(colaboration);
         colaborationRequestDAO.endRequest(requestId);
         colaborationProposalDAO.endProposal(proposalId);
-        return "colaborationRequest/add";
+
+        emailService.sendEmail(request.getEmailStudent(),
+                "Nueva Colaboración",
+                "Nueva colaboración creada entre usted y "+
+                        proposal.getEmailStudent()
+                        + " /n Las fechas de inicio y fin son: "+
+                        colaboration.getDateStart() + " y " + colaboration.getDateEnd());
+
+        emailService.sendEmail(proposal.getEmailStudent(),
+                "Nueva Colaboración",
+                "Nueva colaboración creada entre usted y "+
+                        request.getEmailStudent()
+                        + " /n Las fechas de inicio y fin son: "+
+                        colaboration.getDateStart() + " y " + colaboration.getDateEnd());
+
+        return "/user/listPersonal";
     }
 
 
@@ -146,6 +163,23 @@ public class ColaborationRequestController {
             model.addAttribute("skillTypes", skillTypes);
             return "colaborationRequest/add";
         }
+        List<String> emailList =colaborationProposalDAO.getColaborationProposalEmailsByTimeAndTime(
+                colaborationRequest.getIdSkill(),
+                colaborationRequest.getDateStart(),
+                colaborationRequest.getDateEnd());
+        SkillType skill=skillTypeDAO.getSkillType(colaborationRequest.getIdSkill());
+
+        for(String email:emailList) {
+            emailService.sendEmail(
+                    email,
+                    "Nueva propuesta de colaboración ",
+                    "Se ha creado una propuesta de colaboración de la habilidad "
+                            + skill.getName()+"-"+skill.getLevel()
+                            + " entre " + colaborationRequest.getDateStart()
+                            + " y " + colaborationRequest.getDateEnd()
+            );
+        }
+
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
         return "redirect:list";
     }

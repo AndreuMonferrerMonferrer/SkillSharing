@@ -144,11 +144,41 @@ public class ColaborationController {
         return "redirect:../../listSKP";
     }
 
+    class tupleHours{
+        int proposalId;
+        int requestId;
+        int hours;
+        public int getProposalId() {
+            return proposalId;
+        }
+
+        public int getRequestId() {
+            return requestId;
+        }
+
+        public int getHours() {
+            return hours;
+        }
+
+        public void setProposalId(int proposalId) {
+            this.proposalId = proposalId;
+        }
+
+        public void setRequestId(int requestId) {
+            this.requestId = requestId;
+        }
+
+        public void setHours(int hours) {
+            this.hours = hours;
+        }
+    }
+
     @RequestMapping(value = "/end/{proposalId}/{requestId}")
     public String processEndColaboration(
             Model model,
             @PathVariable int proposalId,
             @PathVariable int requestId){
+        model.addAttribute("tuple",new tupleHours());
         model.addAttribute("proposalId",proposalId);
         model.addAttribute("requestId",requestId);
         return "colaboration/end";
@@ -158,11 +188,9 @@ public class ColaborationController {
     @RequestMapping(value = "/end", method = RequestMethod.POST)
     public String processUpdateAndSubmit(
             Model model,
-            @ModelAttribute("proposalId") Integer proposalId,
-            @ModelAttribute("requestId") Integer requestId
+            @ModelAttribute("tuple") tupleHours tuple
             ){
-        int hours=(Integer) model.getAttribute("hours");
-        colaborationDAO.endColaboration(proposalId, requestId,hours);
+        colaborationDAO.endColaboration(tuple.getProposalId(), tuple.getRequestId(), tuple.getHours());
         return "redirect:listSKP";
     }
 

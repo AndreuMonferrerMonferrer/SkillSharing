@@ -15,12 +15,12 @@
 
         <h2>End colaboration</h2>
         <form action="#" class="mt-5" th:action="@{/colaboration/end}"
-              method="post">
-            <input th:value="${proposalId}" th:text="${proposalId}">
-            <input th:value="${requestId}" th:text="${requestId}">
+              th:object="${tuple}" method="post">
+            <input type="number" th:field="*{proposalId}" hidden>
+            <input type="number" th:field="*{requestId}" hidden>
             <div class="row my-2">
                 <div class="form-floating col">
-                    <input type="number" class="form-control" th:value="${hours}" id="hours" min="0" max="999"  required>
+                    <input type="number" class="form-control" th:value="*{hours}" id="hours" min="0" max="999"  required>
                     <label for="hours">hours</label>
                 </div>
             </div>

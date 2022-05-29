@@ -85,11 +85,11 @@ public class ColaborationDAO {
                 now, proposalId, requestId);
         String emailProposal=jdbcTemplate.queryForObject("SELECT emailStudent FROM ColaborationProposal WHERE proposalId=?",
                 String.class, proposalId);
-        String emailRequest=jdbcTemplate.queryForObject("SELECT emailStudent FROM ColaborationRequest WHERE requestId=?)",
+        String emailRequest=jdbcTemplate.queryForObject("SELECT emailStudent FROM ColaborationRequest WHERE requestId=?",
                 String.class, requestId);
         jdbcTemplate.update("UPDATE Student SET recivedHours=recivedHours+? WHERE email=?"
                 ,hours, emailRequest);
-        jdbcTemplate.update("UPDATE Student SET recivedHours=recivedHours+? WHERE email=?"
+        jdbcTemplate.update("UPDATE Student SET providedHours=providedHours+? WHERE email=?"
                 ,hours, emailProposal);
     }
 

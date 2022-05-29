@@ -20,7 +20,7 @@
             <input type="number" th:field="*{requestId}" hidden>
             <div class="row my-2">
                 <div class="form-floating col">
-                    <input type="number" class="form-control" th:value="*{hours}" id="hours" min="0" max="999"  required>
+                    <input type="number" class="form-control" th:field="*{hours}" th:value="${hours}" id="hours" min="0" max="999"  required>
                     <label for="hours">hours</label>
                 </div>
             </div>

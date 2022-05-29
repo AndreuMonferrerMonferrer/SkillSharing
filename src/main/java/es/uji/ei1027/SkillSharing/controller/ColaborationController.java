@@ -144,7 +144,7 @@ public class ColaborationController {
         return "redirect:../../listSKP";
     }
 
-    class tupleHours{
+    class TupleHours{
         int proposalId;
         int requestId;
         int hours;
@@ -178,17 +178,19 @@ public class ColaborationController {
             Model model,
             @PathVariable int proposalId,
             @PathVariable int requestId){
-        model.addAttribute("tuple",new tupleHours());
-        model.addAttribute("proposalId",proposalId);
-        model.addAttribute("requestId",requestId);
+        TupleHours tupleHours=new TupleHours();
+        tupleHours.setProposalId(proposalId);
+        tupleHours.setRequestId(requestId);
+        model.addAttribute("tuple",tupleHours);
         return "colaboration/end";
 
     }
 
+
     @RequestMapping(value = "/end", method = RequestMethod.POST)
     public String processUpdateAndSubmit(
             Model model,
-            @ModelAttribute("tuple") tupleHours tuple
+            @ModelAttribute("tuple") TupleHours tuple
             ){
         colaborationDAO.endColaboration(tuple.getProposalId(), tuple.getRequestId(), tuple.getHours());
         return "redirect:listSKP";

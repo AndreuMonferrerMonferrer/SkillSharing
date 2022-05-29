@@ -130,6 +130,9 @@ public class ColaborationProposalController {
         model.addAttribute("colaborationProposal", colaborationProposalDAO.getColaborationProposal(proposalId));
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+        model.addAttribute("skillTypes", skillTypes);
+
         return "colaborationProposal/update";
     }
 

@@ -61,10 +61,20 @@ public class ColaborationRequestController {
     }
 
     @RequestMapping(value = "/add/{requestId}")
-    public String addColaborationRequest(Model model, @PathVariable int requestId){
+    public String addColaborationRequest(HttpSession session,Model model, @PathVariable int requestId){
+        session.setAttribute("nextUrl", "/user/list");
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("email", user.getUsername());
         model.addAttribute("colaborationRequest", new ColaborationRequest());
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+        model.addAttribute("skillTypes", skillTypes);
         model.addAttribute("requestId", requestId);
         return "colaborationRequest/add";
     }
@@ -114,6 +124,8 @@ public class ColaborationRequestController {
         model.addAttribute("colaborationRequest", colaborationRequestDAO.getColaborationRequestByUser(requestId));
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+        model.addAttribute("skillTypes", skillTypes);
         return "colaborationRequest/update";
     }
 

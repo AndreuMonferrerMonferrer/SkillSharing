@@ -59,8 +59,15 @@ public class ColaborationProposalController {
         UserDetails user = (UserDetails) session.getAttribute("user");
         model.addAttribute("colaborationProposals", colaborationProposalDAO.getColaborationProposalsByOtherUsers(user.getUsername()));
         model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
-        model.addAttribute("logged",session.getAttribute("user")!=null);
         return "colaborationProposal/list";
+    }
+
+    @RequestMapping("/listN")
+    public String listNoRegistradoColaborationProposals(HttpSession session,Model model){
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("colaborationProposals", colaborationProposalDAO.getProposalAbilitated());
+        model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
+        return "colaborationProposal/listN";
     }
 
     @RequestMapping("/listSKP")

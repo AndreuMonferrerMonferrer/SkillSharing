@@ -8,30 +8,21 @@
 </head>
 <body>
 <div class="d-flex">
-    <div th:replace="fragments/nav" >...</div>
-    <div class="container-fluid">
+    <div>
+        <div th:replace="fragments/navSinRegistrar">...</div>
+    </div>
+    <div class="vh-100 overflow-auto">
         <h1>List of colaboration proposals</h1>
-<table class="table table-striped">
-            <thead>
-            <tr>
-                <th>EmailStudent</th>
-                <th>IdSkill</th>
-                <th>Date Start</th>
-                <th>Date End</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="colaborationProposal: ${colaborationProposals}">
-                <td th:text="${colaborationProposal.emailStudent}"></td>
-                <td th:text="${colaborationProposal.idSkill}"></td>
-                <td th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')}"></td>
-                <td th:text="${#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></td>
-                <td th:text="${colaborationProposal.description}"></td>
-
-            </tr>
-            </tbody>
-        </table>
+        <div class="d-flex flex-row justify-content-center flex-wrap">
+            <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationProposal: ${colaborationProposals}">
+                <div class="card-body">
+                    <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaborationProposal.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationProposal.emailStudent}"></h6>
+                    <h6 class="small" th:text="${#temporals.format(colaborationProposal.dateStart,'dd/MM/yyyy')+'-'+#temporals.format(colaborationProposal.dateEnd,'dd/MM/yyyy')}"></h6>
+                    <p class="card-text" th:text="${colaborationProposal.description}"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

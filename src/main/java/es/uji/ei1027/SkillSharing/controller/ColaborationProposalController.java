@@ -168,7 +168,7 @@ public class ColaborationProposalController {
         if (bindingResult.hasErrors())
             return "colaborationProposal/update";
         colaborationProposalDAO.updateColaborationProposal(colaborationProposal);
-        return "redirect:list";
+        return "redirect:../user/listPersonal";
     }
 
     @RequestMapping(value = "/delete/{proposalId}")

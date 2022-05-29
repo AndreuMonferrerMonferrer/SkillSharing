@@ -151,7 +151,7 @@ public class ColaborationRequestController {
         if (bindingResult.hasErrors())
             return "colaborationRequest/update";
         colaborationRequestDAO.updateColaborationRequest(colaborationRequest);
-        return "redirect:list";
+        return "redirect:../user/listPersonal";
     }
 
     @RequestMapping(value = "/delete/{requestId}")

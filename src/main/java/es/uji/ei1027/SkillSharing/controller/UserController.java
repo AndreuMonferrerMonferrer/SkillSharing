@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,12 +88,12 @@ public class UserController {
 
         model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposalsByUser(email));
 
-        class tupleColabRequest {
+        class tupleColab {
             private final Colaboration colabo;
             private final ColaborationRequest request;
             private final ColaborationProposal proposal;
 
-            tupleColabRequest (Colaboration colabo, ColaborationRequest request, ColaborationProposal proposal){
+            tupleColab (Colaboration colabo, ColaborationRequest request, ColaborationProposal proposal){
                 this.colabo=colabo;
                 this.request=request;
                 this.proposal=proposal;
@@ -112,15 +113,16 @@ public class UserController {
         }
 
         List<Colaboration> colabos =  colaborationDAO.getColaborationsStudent(email);
-        List<tupleColabRequest> colabs = new ArrayList<>();
+        List<tupleColab> colabs = new ArrayList<>();
         for (Colaboration colabo:colabos) {
-            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+            colabs.add(new tupleColab(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
         }
 
         model.addAttribute("colaborations",colabs);
 
         model.addAttribute("skillTypes",  skillTypeDAO.getSkillTypes());
 
+        model.addAttribute("today",LocalDate.now());
         return (String) session.getAttribute("nextUrl");
     }
 

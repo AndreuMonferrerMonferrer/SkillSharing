@@ -21,4 +21,8 @@ public class helpController {
         }
         return "help/help";
     }
+    @RequestMapping("/éxito")
+    public String exito(HttpSession session, Model model){
+        return "help/éxito";
+    }
 }

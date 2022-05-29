@@ -133,7 +133,7 @@ public class ColaborationProposalController {
                         + " /n Las fechas de inicio y fin son: "+
                         colaboration.getDateStart() + " y " + colaboration.getDateEnd());
 
-        return "/user/listPersonal";
+        return "help/éxito";
     }
 
     @RequestMapping(value = "/add")

@@ -26,7 +26,7 @@ public class TrueUserProvider implements UserDao{
             if (listStudents.get(i).getAbilitationState().equals("S")){
                 newUser = new UserDetails();
                 newUser.setUsername(listStudents.get(i).getEmail());
-                newUser.setPassword(passwordEncryptor.encryptPassword(listStudents.get(i).getPwd())); //TODO quitar de aquí la encriptación una vez esté arreglada la bbdd
+                newUser.setPassword(listStudents.get(i).getPwd());
                 newUser.setSkp(listStudents.get(i).getIsSkp().equals("S"));
                 knownUsers.put(listStudents.get(i).getEmail(),newUser);
             }

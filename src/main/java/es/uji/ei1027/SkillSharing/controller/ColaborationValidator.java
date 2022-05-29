@@ -13,7 +13,8 @@ public class ColaborationValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Colaboration colaboration = (Colaboration) obj;
         if (colaboration.getDescription().length() > 100) {
-            errors.rejectValue("description", "length exceeded", "the length has to be less than 100");
+            int sobrante = colaboration.getDescription().length() - 100;
+            errors.rejectValue("description", "length exceeded", "Very long description, you have " + sobrante + " characters left over");
         }
         if (colaboration.getProposalId()< 0){
             errors.rejectValue("proposalId","negative number","the number has to be positive");

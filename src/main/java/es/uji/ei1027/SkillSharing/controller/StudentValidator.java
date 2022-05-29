@@ -32,20 +32,18 @@ public class StudentValidator implements Validator {
             errors.rejectValue("isSkp", "incorrectValue", "the value has to be S or N");
         }
         if(student.getName().length()>50) {
-            errors.rejectValue("name", "length exceeded", "the length has to be less than 50");
+            errors.rejectValue("name", "length exceeded", "the name length has to be shorter");
         }
         if(student.getEmail().length()>50) {
-            errors.rejectValue("email", "length exceeded", "the length has to be less than 50");
+            errors.rejectValue("email", "length exceeded", "the email length has to be shorter");
         }
         if(student.getPwd().length()>30) {
-            errors.rejectValue("pwd", "length exceeded", "the length has to be less than 30");
+            errors.rejectValue("pwd", "length exceeded", "the password length has to be shorter");
         }
         if(student.getDegree().length()>50) {
-            errors.rejectValue("degree", "length exceeded", "the length has to be less than 50");
+            errors.rejectValue("degree", "length exceeded", "the degree name length has to be shorter");
         }
-        /*if(!student.getAbilitationState().equals("N")||!student.getAbilitationState().equals("S")){
-            errors.rejectValue("abilitationState","incorrectValue","has to be an S or an N");
-        }*/
+
 
     }
 }

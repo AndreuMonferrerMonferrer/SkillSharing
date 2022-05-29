@@ -21,7 +21,7 @@ public class SkillTypeValidator implements Validator {
             errors.rejectValue("name", "required", "you have to enter a value");
         }
         if(skillType.getName().length()>20) {
-            errors.rejectValue("name", "lengthExceeded", "Length has to be less than 20");
+            errors.rejectValue("name", "lengthExceeded", "the name length has to be shorter");
         }
         if(skillType.getAbilitationState().trim().equals("")) {
             errors.rejectValue("ailitationState", "required", "you have to enter a value");
@@ -30,7 +30,8 @@ public class SkillTypeValidator implements Validator {
             errors.rejectValue("description", "required", "you have to enter a value");
         }
         if(skillType.getDescription().length()>100) {
-            errors.rejectValue("description", "lengthExceeded", "Length has to be <=100");
+            int sobrante = skillType.getDescription().length() - 100;
+            errors.rejectValue("description", "lengthExceeded", "Very long description, you have " + sobrante + " characters left over");
         }
     }
 }

@@ -51,6 +51,7 @@ public class ColaborationProposalDAO {
             return null;
         }
     }
+
     public List<ColaborationProposal> getColaborationProposals(){
         try{
             return jdbcTemplate.query("SELECT * from ColaborationProposal",

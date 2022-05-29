@@ -63,7 +63,7 @@ public class StudentController {
         if (bindingResult.hasErrors())
             return "student/addNormal";
         studentDAO.addStudentNormal(student);
-        return "redirect:list";
+        return "redirect:../user/profile";
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAndSubmit(@ModelAttribute("student") Student student,

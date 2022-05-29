@@ -5,6 +5,7 @@ import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
 import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
+import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -68,6 +68,29 @@ public class ColaborationProposalController {
         model.addAttribute("colaborationProposals", colaborationProposalDAO.getProposalAbilitated());
         model.addAttribute("skillTypes",skillTypeDAO.getSkillTypes());
         return "colaborationProposal/listSKP";
+    }
+
+    @RequestMapping(value = "/add/{requestId}")
+    public String addColaborationProposal(HttpSession session,Model model, @PathVariable int requestId){
+        session.setAttribute("nextUrl", "/user/list");
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        model.addAttribute("email", user.getUsername());
+        ColaborationRequest request=colaborationRequestDAO.getColaborationRequest(requestId);
+        ColaborationProposal proposal=new ColaborationProposal();
+        proposal.setIdSkill(request.getIdSkill());
+        proposal.setDateEnd(request.getDateEnd());
+        proposal.setDateStart(request.getDateStart());
+        model.addAttribute("colaborationProposal",proposal);
+        List<Integer> idList = skillTypeDAO.getSkillTypesIds();
+        model.addAttribute("idList", idList);
+        List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
+        model.addAttribute("skillTypes", skillTypes);
+        return "colaborationProposal/add";
     }
 
     @RequestMapping(value = "/add")

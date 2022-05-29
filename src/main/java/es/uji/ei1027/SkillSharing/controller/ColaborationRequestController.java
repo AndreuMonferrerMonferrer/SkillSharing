@@ -1,8 +1,10 @@
 package es.uji.ei1027.SkillSharing.controller;
 
+import es.uji.ei1027.SkillSharing.dao.ColaborationProposalDAO;
 import es.uji.ei1027.SkillSharing.dao.ColaborationRequestDAO;
 import es.uji.ei1027.SkillSharing.dao.SkillTypeDAO;
 import es.uji.ei1027.SkillSharing.dao.StudentDAO;
+import es.uji.ei1027.SkillSharing.model.ColaborationProposal;
 import es.uji.ei1027.SkillSharing.model.ColaborationRequest;
 import es.uji.ei1027.SkillSharing.model.SkillType;
 import es.uji.ei1027.SkillSharing.model.UserDetails;
@@ -24,12 +26,19 @@ import java.util.List;
 public class ColaborationRequestController {
 
     private ColaborationRequestDAO colaborationRequestDAO;
+    private ColaborationProposalDAO colaborationProposalDAO;
     private SkillTypeDAO skillTypeDAO;
     private StudentDAO studentDAO;
     @Autowired
     public void setColaborationRequestDAO(ColaborationRequestDAO colaborationRequestDAO){
         this.colaborationRequestDAO=colaborationRequestDAO;
     }
+
+    @Autowired
+    public void setColaborationProposalDAO(ColaborationProposalDAO colaborationProposalDAO){
+        this.colaborationProposalDAO=colaborationProposalDAO;
+    }
+
     @Autowired
     public void setSkillTypeDAO(SkillTypeDAO skillTypeDAO){
         this.skillTypeDAO=skillTypeDAO;
@@ -60,8 +69,8 @@ public class ColaborationRequestController {
         return "colaborationRequest/listSKP";
     }
 
-    @RequestMapping(value = "/add/{requestId}")
-    public String addColaborationRequest(HttpSession session,Model model, @PathVariable int requestId){
+    @RequestMapping(value = "/add/{proposalId}")
+    public String addColaborationRequest(HttpSession session,Model model, @PathVariable int proposalId){
         session.setAttribute("nextUrl", "/user/list");
         if (session.getAttribute("user") == null)
         {
@@ -70,12 +79,16 @@ public class ColaborationRequestController {
         }
         UserDetails user = (UserDetails) session.getAttribute("user");
         model.addAttribute("email", user.getUsername());
-        model.addAttribute("colaborationRequest", new ColaborationRequest());
+        ColaborationProposal proposal=colaborationProposalDAO.getColaborationProposal(proposalId);
+        ColaborationRequest request=new ColaborationRequest();
+        request.setIdSkill(proposal.getIdSkill());
+        request.setDateEnd(proposal.getDateEnd());
+        request.setDateStart(proposal.getDateStart());
+        model.addAttribute("colaborationRequest",request);
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();
         model.addAttribute("skillTypes", skillTypes);
-        model.addAttribute("requestId", requestId);
         return "colaborationRequest/add";
     }
 
@@ -116,12 +129,12 @@ public class ColaborationRequestController {
             return "colaborationRequest/add";
         }
         colaborationRequestDAO.addColaborationRequest(colaborationRequest);
-        return "redirect:list";//TODO listN bien hecho
+        return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{requestId}", method = RequestMethod.GET)
     public String editColaborationRequest(Model model, @PathVariable int requestId){
-        model.addAttribute("colaborationRequest", colaborationRequestDAO.getColaborationRequestByUser(requestId));
+        model.addAttribute("colaborationRequest", colaborationRequestDAO.getColaborationRequest(requestId));
         List<Integer> idList = skillTypeDAO.getSkillTypesIds();
         model.addAttribute("idList", idList);
         List<SkillType> skillTypes = skillTypeDAO.getSkillTypesAbilitados();

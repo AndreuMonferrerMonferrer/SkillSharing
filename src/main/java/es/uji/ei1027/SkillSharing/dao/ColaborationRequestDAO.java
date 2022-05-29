@@ -47,7 +47,7 @@ public class ColaborationRequestDAO {
                 colaborationRequest.getIdSkill(), colaborationRequest.getRequestId());
     }
 
-    public ColaborationRequest getColaborationRequestByUser(int requestId){
+    public ColaborationRequest getColaborationRequest(int requestId){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM ColaborationRequest WHERE requestId=?",
                     new ColaborationRequestRowMapper(), requestId);
@@ -93,7 +93,7 @@ public class ColaborationRequestDAO {
     }
 
     /*todas las ColaborationRequest de un alumno*/
-    public List<ColaborationRequest> getColaborationRequests(String emailStudent){
+    public List<ColaborationRequest> getColaborationRequestsByUser(String emailStudent){
         try{
             return this.jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent=?",
                     new ColaborationRequestRowMapper(), emailStudent);

@@ -22,7 +22,7 @@
                     <p class="card-text" th:text="${colaborationRequest.description}"></p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="add" class="button btn btn-success" th:if="${logged}">Add a Colaboration proposal</button></a>
+                    <a th:href="@{'../colaborationProposal/add/'+${colaborationRequest.requestId}}" class="button btn btn-success" th:if="${logged}">Add a Colaboration proposal</button></a>
                 </div>
             </div>
         </div>

@@ -83,7 +83,7 @@ public class UserController {
         String email = user.getUsername();
         model.addAttribute("email", email);
 
-        model.addAttribute("colaborationRequests", colaborationRequestDAO.getColaborationRequests(email));
+        model.addAttribute("colaborationRequests", colaborationRequestDAO.getColaborationRequestsByUser(email));
 
         model.addAttribute("colaborationProposals",colaborationProposalDAO.getColaborationProposalsByUser(email));
 
@@ -114,7 +114,7 @@ public class UserController {
         List<Colaboration> colabos =  colaborationDAO.getColaborationsStudent(email);
         List<tupleColabRequest> colabs = new ArrayList<>();
         for (Colaboration colabo:colabos) {
-            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequestByUser(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+            colabs.add(new tupleColabRequest(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
         }
 
         model.addAttribute("colaborations",colabs);

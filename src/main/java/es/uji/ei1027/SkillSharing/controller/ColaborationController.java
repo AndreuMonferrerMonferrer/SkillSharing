@@ -68,7 +68,7 @@ public class ColaborationController {
         List<Colaboration> colabos =  colaborationDAO.getColaborations();
         List<tupleColab> colabs = new ArrayList<>();
         for (Colaboration colabo:colabos) {
-            colabs.add(new tupleColab(colabo,colaborationRequestDAO.getColaborationRequestByUser(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
+            colabs.add(new tupleColab(colabo,colaborationRequestDAO.getColaborationRequest(colabo.getRequestId()),colaborationProposalDAO.getColaborationProposal(colabo.getProposalId())));
         }
 
         model.addAttribute("colaborations",colabs);

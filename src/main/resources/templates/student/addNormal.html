@@ -36,7 +36,7 @@
             </div>
 
             <div class="my-1 form-floating">
-                <input type="text" th:field="*{telNumber}" minlength="9" maxlength="9"
+                <input type="number" th:field="*{telNumber}" minlength="9" maxlength="9"
                        class="form-control text-white bg-dark" id="telNumberInput" placeholder="000000000" required/>
                 <label for="telNumberInput">Tel.Number:</label>
                 <div class="error" th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}"></div>

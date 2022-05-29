@@ -102,8 +102,12 @@ public class ColaborationProposalDAO {
     /*todas las ColaborationProposal otros alumnos*/
     public List<ColaborationProposal> getColaborationProposalsByOtherUsers(String emailStudent){
         try{
-            return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal WHERE emailStudent IN (SELECT email from Student where abilitationState='S') AND emailStudent!=?",
-                    new ColaborationProposalRowMapper(), emailStudent);
+            return this.jdbcTemplate.query("SELECT * FROM ColaborationProposal " +
+                            "WHERE emailStudent IN (SELECT email from Student where abilitationState='S') " +
+                            "AND emailStudent!=? " +
+                            "AND idSkill IN (SELECT id FROM SkillType WHERE abilitationState='S') " +
+                            "AND dateEnd>?",
+                    new ColaborationProposalRowMapper(), emailStudent,LocalDate.now());
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationProposal>();
         }

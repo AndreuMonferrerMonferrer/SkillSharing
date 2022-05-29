@@ -8,11 +8,8 @@
 </head>
 <body>
 <div class="d-flex">
-  <div th:if="${logged}">
+  <div>
     <div th:replace="fragments/nav">...</div>
-  </div>
-  <div th:unless="${logged}">
-    <div th:replace="fragments/navSinRegistrar"th:unless="${logged}">...</div>
   </div>
   <div class="vh-100 overflow-auto">
     <h1>List of colaboration proposals</h1>
@@ -25,7 +22,7 @@
           <p class="card-text" th:text="${colaborationProposal.description}"></p>
         </div>
         <div class="card-footer text-center">
-          <a th:href="@{'../colaborationRequest/add/'+${colaborationProposal.proposalId}}" class="button btn btn-success" th:if="${logged}">Add a Colaboration request</button></a>
+          <a th:href="@{'../colaborationRequest/add/'+${colaborationProposal.proposalId}}" class="button btn btn-success" >Add a Colaboration request</button></a>
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ public class SkillTypeDAO {
     }
 
     public void updateSkillType(SkillType skillType){//¿bool?
-        jdbcTemplate.update("UPDATE skillType SET name=? , level=? , description=? ,  abilitationState=? WHERE id=?",
+        jdbcTemplate.update("UPDATE skillType SET name=?, level=?, description=?,  abilitationState=? WHERE id=?",
                 skillType.getName(), skillType.getLevel(),skillType.getDescription(),skillType.getAbilitationState(),skillType.getId());
     }
 

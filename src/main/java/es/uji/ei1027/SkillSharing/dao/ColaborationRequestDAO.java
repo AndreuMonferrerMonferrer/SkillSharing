@@ -95,7 +95,7 @@ public class ColaborationRequestDAO {
     /*todas las ColaborationRequest de un alumno*/
     public List<ColaborationRequest> getColaborationRequestsByUser(String emailStudent){
         try{
-            return this.jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent=?",
+            return this.jdbcTemplate.query("SELECT * FROM ColaborationRequest WHERE emailStudent=? AND idSkill IN (SELECT id FROM SkillType WHERE abilitationState='S')",
                     new ColaborationRequestRowMapper(), emailStudent);
         }catch(EmptyResultDataAccessException e){
             return new ArrayList<ColaborationRequest>();

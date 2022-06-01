@@ -74,6 +74,8 @@ public class StudentController {
         if (bindingResult.hasErrors())
             return "student/add";
         student.setPwd(passwordEncryptor.encryptPassword(student.getPwd()));
+        student.setIsSkp("N");
+        student.setAbilitationState("S");
         userDao.addUser(student);
         studentDAO.addStudentNormal(student);
         return "redirect:../user/profile";

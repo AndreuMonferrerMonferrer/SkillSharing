@@ -54,7 +54,7 @@ public class ColaborationController {
         }
 
         if (studentDAO.getStudent(user.getUsername()).getIsSkp().equals("N")){
-            return "/user/profile";
+            return "user/profile";
         }
         class tupleColab {
             private final Colaboration colabo;
@@ -149,7 +149,7 @@ public class ColaborationController {
             @ModelAttribute("tuple") TupleHours tuple
             ){
         colaborationDAO.endColaboration(tuple.getProposalId(), tuple.getRequestId(), tuple.getHours());
-        return "redirect:listSKP";
+        return "help/fin";
     }
 
 

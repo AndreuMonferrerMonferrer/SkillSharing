@@ -25,4 +25,9 @@ public class HelpController {
     public String exito(HttpSession session, Model model){
         return "help/éxito";
     }
+
+    @RequestMapping("/fin")
+    public String fin(HttpSession session, Model model){
+        return "help/fin";
+    }
 }

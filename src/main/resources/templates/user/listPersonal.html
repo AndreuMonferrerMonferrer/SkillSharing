@@ -16,7 +16,7 @@
       <!--Proporals-->
       <h1>List of colaboration proposals</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationProposal: ${colaborationProposals}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 20rem;" th:each="colaborationProposal: ${colaborationProposals}">
           <div th:style="${colaborationProposal.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaborationProposal.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationProposal.emailStudent}"></h6>
@@ -37,7 +37,7 @@
       <!--Requests-->
       <h1>List of colaboration requests</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaborationRequest: ${colaborationRequests}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 20rem;" th:each="colaborationRequest: ${colaborationRequests}">
           <div th:style="${colaborationRequest.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaborationRequest.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted" th:text="${colaborationRequest.emailStudent}"></h6>
@@ -57,7 +57,7 @@
       <!--Colabos-->
       <h1>List of Colaborations</h1>
       <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 18rem;" th:each="colaboration: ${colaborations}">
+        <div class="card mx-4 my-4 border border-dark" style="width:18rem;height: 20rem;" th:each="colaboration: ${colaborations}">
           <div th:style="${colaboration.colabo.dateEnd.isBefore(tomorrow) ?'background-color:#e0e0eb':'background-color: white'}" class="card-body">
             <h5 class="card-title" th:each="skillType: ${skillTypes}" th:if="${colaboration.request.idSkill} == ${skillType.id}"  th:text="${skillType.name + ' - ' + skillType.level}"></h5>
             <h6 class="card-subtitle mb-2 text-muted"><i>Requester:</i></h6>
